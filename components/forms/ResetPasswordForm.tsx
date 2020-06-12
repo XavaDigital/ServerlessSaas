@@ -1,23 +1,22 @@
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 import { useAuth } from 'hooks/useAuth';
 
-interface LoginData {
-	email: string;
-	password: string;
-}
-
-const LoginForm: React.FC = () => {
+const ResetPasswordForm: React.FC = () => {
 	const { register, errors, handleSubmit } = useForm();
 	const auth = useAuth();
 	const router = useRouter();
 
-	const onSubmit = (data: LoginData) => {
-		return auth.signIn(data).then(() => {
-			router.push('/dashboard');
-		});
+	const onSubmit = (data: { email: string }) => {
+		auth
+			.sendPasswordResetEmail(data.email)
+			.then(() => {
+				router.push('/login');
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	return (
@@ -50,47 +49,6 @@ const LoginForm: React.FC = () => {
 					)}
 				</div>
 			</div>
-			<div className="mt-4">
-				<label
-					htmlFor="password"
-					className="block text-sm font-medium leading-5 text-gray-700"
-				>
-					Password
-				</label>
-				<div className="mt-1 rounded-md">
-					<input
-						id="password"
-						className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm"
-						type="password"
-						name="password"
-						ref={register({
-							required: 'Please enter a password',
-							minLength: {
-								value: 6,
-								message: 'Should have at least 6 characters',
-							},
-						})}
-					/>
-					{errors.password && (
-						<div className="mt-2 text-xs text-red-600">
-							{errors.password.message}
-						</div>
-					)}
-				</div>
-			</div>
-
-			<div className="mt-4 flex items-end">
-				<div className="text-sm leading-5">
-					<Link href="/reset-password">
-						<a
-							href="#"
-							className="font-medium text-mariner-600 hover:text-mariner-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-						>
-							Forgot your password?
-						</a>
-					</Link>
-				</div>
-			</div>
 
 			<div className="mt-4">
 				<span className="block w-full rounded-md shadow-sm">
@@ -98,7 +56,7 @@ const LoginForm: React.FC = () => {
 						type="submit"
 						className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-mariner-600 hover:bg-mariner-500 focus:outline-none focus:border-mariner-700 focus:shadow-outline-mariner active:bg-mariner-700 transition duration-150 ease-in-out"
 					>
-						Sign up
+						Send reset link
 					</button>
 				</span>
 			</div>
@@ -106,4 +64,4 @@ const LoginForm: React.FC = () => {
 	);
 };
 
-export default LoginForm;
+export default ResetPasswordForm;

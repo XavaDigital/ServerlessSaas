@@ -70,6 +70,12 @@ const useAuthProvider = () => {
 		return auth.signOut().then(() => setUser(false));
 	};
 
+	const sendPasswordResetEmail = (email) => {
+		return auth.sendPasswordResetEmail(email).then((response) => {
+			return response;
+		});
+	};
+
 	// Get the user data from Firestore
 	const getUserAdditionalData = (user: firebase.User) => {
 		return db
@@ -104,5 +110,6 @@ const useAuthProvider = () => {
 		signUp,
 		signIn,
 		signOut,
+		sendPasswordResetEmail,
 	};
 };
