@@ -1,18 +1,30 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 
 import { useAuth } from 'hooks/useAuth';
 import { User } from 'interfaces/user';
+import Button from 'components/elements/Button';
 
 const SignUpForm: React.FC = () => {
 	const { register, errors, handleSubmit } = useForm();
 	const auth = useAuth();
 	const router = useRouter();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const onSubmit = (data: User) => {
-		return auth.signUp(data).then(() => {
-			router.push('/dashboard');
-		});
+		setIsLoading(true);
+		return auth
+			.signUp(data)
+			.then(() => {
+				router.push('/dashboard');
+			})
+			.catch((error) => {
+				console.log(error);
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
 	};
 
 	return (
@@ -100,12 +112,7 @@ const SignUpForm: React.FC = () => {
 
 			<div className="mt-4">
 				<span className="block w-full rounded-md shadow-sm">
-					<button
-						type="submit"
-						className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-mariner-600 hover:bg-mariner-500 focus:outline-none focus:border-mariner-700 focus:shadow-outline-mariner active:bg-mariner-700 transition duration-150 ease-in-out"
-					>
-						Sign up
-					</button>
+					<Button title="Sign up" type="submit" isLoading={isLoading} />
 				</span>
 			</div>
 		</form>
