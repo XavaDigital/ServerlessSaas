@@ -1,5 +1,28 @@
 /* purgecss start ignore */
 @tailwind base;
+
+h1 {
+	@apply text-2xl font-bold mb-2;
+}
+h2 {
+	@apply text-xl font-bold mb-2;
+}
+h3 {
+	@apply text-lg font-semibold mb-1;
+}
+h4 {
+	@apply text-lg font-semibold mt-3 mb-2;
+}
+a {
+	@apply text-blue-600;
+}
+p {
+	@apply mb-2 leading-6;
+}
+pre {
+	@apply bg-gray-300 border-gray-600 text-gray-800 p-2 block break-words;
+}
+
 @tailwind components;
 /* purgecss end ignore */
 @tailwind utilities;
