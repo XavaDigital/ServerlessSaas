@@ -10,24 +10,26 @@ const ResetPasswordForm: React.FC = () => {
 	const auth = useAuth();
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState(null);
 
 	const onSubmit = (data: { email: string }) => {
 		setIsLoading(true);
+		setError(null);
 		auth
 			.sendPasswordResetEmail(data.email)
-			.then(() => {
-				router.push('/login');
-			})
-			.catch((error) => {
-				console.log(error);
-			})
-			.finally(() => {
+			.then((response: { error?: { massage: string } }) => {
 				setIsLoading(false);
+				response?.error ? setError(response.error) : router.push('/login');
 			});
 	};
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
+			{error?.message && (
+				<div className="mb-4 text-red-500 text-center border-dashed border border-red-600 p-2 rounded">
+					<span>{error.message}</span>
+				</div>
+			)}
 			<div className="rounded-md">
 				<label
 					htmlFor="email"

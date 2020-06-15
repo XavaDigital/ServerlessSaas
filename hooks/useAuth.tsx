@@ -27,66 +27,65 @@ export const useAuth: any = () => {
 const useAuthProvider = () => {
 	const [user, setUser] = useState(null);
 
-	const createUser = (user: User) => {
-		return db
-			.collection('users')
-			.doc(user.uid)
-			.set(user)
-			.then(() => {
-				setUser(user);
-				return user;
-			})
-			.catch((error) => {
-				return { error };
-			});
+	const createUser = async (currentUser: User) => {
+		try {
+			return db
+				.collection('users')
+				.doc(currentUser.uid)
+				.set({ ...currentUser }, { merge: true });
+		} catch (error) {
+			return { error };
+		}
 	};
 
-	const signUp = ({ name, email, password }) => {
-		return auth
-			.createUserWithEmailAndPassword(email, password)
-			.then((response) => {
-				auth.currentUser.sendEmailVerification();
-				return createUser({ uid: response.user.uid, email, name });
-			})
-			.catch((error) => {
-				return { error };
-			});
+	const signUp = async ({ name, email, password }) => {
+		try {
+			return await auth
+				.createUserWithEmailAndPassword(email, password)
+				.then((response) => {
+					auth.currentUser.sendEmailVerification();
+					return createUser({ uid: response.user.uid, email, name });
+				});
+		} catch (error) {
+			return { error };
+		}
 	};
 
-	const signIn = ({ email, password }) => {
-		return auth
-			.signInWithEmailAndPassword(email, password)
-			.then((response) => {
-				setUser(response.user);
-				getUserAdditionalData(user);
-				return response.user;
-			})
-			.catch((error) => {
-				return { error };
-			});
+	const signIn = async ({ email, password }) => {
+		try {
+			const {
+				user,
+				additionalUserInfo,
+			} = await auth.signInWithEmailAndPassword(email, password);
+			const currentUser = { ...user, additionalUserInfo };
+			setUser(currentUser);
+			getUserAdditionalData(currentUser);
+			return currentUser;
+		} catch (error) {
+			return { error };
+		}
 	};
 
-	const signOut = () => {
-		return auth.signOut().then(() => setUser(false));
+	const signOut = async () => {
+		try {
+			await auth.signOut();
+			return setUser(false);
+		} catch (error) {
+			return { error };
+		}
 	};
 
-	const sendPasswordResetEmail = (email) => {
-		return auth.sendPasswordResetEmail(email).then((response) => {
-			return response;
-		});
+	const sendPasswordResetEmail = async (email) => {
+		const response = await auth.sendPasswordResetEmail(email);
+		return response;
 	};
 
 	// Get the user data from Firestore
-	const getUserAdditionalData = (user: firebase.User) => {
-		return db
-			.collection('users')
-			.doc(user.uid)
-			.get()
-			.then((userData) => {
-				if (userData.data()) {
-					setUser(userData.data());
-				}
-			});
+	const getUserAdditionalData = async (user: firebase.User) => {
+		const userData = await db.collection('users').doc(user.uid).get();
+		if (userData.data()) {
+			setUser(userData.data());
+		}
 	};
 
 	/// We need to get the user data from the Firestore db
