@@ -22,7 +22,7 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
 				</Head>
 				<Header />
 				<div className="min-h-screen">
-					<div className="bg-gray-800 pb-32">
+					<div className="bg-mariner-500 pb-32">
 						<header className="pt-16 pb-12 container mx-auto">
 							<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 								<h1 className="text-3xl leading-9 font-bold text-white text-center">
@@ -39,10 +39,10 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
 									<Link href="/blog">
 										<a
 											href="#"
-											className="flex items-center text-sm mb-2 leading-5 font-medium text-gray-400 hover:text-gray-200 transition duration-150 ease-in-out"
+											className="flex items-center text-sm mb-2 leading-5 font-medium text-gray-200 hover:text-white transition duration-150 ease-in-out"
 										>
 											<svg
-												className="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-500"
+												className="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-200"
 												viewBox="0 0 20 20"
 												fill="currentColor"
 											>
@@ -60,13 +60,13 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
 									<Link href="/">
 										<a
 											href="#"
-											className="text-gray-400 hover:text-gray-200 transition duration-150 ease-in-out"
+											className="text-gray-200 hover:text-white transition duration-150 ease-in-out"
 										>
 											Home
 										</a>
 									</Link>
 									<svg
-										className="flex-shrink-0 mx-2 h-5 w-5 text-gray-500"
+										className="flex-shrink-0 mx-2 h-5 w-5 text-gray-200"
 										viewBox="0 0 20 20"
 										fill="currentColor"
 									>
@@ -79,13 +79,13 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
 									<Link href="/blog">
 										<a
 											href="#"
-											className="text-gray-400 hover:text-gray-200 transition duration-150 ease-in-out"
+											className="text-gray-200 hover:text-white transition duration-150 ease-in-out"
 										>
 											Blogs
 										</a>
 									</Link>
 									<svg
-										className="flex-shrink-0 mx-2 h-5 w-5 text-gray-500"
+										className="flex-shrink-0 mx-2 h-5 w-5 text-gray-200"
 										viewBox="0 0 20 20"
 										fill="currentColor"
 									>
@@ -97,7 +97,7 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
 									</svg>
 									<a
 										href="#"
-										className="text-gray-400 hover:text-gray-200 transition duration-150 ease-in-out"
+										className="text-gray-200 hover:text-white transition duration-150 ease-in-out"
 									>
 										{post.data.title}
 									</a>
