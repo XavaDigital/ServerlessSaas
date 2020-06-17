@@ -10,33 +10,33 @@ import TeamSection from 'components/home/TeamSection';
 import PricingSection from 'components/home/PricingSection';
 
 interface Props {
-	posts: Post[];
+  posts: Post[];
 }
 
 const HomePage: NextPage<Props> = ({ posts }) => {
-	return (
-		<Layout>
-			<HeroSection />
-			<FeatureSection />
-			<StepsSection />
-			<PricingSection />
-			<TeamSection />
-			<BlogSection posts={posts} />
-		</Layout>
-	);
+  return (
+    <Layout>
+      <HeroSection />
+      <FeatureSection />
+      <StepsSection />
+      <PricingSection />
+      <TeamSection />
+      <BlogSection posts={posts} />
+    </Layout>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-	try {
-		const response = await Client().query(
-			Prismic.Predicates.at('document.type', 'blog'),
-			{ pageSize: 3, orderings: '[my.blog.date desc]' }
-		);
+  try {
+    const response = await Client().query(
+      Prismic.Predicates.at('document.type', 'blog'),
+      { pageSize: 3, orderings: '[my.blog.date desc]' }
+    );
 
-		return { props: { posts: response.results } };
-	} catch (error) {
-		return { props: { error } };
-	}
+    return { props: { posts: response.results } };
+  } catch (error) {
+    return { props: { error } };
+  }
 };
 
 export default HomePage;
