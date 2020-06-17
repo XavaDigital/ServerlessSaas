@@ -1,21 +1,20 @@
 import { NextPage, GetStaticProps } from 'next';
 
-import Header from 'components/layout/Header';
-import HeroSection from 'components/layout/HeroSection';
+import HeroSection from 'components/home/HeroSection';
 import { Client, Prismic } from 'config/prismic';
-import BlogsSection from 'components/layout/BlogsSections';
+import BlogSection from 'components/home/BlogSections';
+import Layout from 'components/home/Layout';
 
 interface Props {
 	posts: Post[];
 }
 
-const Home: NextPage<Props> = ({ posts }) => {
+const HomePage: NextPage<Props> = ({ posts }) => {
 	return (
-		<>
-			<Header />
+		<Layout>
 			<HeroSection />
-			<BlogsSection posts={posts} />
-		</>
+			<BlogSection posts={posts} />
+		</Layout>
 	);
 };
 
@@ -32,4 +31,4 @@ export const getStaticProps: GetStaticProps = async () => {
 	}
 };
 
-export default Home;
+export default HomePage;

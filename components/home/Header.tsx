@@ -11,11 +11,31 @@ const Header = (): JSX.Element => {
 				</Link>
 				<nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
 					<Link href="/blog">
-						<a className="mr-5 hover:text-gray-900">Blog</a>
+						<a
+							href="#"
+							className="mr-5 text-base text-gray-600 hover:text-gray-800"
+						>
+							Blog
+						</a>
 					</Link>
-					<a className="mr-5 hover:text-gray-900">Pricing</a>
-					<a className="mr-5 hover:text-gray-900">About</a>
-					<a className="mr-5 hover:text-gray-900">Team</a>
+					<a
+						href="#"
+						className="mr-5 text-base text-gray-600 hover:text-gray-800"
+					>
+						Pricing
+					</a>
+					<a
+						href="#"
+						className="mr-5 text-base text-gray-600 hover:text-gray-800"
+					>
+						About
+					</a>
+					<a
+						href="#"
+						className="mr-5 text-base text-gray-600 hover:text-gray-800"
+					>
+						Team
+					</a>
 				</nav>
 				<Link href="/login">
 					<button className="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0 md:mr-5">

@@ -1,0 +1,22 @@
+/* Add some default styling to rich blog text */
+.rich-text h1 {
+	@apply text-2xl font-bold mb-2;
+}
+.rich-text h2 {
+	@apply text-xl font-bold mb-2;
+}
+.rich-text h3 {
+	@apply text-lg font-semibold mb-1;
+}
+.rich-text h4 {
+	@apply text-lg font-semibold mt-3 mb-2;
+}
+.rich-text a {
+	@apply text-blue-600;
+}
+.rich-text p {
+	@apply mb-2 leading-6;
+}
+.rich-text pre {
+	@apply bg-gray-300 border-gray-600 text-gray-800 p-2 block break-words;
+}
