@@ -96,7 +96,7 @@ const LoginForm: React.FC = () => {
           <Link href="/reset-password">
             <a
               href="#"
-              className="font-medium text-mariner-600 hover:text-mariner-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+              className="font-medium text-royal-blue-600 hover:text-royal-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150"
             >
               Forgot your password?
             </a>

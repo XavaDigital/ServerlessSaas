@@ -21,7 +21,7 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
         <meta property="og:image" content={post.data.image.url} />
       </Head>
       <Layout>
-        <div className="bg-mariner-500 pb-32">
+        <div className="bg-royal-blue-500 pb-32">
           <header className="pt-16 pb-12 container mx-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h1 className="text-3xl leading-9 font-bold text-white text-center">

@@ -17,7 +17,7 @@ const HeroSection = (): JSX.Element => {
             aliquip ex ea commodo consequat.
           </p>
           <div className="flex justify-center">
-            <button className="inline-flex text-white bg-mariner-500 border-0 py-2 px-6 focus:outline-none hover:bg-mariner-600 rounded text-lg">
+            <button className="inline-flex text-white bg-royal-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-royal-blue-600 rounded text-lg">
               Button
             </button>
             <button className="ml-4 inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">

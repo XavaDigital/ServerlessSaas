@@ -224,7 +224,7 @@ const EditProfile: React.FC = () => {
                             ) : progress && progress !== 100 ? (
                               <div className="shadow ml-3 rounded-md bg-grey-light max-w-sm m-w-64">
                                 <div
-                                  className="rounded-md bg-mariner-600 text-xs leading-none py-1 text-center text-white"
+                                  className="rounded-md bg-royal-blue-600 text-xs leading-none py-1 text-center text-white"
                                   style={{ width: `${progress}%` }}
                                 >
                                   {`${progress}%`}
@@ -263,7 +263,7 @@ const EditProfile: React.FC = () => {
                 <span className="ml-3 inline-flex rounded-md shadow-sm">
                   <button
                     type="submit"
-                    className="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-mariner-600 hover:bg-mariner-500 focus:outline-none focus:border-mariner-700 focus:shadow-outline-mariner active:bg-mariner-700 transition duration-150 ease-in-out"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-royal-blue-600 hover:bg-royal-blue-500 focus:outline-none focus:border-royal-blue-700 focus:shadow-outline-royal-blue active:bg-royal-blue-700 transition duration-150 ease-in-out"
                   >
                     {isLoading ? 'Loading...' : 'Save'}
                   </button>

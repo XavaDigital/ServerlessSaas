@@ -18,7 +18,7 @@ const DashBoardPage: React.FC = () => {
             </p>
             <button
               onClick={() => auth.signOut()}
-              className="mt-5 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-mariner-600 hover:bg-mariner-500 focus:outline-none focus:border-mariner-700 focus:shadow-outline-mariner active:bg-mariner-700 transition duration-150 ease-in-out"
+              className="mt-5 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-royal-blue-600 hover:bg-royal-blue-500 focus:outline-none focus:border-royal-blue-700 focus:shadow-outline-royal-blue active:bg-royal-blue-700 transition duration-150 ease-in-out"
             >
               Sign out
             </button>
