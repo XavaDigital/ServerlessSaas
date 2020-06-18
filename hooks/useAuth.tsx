@@ -38,6 +38,15 @@ const useAuthProvider = () => {
     }
   };
 
+  const updateUser = async ({ id, user }) => {
+    try {
+      await db.collection('users').doc(id).update(user);
+      setUser(user);
+    } catch (error) {
+      return { error };
+    }
+  };
+
   const signUp = async ({ name, email, password }) => {
     try {
       return await auth
@@ -110,5 +119,6 @@ const useAuthProvider = () => {
     signIn,
     signOut,
     sendPasswordResetEmail,
+    updateUser,
   };
 };
