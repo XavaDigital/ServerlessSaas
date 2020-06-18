@@ -12,7 +12,7 @@ const SignUpPage: React.FC = () => {
           <p className="mt-2 text-center text-md text-gray-600">
             Already have an account?{' '}
             <Link href="/login">
-              <a href="#" className="text-blue-500">
+              <a href="" className="text-blue-500">
                 Log in
               </a>
             </Link>
