@@ -39,7 +39,7 @@ export const DashboardHeader: React.FC = () => {
 
   return (
     <nav className="bg-royal-blue-800">
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div className="border-b border-royal-blue-700">
           <div className="flex items-center justify-between h-16 px-4 sm:px-0">
             <div className="flex items-center">
@@ -122,12 +122,12 @@ export const DashboardHeader: React.FC = () => {
                   >
                     <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-lg shadow-xl">
                       <div className="py-1 rounded bg-white shadow-xs">
-                        <Link href="/profile">
+                        <Link href="/account">
                           <a
                             href="#"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-royal-blue-100"
                           >
-                            Profile
+                            Account
                           </a>
                         </Link>
                         <Link href="/pro">
@@ -265,12 +265,12 @@ export const DashboardHeader: React.FC = () => {
               </div>
             </div>
             <div className="mt-3 px-2">
-              <Link href="/profile">
+              <Link href="/account">
                 <a
                   href="#"
                   className="block px-3 py-2 rounded text-base font-medium text-gray-400 hover:text-white hover:bg-royal-blue-700 focus:outline-none focus:text-white focus:bg-royal-blue-700"
                 >
-                  Your Profile
+                  Your account
                 </a>
               </Link>
               <a

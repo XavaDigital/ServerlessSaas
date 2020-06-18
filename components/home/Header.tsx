@@ -37,25 +37,18 @@ const Header = (): JSX.Element => {
             Team
           </a>
         </nav>
-        <Link href="/login">
-          <button className="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0 md:mr-5">
-            Login
-          </button>
-        </Link>
-        <button className="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">
-          Sign Up
-          <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="w-4 h-4 ml-1"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </button>
+        <div>
+          <Link href="/login">
+            <button className="inline-flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-royal-blue-600 hover:bg-royal-blue-500 focus:outline-none focus:border-royal-blue-700 focus:shadow-outline-royal-blue active:bg-royal-blue-700 transition duration-150 ease-in-out md:mt-0 mt-4 md:mt-0 mr-4">
+              Login
+            </button>
+          </Link>
+          <Link href="/signup">
+            <button className="inline-flex flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-royal-blue-600 hover:bg-royal-blue-500 focus:outline-none focus:border-royal-blue-700 focus:shadow-outline-royal-blue active:bg-royal-blue-700 transition duration-150 ease-in-out mt-4 md:mt-0">
+              Sign Up
+            </button>
+          </Link>
+        </div>
       </div>
     </header>
   );
