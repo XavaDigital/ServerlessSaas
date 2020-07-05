@@ -2,7 +2,7 @@ import { GetStaticProps, NextPage } from 'next';
 import { Client, Prismic } from 'config/prismic';
 
 import Layout from 'components/home/Layout';
-import BlogCard from 'components/BlogCard';
+import BlogCard from 'components/home/BlogCard';
 
 interface Props {
   posts: Post[];
