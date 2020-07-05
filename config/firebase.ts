@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
+import 'firebase/functions';
 
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -23,7 +24,18 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const now = firebase.firestore.Timestamp.now();
 const storage = firebase.storage();
+const functions = firebase.functions();
 
-export { auth, db, now, storage };
+//// Uncomment the following line to let functions use the functions emulator
+// if (process.env.NODE_ENV === 'development') {
+//   functions.useFunctionsEmulator('http://localhost:5001');
+// }
+
+//// Uncomment the following line to let functions use the database emulator
+// if (process.env.NODE_ENV === 'development') {
+//   db.settings({ host: 'localhost:8080', ssl: false });
+// }
+
+export { auth, db, functions, now, storage };
 
 console.log(app.name ? 'Firebase Mode Activated!' : 'Firebase not working :(');

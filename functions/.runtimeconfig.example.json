@@ -1,0 +1,12 @@
+{
+  "stripe": {
+    "hobby_product_id": "prod_xxx",
+    "pro_product_id": "prod_xxx",
+    "webhook_secret": "whsec_xxx",
+    "publishable_key": "pk_test_xxx",
+    "test_key": "sk_test_xxx"
+  },
+  "client": {
+    "host": "http://localhost:3000"
+  }
+}
