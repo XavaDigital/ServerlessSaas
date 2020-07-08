@@ -1,4 +1,4 @@
-import BlogCard from 'components/BlogCard';
+import BlogCard from 'components/home/BlogCard';
 
 interface Props {
   posts: Post[];

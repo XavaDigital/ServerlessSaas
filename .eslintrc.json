@@ -1,17 +1,17 @@
 {
-	"parser": "@typescript-eslint/parser",
-	"extends": [
-		"plugin:@typescript-eslint/recommended",
-		"plugin:react/recommended",
-		"plugin:prettier/recommended"
-	],
-	"plugins": ["@typescript-eslint", "react", "prettier"],
-	"rules": {
-		"react/react-in-jsx-scope": "off",
-		"@typescript-eslint/no-explicit-any": "off",
-		"react/prop-types": "off"
-	},
-	"globals": {
-		"React": "writable"
-	}
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "react", "prettier"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/prop-types": "off"
+  },
+  "globals": {
+    "React": "writable"
+  }
 }

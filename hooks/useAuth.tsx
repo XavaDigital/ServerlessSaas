@@ -113,6 +113,19 @@ const useAuthProvider = () => {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    if (user?.uid) {
+      // Subscribe to user document on mount
+      const unsubscribe = db
+        .collection('users')
+        .doc(user.uid)
+        .onSnapshot((doc) => setUser(doc.data()));
+
+      // Unsubscribe on cleanup
+      return () => unsubscribe();
+    }
+  }, []);
+
   return {
     user,
     signUp,

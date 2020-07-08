@@ -1,46 +1,29 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Transition from 'components/Transition';
-import { useRequireAuth } from 'hooks/useRequireAuth';
+import Transition from 'components/shared/Transition';
+import { useAuth } from 'hooks/useAuth';
+import { useOnClickOutside } from 'hooks/useClickOutside';
 
 export const DashboardHeader: React.FC = () => {
-  const auth = useRequireAuth();
-  if (!auth.user) return null;
-
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [navbarOpen, setNavbarOpen] = useState(false);
   const router = useRouter();
   const dropdownNode = useRef();
   const navbarNode = useRef();
   const hamburgerNode = useRef();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
 
-  const handleClick = (event: Event) => {
-    if (!dropdownNode?.current?.contains(event.target)) {
-      setDropdownOpen(false);
-    }
+  useOnClickOutside(dropdownNode, () => setDropdownOpen(false));
+  useOnClickOutside(navbarNode, () => setNavbarOpen(false));
 
-    if (
-      !navbarNode?.current?.contains(event.target) &&
-      !hamburgerNode?.current?.contains(event.target)
-    ) {
-      setNavbarOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClick);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-    };
-  }, []);
+  const auth = useAuth();
+  if (!auth.user) return null;
 
   return (
-    <nav className="bg-royal-blue-800">
+    <nav className="bg-gray-800">
       <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
-        <div className="border-b border-royal-blue-700">
+        <div className="border-b border-gray-700">
           <div className="flex items-center justify-between h-16 px-4 sm:px-0">
             <div className="flex items-center">
               <div className="flex-shrink-0">
@@ -52,8 +35,8 @@ export const DashboardHeader: React.FC = () => {
                     <a
                       className={
                         router.pathname.includes('dashboard')
-                          ? 'mr-4 px-3 py-2 rounded text-sm font-medium text-white bg-royal-blue-900 focus:outline-none focus:text-white focus:bg-royal-blue-700'
-                          : 'mr-4 px-3 py-2 rounded text-sm font-medium text-gray-300 hover:text-white hover:bg-royal-blue-700 focus:outline-none focus:text-white focus:bg-royal-blue-700'
+                          ? 'mr-4 px-3 py-2 rounded text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700'
+                          : 'mr-4 px-3 py-2 rounded text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
                       }
                     >
                       Dashboard
@@ -63,8 +46,8 @@ export const DashboardHeader: React.FC = () => {
                     <a
                       className={
                         router.pathname.includes('account')
-                          ? 'px-3 py-2 rounded text-sm font-medium text-white bg-royal-blue-900 focus:outline-none focus:text-white focus:bg-royal-blue-700'
-                          : 'px-3 py-2 rounded text-sm font-medium text-gray-300 hover:text-white hover:bg-royal-blue-700 focus:outline-none focus:text-white focus:bg-royal-blue-700'
+                          ? 'px-3 py-2 rounded text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700'
+                          : 'px-3 py-2 rounded text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
                       }
                     >
                       Account
@@ -74,8 +57,8 @@ export const DashboardHeader: React.FC = () => {
                     <a
                       className={
                         router.pathname.includes('team')
-                          ? 'ml-4 px-3 py-2 rounded text-sm font-medium text-white bg-royal-blue-900 focus:outline-none focus:text-white focus:bg-royal-blue-700'
-                          : 'ml-4 px-3 py-2 rounded text-sm font-medium text-gray-300 hover:text-white hover:bg-royal-blue-700 focus:outline-none focus:text-white focus:bg-royal-blue-700'
+                          ? 'ml-4 px-3 py-2 rounded text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700'
+                          : 'ml-4 px-3 py-2 rounded text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
                       }
                     >
                       Team
@@ -92,12 +75,12 @@ export const DashboardHeader: React.FC = () => {
                       onClick={() => setDropdownOpen(!dropdownOpen)}
                       className="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
                     >
-                      <span className="inline-block h-8 w-8 rounded-full overflow-hidden bg-royal-blue-100">
+                      <span className="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-100">
                         {auth.user?.avatarUrl ? (
                           <img
                             className="h-full w-full object-cover rounded"
                             src={auth.user.avatarUrl}
-                            alt={auth.user.fullName}
+                            alt={auth.user.name}
                           />
                         ) : (
                           <svg
@@ -125,7 +108,7 @@ export const DashboardHeader: React.FC = () => {
                         <Link href="/account">
                           <a
                             href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-royal-blue-100"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
                             Account
                           </a>
@@ -133,7 +116,7 @@ export const DashboardHeader: React.FC = () => {
                         <Link href="/pro">
                           <a
                             href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-royal-blue-100"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
                             Upgrade to Pro
                           </a>
@@ -141,14 +124,14 @@ export const DashboardHeader: React.FC = () => {
                         <Link href="/subscriptions">
                           <a
                             href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-royal-blue-100"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
                             Subscriptions
                           </a>
                         </Link>
                         <a
                           href="/#"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-royal-blue-100"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           onClick={() => auth.signOut()}
                         >
                           Sign out
@@ -162,7 +145,7 @@ export const DashboardHeader: React.FC = () => {
             <div className="-mr-2 flex md:hidden" ref={hamburgerNode}>
               <button
                 onClick={() => setNavbarOpen(!navbarOpen)}
-                className="inline-flex items-center justify-center p-2 rounded text-gray-400 hover:text-white hover:bg-royal-blue-700 focus:outline-none focus:bg-royal-blue-700 focus:text-white"
+                className="inline-flex items-center justify-center p-2 rounded text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
               >
                 <svg
                   className="h-6 w-6"
@@ -195,7 +178,7 @@ export const DashboardHeader: React.FC = () => {
       </div>
       {navbarOpen && (
         <div
-          className="block border-b border-royal-blue-700 md:hidden"
+          className="block border-b border-gray-700 md:hidden"
           ref={navbarNode}
         >
           <div className="px-2 py-3 sm:px-3">
@@ -204,8 +187,8 @@ export const DashboardHeader: React.FC = () => {
                 href="#"
                 className={
                   router.pathname.includes('dashboard')
-                    ? 'block px-3 py-2 rounded text-base font-medium text-white bg-royal-blue-900 focus:outline-none focus:text-white focus:bg-royal-blue-700'
-                    : 'block px-3 py-2 rounded text-base font-medium text-gray-300 hover:text-white hover:bg-royal-blue-700 focus:outline-none focus:text-white focus:bg-royal-blue-700'
+                    ? 'block px-3 py-2 rounded text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700'
+                    : 'block px-3 py-2 rounded text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
                 }
               >
                 Dashboard
@@ -216,8 +199,8 @@ export const DashboardHeader: React.FC = () => {
                 href="#"
                 className={
                   router.pathname.includes('account')
-                    ? 'mt-1 block px-3 py-2 rounded text-base font-medium text-white bg-royal-blue-900 focus:outline-none focus:text-white focus:bg-royal-blue-700'
-                    : 'mt-1 block px-3 py-2 rounded text-base font-medium text-gray-300 hover:text-white hover:bg-royal-blue-700 focus:outline-none focus:text-white focus:bg-royal-blue-700'
+                    ? 'mt-1 block px-3 py-2 rounded text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700'
+                    : 'mt-1 block px-3 py-2 rounded text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
                 }
               >
                 Account
@@ -228,22 +211,22 @@ export const DashboardHeader: React.FC = () => {
                 href="#"
                 className={
                   router.pathname.includes('team')
-                    ? 'mt-1 block px-3 py-2 rounded text-base font-medium text-white bg-royal-blue-900 focus:outline-none focus:text-white focus:bg-royal-blue-700'
-                    : 'mt-1 block px-3 py-2 rounded text-base font-medium text-gray-300 hover:text-white hover:bg-royal-blue-700 focus:outline-none focus:text-white focus:bg-royal-blue-700'
+                    ? 'mt-1 block px-3 py-2 rounded text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700'
+                    : 'mt-1 block px-3 py-2 rounded text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
                 }
               >
                 Team
               </a>
             </Link>
           </div>
-          <div className="pt-4 pb-3 border-t border-royal-blue-700">
+          <div className="pt-4 pb-3 border-t border-gray-700">
             <div className="flex items-center px-5">
               <div className="flex-shrink-0">
                 {auth.user?.avatarUrl ? (
                   <img
                     className="h-12 w-12 object-cover rounded-full"
                     src={auth.user.avatarUrl}
-                    alt={auth.user.fullName}
+                    alt={auth.user.name}
                   />
                 ) : (
                   <svg
@@ -257,7 +240,7 @@ export const DashboardHeader: React.FC = () => {
               </div>
               <div className="ml-3">
                 <div className="text-base font-medium leading-none text-white">
-                  {auth.user.fullName}
+                  {auth.user.name}
                 </div>
                 <div className="mt-1 text-sm font-medium leading-none text-gray-400">
                   {auth.user.email}
@@ -268,14 +251,14 @@ export const DashboardHeader: React.FC = () => {
               <Link href="/account">
                 <a
                   href="#"
-                  className="block px-3 py-2 rounded text-base font-medium text-gray-400 hover:text-white hover:bg-royal-blue-700 focus:outline-none focus:text-white focus:bg-royal-blue-700"
+                  className="block px-3 py-2 rounded text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
                 >
                   Your account
                 </a>
               </Link>
               <a
                 href="/#"
-                className="mt-1 block px-3 py-2 rounded text-base font-medium text-gray-400 hover:text-white hover:bg-royal-blue-700 focus:outline-none focus:text-white focus:bg-royal-blue-700"
+                className="mt-1 block px-3 py-2 rounded text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
                 onClick={() => auth.signOut()}
               >
                 Sign out

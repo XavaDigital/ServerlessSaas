@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import { storage } from 'config/firebase';
 
-import BreadCrumbs from 'components/BreadCrumbs';
+import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 import Layout from 'components/dashboard/Layout';
 import { useRequireAuth } from 'hooks/useRequireAuth';
 import Button from 'components/elements/Button';
@@ -31,8 +31,8 @@ const Editaccount: React.FC = () => {
   const [error, setError] = useState(null);
   const [progress, setProgress] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
-  const auth = useRequireAuth();
 
+  const auth = useRequireAuth();
   if (!auth.user) return null;
 
   const { register, errors, handleSubmit } = useForm({
@@ -103,7 +103,7 @@ const Editaccount: React.FC = () => {
   return (
     <Layout>
       <div className="container py-10 max-w-6xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-        <header className="pb-4 sm:py-4 sm:py-6">
+        <header className="pb-4 sm:py-6">
           {/* {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />} */}
           <div className="mt-2 md:flex md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
