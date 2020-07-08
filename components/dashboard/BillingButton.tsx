@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { functions } from 'config/firebase';
-import Spinner from '../icons/spinner';
+import Spinner from 'components/icons/Spinner';
 
-const BillingButton = () => {
+const BillingButton: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const redirectToBilling = async () => {

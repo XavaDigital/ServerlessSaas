@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import { functions } from 'config/firebase';
 import { useAuth } from 'hooks/useAuth';
-import Spinner from '../icons/spinner';
+import Spinner from 'components/icons/Spinner';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY

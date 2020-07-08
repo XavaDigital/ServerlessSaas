@@ -1,4 +1,4 @@
-interface Post {
+export interface Post {
   uid: string;
   data: {
     title: string;
@@ -14,7 +14,7 @@ interface Post {
   };
 }
 
-interface Author {
+export interface Author {
   name: string;
   picture: string;
 }

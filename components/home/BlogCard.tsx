@@ -1,10 +1,7 @@
 import Link from 'next/link';
+import { Post } from 'interfaces/post';
 
-interface Props {
-  post: Post;
-}
-
-const BlogCard: React.FC<Props> = ({ post }) => {
+const BlogCard: React.FC<{ post: Post }> = ({ post }) => {
   if (!post) return null;
 
   return (

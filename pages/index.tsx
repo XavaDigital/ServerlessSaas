@@ -1,7 +1,8 @@
 import { NextPage, GetStaticProps } from 'next';
 
-import HeroSection from 'components/home/HeroSection';
 import { Client, Prismic } from 'config/prismic';
+import { Post } from 'interfaces/post';
+import HeroSection from 'components/home/HeroSection';
 import BlogSection from 'components/home/BlogSections';
 import Layout from 'components/home/Layout';
 import FeatureSection from 'components/home/FeatureSection';

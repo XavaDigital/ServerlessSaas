@@ -1,10 +1,7 @@
 import BlogCard from 'components/home/BlogCard';
+import { Post } from 'interfaces/post';
 
-interface Props {
-  posts: Post[];
-}
-
-const BlogSection: React.FC<Props> = ({ posts }) => {
+const BlogSection: React.FC<{ posts: Post[] }> = ({ posts }) => {
   if (!posts) return null;
 
   return (

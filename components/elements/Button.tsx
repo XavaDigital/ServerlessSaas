@@ -1,4 +1,4 @@
-import Spinner from 'components/icons/spinner';
+import Spinner from 'components/icons/Spinner';
 
 interface ButtonProps {
   title?: string;

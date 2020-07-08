@@ -3,15 +3,11 @@ import Head from 'next/head';
 import { RichText } from 'prismic-reactjs';
 
 import { Client, Prismic } from 'config/prismic';
-import Header from 'components/home/Header';
 import Link from 'next/link';
 import Layout from 'components/home/Layout';
+import { Post } from 'interfaces/post';
 
-interface Props {
-  post: Post;
-}
-
-const BlogDetailPage: React.FC<Props> = ({ post }) => {
+const BlogDetailPage: React.FC<{ post: Post }> = ({ post }) => {
   if (!post) return null;
 
   return (
@@ -23,8 +19,8 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
       <Layout>
         <div className="bg-royal-blue-500 pb-32">
           <header className="pt-16 pb-12 container mx-auto">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl leading-9 font-bold text-white text-center">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h1 className="text-4xl leading-9 font-bold text-white text-center">
                 {post.data.title}
               </h1>
             </div>
@@ -32,7 +28,7 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
         </div>
 
         <main className="-mt-32 container mx-auto md:px-6 lg:px-32">
-          <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
             <div>
               <nav className="sm:hidden">
                 <Link href="/blog">
@@ -83,26 +79,9 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
                     Blogs
                   </a>
                 </Link>
-                <svg
-                  className="flex-shrink-0 mx-2 h-5 w-5 text-gray-200"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <a
-                  href="#"
-                  className="text-gray-200 hover:text-white transition duration-150 ease-in-out"
-                >
-                  {post.data.title}
-                </a>
               </nav>
             </div>
-            <div className="rich-text bg-white rounded-lg shadow-xl px-5 py-6 sm:px-6 text-lg">
+            <div className="rich-text bg-white rounded-lg shadow-xl p-6 sm:p-8 text-lg">
               {RichText.render(post.data.content)}
             </div>
           </div>
@@ -114,7 +93,7 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const response = await Client().getByUID('blog', params.uid);
+    const response = await Client().getByUID('blog', params.uid as string, {});
 
     return { props: { post: response || null } };
   } catch (error) {

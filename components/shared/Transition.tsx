@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 interface Props {
-  show: string;
+  show: boolean;
   enter: string;
   enterFrom: string;
   enterTo: string;
