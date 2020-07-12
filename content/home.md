@@ -1,10 +1,14 @@
 ---
 hero_title: The best software in the world
-hero_description: >-
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+hero_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+  do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+  minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+  commodo consequat.
+hero_image: img/harps-joseph-tavpde7fxgy-unsplash.jpg
 hero_button_label: Sign up
+feature_title: Our amazing features
+feature_description: Blue bottle crucifix vinyl post-ironic fourd dollar toast
+  vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh pug.
 features:
   - description: >+
       Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy.
@@ -18,10 +22,9 @@ features:
       try-hard.
 
     name: The Catalyzer
-  - description: >-
-      Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy.
-      Gastropub indxgo juice poutine, ramps microdosing banh mi pug VHS
-      try-hard.
+  - description: Blue bottle crucifix vinyl post-ironic four dollar toast vegan
+      taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh mi pug
+      VHS try-hard.
     name: Neptune
 steps:
   - description: >+
@@ -54,28 +57,28 @@ pricing_description: Start free. Upgrade whenever you want.
 plan:
   - description: Try for free
     name: Free Plan
-    price: '0'
+    price: "0"
     usp:
       - name: Fingerstache disrupt
       - name: Franzen hashtag
-  - description: 'For the hobbyist '
+  - description: "For the hobbyist "
     name: Hobby Plan
-    price: '29'
+    price: "29"
     usp:
       - name: All features included in Free Plan
       - name: Tilde art party
       - name: Banh mi cornhole
   - description: For the Pros
     name: Pro Plan
-    price: '49'
+    price: "49"
     usp:
       - name: All features included in Hobby Plan
       - name: Waistcoat squid hexagon
       - name: Pinterest occupy authentic
 team_title: OUR TEAM
-team_description: >-
-  Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify,
-  subway tile poke farm-to-table. Franzen you probably haven't heard of them.
+team_description: Whatever cardigan tote bag tumblr hexagon brooklyn
+  asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably
+  haven't heard of them.
 team:
   - name: Holden Caulfield
     photo: /img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
@@ -90,4 +93,3 @@ team:
     photo: /img/harps-joseph-tavpde7fxgy-unsplash.jpg
     position: Designer
 ---
-
