@@ -1,8 +1,6 @@
 import { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
 
-import { Client, Prismic } from 'config/prismic';
-import { Post } from 'interfaces/post';
 import HeroSection from 'components/home/HeroSection';
 import BlogSection from 'components/home/BlogSections';
 import Layout from 'components/home/Layout';
@@ -11,54 +9,61 @@ import StepsSection from 'components/home/StepsSection';
 import TeamSection from 'components/home/TeamSection';
 import PricingSection from 'components/home/PricingSection';
 
-import { attributes, react as HomeContent } from '../content/home.md';
-
 interface Props {
-  posts: Post[];
+  content: { attributes: any };
+  posts: { attributes: any; html: any }[];
 }
 
-const HomePage: NextPage<Props> = ({ posts }) => {
-  const { title, cats } = attributes;
+const HomePage: NextPage<Props> = ({ content, posts }) => {
+  const { attributes } = content;
+
+  const latestPosts = posts.slice(Math.max(posts.length - 3, 0));
+
   return (
     <>
       <Head>
-        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+        <title>Serverless SaaS</title>
       </Head>
-      <article>
-        <h1>{title}</h1>
-        <HomeContent />
-        <ul>
-          {cats.map((cat, k) => (
-            <li key={k}>
-              <h2>{cat.name}</h2>
-              <p>{cat.description}</p>
-            </li>
-          ))}
-        </ul>
-      </article>
       <Layout>
-        <HeroSection />
-        <FeatureSection />
-        <StepsSection />
+        <HeroSection
+          title={attributes.hero_title}
+          description={attributes.hero_description}
+          image={attributes.hero_image}
+        />
+        <FeatureSection
+          title={attributes.feature_title}
+          description={attributes.feature_description}
+          features={attributes.features}
+        />
+        <StepsSection steps={attributes.steps} image={attributes.steps_image} />
         <PricingSection />
-        <TeamSection />
-        <BlogSection posts={posts} />
+        <BlogSection posts={latestPosts} />
+        <TeamSection
+          title={attributes.steps_title}
+          description={attributes.steps_description}
+          team={attributes.team}
+        />
       </Layout>
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  try {
-    const response = await Client().query(
-      Prismic.Predicates.at('document.type', 'blog'),
-      { pageSize: 3, orderings: '[my.blog.date desc]' }
-    );
+  const content = await import('../content/home.md');
 
-    return { props: { posts: response.results } };
-  } catch (error) {
-    return { props: { error } };
-  }
+  const posts = ((context) => {
+    const keys = context.keys();
+    const values = keys.map(context) as any;
+
+    const data = keys.map((_, index) => {
+      const post = values[index];
+      return post;
+    });
+
+    return data;
+  })(require.context('../content/posts', true, /\.md$/));
+
+  return { props: { content: content.default, posts } };
 };
 
 export default HomePage;

@@ -1,7 +1,7 @@
 ---
 template: post
 title: Here’s what I learned at the world’s biggest React conference
-slug: here’s-what-I-learned-at-the-world’s-biggest-react-conference
+slug: here-is-what-i-learned-at-the-worlds-biggest-react-conference
 draft: false
 date: 2018-04-24T13:10:27.395Z
 description: >-
@@ -11,17 +11,19 @@ description: >-
   over 25 speakers. Let me tell you five things I learned on a day filled with
   great talks, lots of coffee, and of course some beers.
 category: article
+image: img/harps-joseph-tavpde7fxgy-unsplash.jpg
 tags:
   - react
   - events
 ---
+
 On Friday, April 13th, three colleagues and I from [Inspire](https://www.inspire.nl/) attended the biggest React conference in the world:[React Amsterdam](https://react.amsterdam/). Together with 1200 frontend and full stack developers from across the globe, we gathered in the tech heart of Europe for an event with over 25 speakers.
 
 Let me tell you five things I learned on a day filled with great talks, lots of coffee, and of course some beers.
 
 ## 1. Reactive programming
 
-There will always be a new JavaScript framework to learn. Technology will continue to evolve and change, and developers will continue to rewrite applications. *[Tracy Lee](https://twitter.com/ladyleet) talked about reactive programming, which can enable you to just copy-paste most of your code from framework to framework.*
+There will always be a new JavaScript framework to learn. Technology will continue to evolve and change, and developers will continue to rewrite applications. _[Tracy Lee](https://twitter.com/ladyleet) talked about reactive programming, which can enable you to just copy-paste most of your code from framework to framework._
 
 In her talk, Tracy showed why reactive programming can be a more efficient way to code. She also discussed how it has been adopted by industry leaders such as Netflix, Slack, Microsoft, and Facebook as the new standard for developing applications. It seems very promising, especially libraries like RxJS, that help developers deliver complex features quicker with less, more maintainable code.
 
@@ -29,7 +31,7 @@ The more developers adopt this concept, the better.
 
 As Tracy mentioned in her blog post:
 
-> *“The more people understand reactive programming, the more productive we as one modern web will all be. The only barrier to adoption is not understanding the paradigm and the language around it.”*
+> _“The more people understand reactive programming, the more productive we as one modern web will all be. The only barrier to adoption is not understanding the paradigm and the language around it.”_
 
 I think it’s not such a bad idea to invest some time in learning reactive programming, and RxJS could be a great library to get you started.
 
@@ -71,7 +73,7 @@ Watch the full talk [here](https://www.youtube.com/watch?v=N-X3Z5A-pW4&feature=y
 
 ![](https://miro.medium.com/freeze/max/60/1*4rpcfMytFkK4M4kwy0eN-A.gif?q=20)
 
-![](<>)
+![]()
 
 <https://github.com/viromedia/viro>
 
@@ -97,11 +99,11 @@ You can read more about that from the creator of Redux in his own blog post,[You
 
 Kitze continued and showed a simple question someone asked on Reddit:*“Hello Reddit, I just started my first React app. What should I use to do network requests?”*The most upvoted answer?*“Just use redux-saga.”*Who says JUST use redux-saga? As Kitz said, that is like having a friend tell you there is a bug in his house and you tell him to use a bazooka.
 
-*The front-end world is changing very rapidly, and the battles of different technologies will keep on forever. But the problem is that we are asking “What’s better?” instead of:*
+_The front-end world is changing very rapidly, and the battles of different technologies will keep on forever. But the problem is that we are asking “What’s better?” instead of:_
 
-* What’s suitable for my app?
-* What’s suitable for my team?
-* What’s suitable for our use-case?
+- What’s suitable for my app?
+- What’s suitable for my team?
+- What’s suitable for our use-case?
 
 Kitze ended his talk with the question “Do we even need a state management library when using GraphQL?” The answer: maybe.
 
@@ -115,10 +117,10 @@ Moving from Redux to React Apollo (<https://dev-blog.apollodata.com/reducing-our
 
 The only things left to mention about Kitze’s talk are these simple pieces of advice:
 
-* Stop seeking external approval.
-* Stop seeking answers to other people’s projects.
-* *Stop feeling insecure about your code, because today no one actually knows what they’re doing*.
-* For God’s sake: delete your Twitter account.
+- Stop seeking external approval.
+- Stop seeking answers to other people’s projects.
+- _Stop feeling insecure about your code, because today no one actually knows what they’re doing_.
+- For God’s sake: delete your Twitter account.
 
 Watch the full talk [here](https://www.youtube.com/watch?v=smBND2pwdUE&feature=youtu.be&t=5h2m44s).
 

@@ -11,6 +11,7 @@ description: >-
   suitable for your web application? Let’s discuss six interesting technologies
   for web development.
 category: article
+image: img/foto-sushi-6anudmpilw4-unsplash.jpg
 tags:
   - react
   - vue
@@ -20,6 +21,7 @@ tags:
   - phoenix
   - graphql
 ---
+
 The world of web development is constantly changing and it is a challenge to keep a close eye on everything that is going on. Which frameworks will still be relevant in the coming year? And which programming language is most suitable for your web application? Let’s discuss six interesting technologies for web development.
 
 In this article, we distinguish between front-end and back-end technology. We start with three front-end development frameworks and then discuss three back-end development frameworks.

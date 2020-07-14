@@ -1,9 +1,6 @@
 import BlogCard from 'components/home/BlogCard';
-import { Post } from 'interfaces/post';
 
-const BlogSection: React.FC<{ posts: Post[] }> = ({ posts }) => {
-  if (!posts) return null;
-
+const BlogSection: React.FC<{ posts: any }> = ({ posts }) => {
   return (
     <section className="text-gray-700 body-font">
       <div className="container px-5 py-24 mx-auto">
@@ -16,7 +13,7 @@ const BlogSection: React.FC<{ posts: Post[] }> = ({ posts }) => {
           </p>
         </div>
         <div className="flex flex-wrap -m-4 mt-4">
-          {posts.map((post, i) => {
+          {posts?.map((post, i) => {
             return (
               <div className="p-4 md:w-1/3" key={i}>
                 <BlogCard post={post} />

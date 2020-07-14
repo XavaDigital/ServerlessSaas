@@ -10,6 +10,7 @@ description: >-
   company, but there are many other reasons why working on side projects can be
   exceptionally important.
 category: article
+image: img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
 tags:
   - side-projects
   - startup
