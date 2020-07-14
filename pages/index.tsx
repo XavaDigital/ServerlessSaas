@@ -49,7 +49,7 @@ const HomePage: NextPage<Props> = ({ content, posts }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const content = await import('../content/home.md');
+  const content = await import(`../content/pages/${'home'}.md`);
 
   const posts = ((context) => {
     const keys = context.keys();

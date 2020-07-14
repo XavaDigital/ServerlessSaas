@@ -1,11 +1,9 @@
 import { GetStaticProps, NextPage } from 'next';
-import { Client, Prismic } from 'config/prismic';
 
 import Layout from 'components/home/Layout';
 import BlogCard from 'components/home/BlogCard';
-import { Post } from 'interfaces/post';
 
-const BlogPage: NextPage<{ posts: Post[] }> = ({ posts }) => {
+const BlogPage: NextPage<{ posts: any[] }> = ({ posts }) => {
   return (
     <Layout>
       <div className="min-h-screen pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
@@ -33,16 +31,19 @@ const BlogPage: NextPage<{ posts: Post[] }> = ({ posts }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  try {
-    const response = await Client().query(
-      Prismic.Predicates.at('document.type', 'blog'),
-      { orderings: '[my.blog.date desc]' }
-    );
+  const posts = ((context) => {
+    const keys = context.keys();
+    const values = keys.map(context) as any;
 
-    return { props: { posts: response.results } };
-  } catch (error) {
-    return { props: { error: error.message } };
-  }
+    const data = keys.map((_, index) => {
+      const post = values[index];
+      return post;
+    });
+
+    return data;
+  })(require.context('../../content/posts', true, /\.md$/));
+
+  return { props: { posts } };
 };
 
 export default BlogPage;
