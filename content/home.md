@@ -52,6 +52,7 @@ steps:
       retro.
 
     name: FINISH
+steps_image: img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
 pricing_title: Simple Pricing
 pricing_description: Start free. Upgrade whenever you want.
 plan:
@@ -83,13 +84,29 @@ team:
   - name: Holden Caulfield
     photo: /img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
     position: UI Developer
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+      mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
+      elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
+    image: img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
   - name: Alper Kamu
     photo: /img/foto-sushi-6anudmpilw4-unsplash.jpg
     position: Designer
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+      mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
+      elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
+    image: img/foto-sushi-6anudmpilw4-unsplash.jpg
   - name: Atticus Finch
     photo: /img/kal-visuals-b1hg7qi-zcc-unsplash.jpg
     position: UI Developer
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+      mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
+      elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
+    image: img/harps-joseph-tavpde7fxgy-unsplash.jpg
   - name: Henry Letham
     photo: /img/harps-joseph-tavpde7fxgy-unsplash.jpg
     position: Designer
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+      mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
+      elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
+    image: img/kal-visuals-b1hg7qi-zcc-unsplash.jpg
 ---
