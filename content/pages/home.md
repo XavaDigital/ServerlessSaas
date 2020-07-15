@@ -55,27 +55,25 @@ steps:
 steps_image: img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
 pricing_title: Simple Pricing
 pricing_description: Start free. Upgrade whenever you want.
-plan:
+plans:
   - description: Try for free
     name: Free Plan
     price: '0'
-    usp:
-      - name: Fingerstache disrupt
-      - name: Franzen hashtag
+    usps: [Fingerstache disrupt, Franzen hashtag]
   - description: 'For the hobbyist '
     name: Hobby Plan
     price: '29'
-    usp:
-      - name: All features included in Free Plan
-      - name: Tilde art party
-      - name: Banh mi cornhole
+    usps:
+      [All features included in Free Plan, Tilde art party, Banh mi cornhole]
   - description: For the Pros
     name: Pro Plan
     price: '49'
-    usp:
-      - name: All features included in Hobby Plan
-      - name: Waistcoat squid hexagon
-      - name: Pinterest occupy authentic
+    usps:
+      [
+        All features included in Hobby Plan,
+        Waistcoat squid hexagon,
+        Pinterest occupy authentic,
+      ]
 team_title: OUR TEAM
 team_description: Whatever cardigan tote bag tumblr hexagon brooklyn
   asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably

@@ -36,7 +36,11 @@ const HomePage: NextPage<Props> = ({ content, posts }) => {
           features={attributes.features}
         />
         <StepsSection steps={attributes.steps} image={attributes.steps_image} />
-        <PricingSection />
+        <PricingSection
+          title={attributes.pricing_title}
+          description={attributes.pricing_description}
+          plans={attributes.plans}
+        />
         <BlogSection posts={latestPosts} />
         <TeamSection
           title={attributes.steps_title}

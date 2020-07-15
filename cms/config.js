@@ -15,7 +15,7 @@ export default {
         {
           label: 'Home',
           name: 'home',
-          file: 'content/home.md',
+          file: 'content/pages/home.md',
           fields: [
             {
               label: 'Hero Title',
@@ -97,8 +97,8 @@ export default {
               widget: 'string',
             },
             {
-              label: 'Plan',
-              name: 'plan',
+              label: 'Plans',
+              name: 'plans',
               widget: 'list',
               fields: [
                 {
@@ -117,16 +117,9 @@ export default {
                   widget: 'string',
                 },
                 {
-                  label: 'USP',
-                  name: 'usp',
+                  label: 'USPs',
+                  name: 'usps',
                   widget: 'list',
-                  fields: [
-                    {
-                      label: 'Name',
-                      name: 'name',
-                      widget: 'string',
-                    },
-                  ],
                 },
               ],
             },

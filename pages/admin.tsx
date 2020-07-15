@@ -8,15 +8,13 @@ const CMS = dynamic(
   (): any =>
     import('netlify-cms-app').then((cms: any) => {
       cms.init({ config });
-      cms.registerPreviewStyle('../styles/index.css');
       cms.registerPreviewStyle(
         'https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css'
       );
-      cms.registerPreviewStyle('../styles/blog.css');
-      cms.registerPreviewTemplate('posts', PostPreview);
       cms.registerPreviewTemplate('home', HomePreview);
+      cms.registerPreviewTemplate('posts', PostPreview);
     }),
-  { ssr: false, loading: () => <p>...</p> }
+  { ssr: false, loading: () => <p>Loading...</p> }
 );
 
 const AdminPage: React.FC = () => {
