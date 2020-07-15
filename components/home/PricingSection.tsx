@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 interface Props {
   title: string;
   description: string;
@@ -11,7 +13,7 @@ interface Props {
 
 const PricingSection: React.FC<Props> = ({ title, description, plans }) => {
   return (
-    <section className="text-gray-700 body-font">
+    <section className="text-gray-700 body-font" id="pricing">
       <div className="md:max-w-5xl lg:max-w-6xl px-5 py-24 mx-auto">
         <div className="text-center mb-20">
           <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">
@@ -45,7 +47,7 @@ const PricingSection: React.FC<Props> = ({ title, description, plans }) => {
                           className="flex items-center text-gray-600 mb-2"
                           key={i}
                         >
-                          <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-500 text-white rounded-full flex-shrink-0">
+                          <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-green-500 text-white rounded-full flex-shrink-0">
                             <svg
                               fill="none"
                               stroke="currentColor"
@@ -58,25 +60,27 @@ const PricingSection: React.FC<Props> = ({ title, description, plans }) => {
                               <path d="M20 6L9 17l-5-5"></path>
                             </svg>
                           </span>
-                          {usp.name}
+                          {usp}
                         </p>
                       );
                     })}
                   </div>
-                  <button className="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-600 rounded">
-                    Start free
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4 ml-auto"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
-                  </button>
+                  <Link href="/signup">
+                    <button className="flex items-center mt-auto text-white bg-indigo-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-600 rounded">
+                      Start free
+                      <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        className="w-4 h-4 ml-auto"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                      </svg>
+                    </button>
+                  </Link>
                   <p className="text-xs text-gray-500 mt-3">
                     {plan.description}
                   </p>

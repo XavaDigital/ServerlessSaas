@@ -11,13 +11,10 @@ import PricingSection from 'components/home/PricingSection';
 
 interface Props {
   content: { attributes: any };
-  posts: { attributes: any; html: any }[];
 }
 
-const HomePage: NextPage<Props> = ({ content, posts }) => {
+const HomePage: NextPage<Props> = ({ content }) => {
   const { attributes } = content;
-
-  const latestPosts = posts.slice(Math.max(posts.length - 3, 0));
 
   return (
     <>
@@ -41,11 +38,15 @@ const HomePage: NextPage<Props> = ({ content, posts }) => {
           description={attributes.pricing_description}
           plans={attributes.plans}
         />
-        <BlogSection posts={latestPosts} />
         <TeamSection
-          title={attributes.steps_title}
-          description={attributes.steps_description}
+          title={attributes.team_title}
+          description={attributes.team_description}
           team={attributes.team}
+        />
+        <BlogSection
+          title={attributes.blog_title}
+          description={attributes.blog_description}
+          slugs={attributes.posts}
         />
       </Layout>
     </>
@@ -55,19 +56,7 @@ const HomePage: NextPage<Props> = ({ content, posts }) => {
 export const getStaticProps: GetStaticProps = async () => {
   const content = await import(`../content/pages/${'home'}.md`);
 
-  const posts = ((context) => {
-    const keys = context.keys();
-    const values = keys.map(context) as any;
-
-    const data = keys.map((_, index) => {
-      const post = values[index];
-      return post;
-    });
-
-    return data;
-  })(require.context('../content/posts', true, /\.md$/));
-
-  return { props: { content: content.default, posts } };
+  return { props: { content: content.default } };
 };
 
 export default HomePage;

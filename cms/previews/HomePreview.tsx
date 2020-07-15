@@ -4,16 +4,15 @@ import FeatureSection from 'components/home/FeatureSection';
 import StepsSection from 'components/home/StepsSection';
 import TeamSection from 'components/home/TeamSection';
 import PricingSection from 'components/home/PricingSection';
+import BlogSection from 'components/home/BlogSections';
 
 const HomePreview: ComponentType<any> = ({ entry, widgetsFor }) => {
   const features = [];
   widgetsFor('features').map((feature) => {
-    if (feature) {
-      features.push({
-        name: feature?.getIn(['data', 'name']),
-        description: feature?.getIn(['data', 'description']),
-      });
-    }
+    features.push({
+      name: feature?.getIn(['data', 'name']),
+      description: feature?.getIn(['data', 'description']),
+    });
   });
 
   const steps = [];
@@ -26,19 +25,17 @@ const HomePreview: ComponentType<any> = ({ entry, widgetsFor }) => {
 
   const plans = [];
   widgetsFor('plans').map((plan) => {
-    const usps = [];
-    widgetsFor('plan.usps').map((usp) => {
-      plans.push({
-        name: usp?.getIn(['data', 'name']),
-      });
-    });
-
     plans.push({
       name: plan?.getIn(['data', 'name']),
       description: plan?.getIn(['data', 'description']),
       price: plan?.getIn(['data', 'price']),
       usps: plan?.getIn(['data', 'usps']),
     });
+  });
+
+  const slugs = [];
+  widgetsFor('posts').map((post) => {
+    slugs.push(post?.getIn(['data']));
   });
 
   const team = [];
@@ -71,6 +68,11 @@ const HomePreview: ComponentType<any> = ({ entry, widgetsFor }) => {
         title={entry.getIn(['data', 'pricing_title'])}
         description={entry.getIn(['data', 'pricing_description'])}
         plans={plans}
+      />
+      <BlogSection
+        title={entry.getIn(['data', 'blog_title'])}
+        description={entry.getIn(['data', 'blog_description'])}
+        slugs={slugs}
       />
       <TeamSection
         title={entry.getIn(['data', 'team_title'])}

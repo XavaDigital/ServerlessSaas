@@ -124,6 +124,16 @@ export default {
               ],
             },
             {
+              label: 'Featured Posts',
+              name: 'posts',
+              widget: 'relation',
+              collection: 'posts',
+              searchFields: ['title'],
+              valueField: '{{slug}}',
+              displayFields: ['title'],
+              multiple: true,
+            },
+            {
               label: 'Team Title',
               name: 'team_title',
               widget: 'string',

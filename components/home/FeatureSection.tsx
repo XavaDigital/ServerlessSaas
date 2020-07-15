@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 interface Props {
   title: string;
   description: string;
@@ -58,7 +60,7 @@ const FeatureSection: React.FC<Props> = ({ title, description, features }) => {
   };
 
   return (
-    <section className="text-gray-700 body-font">
+    <section className="text-gray-700 body-font" id="features">
       <div className="container px-5 py-24 mx-auto">
         <div className="text-center mb-20">
           <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">
@@ -88,28 +90,16 @@ const FeatureSection: React.FC<Props> = ({ title, description, features }) => {
                   <p className="leading-relaxed text-base">
                     {feature.description}
                   </p>
-                  <a className="mt-3 text-indigo-500 inline-flex items-center">
-                    Learn More
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4 ml-2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
-                  </a>
                 </div>
               </div>
             );
           })}
         </div>
-        <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-          Button
-        </button>
+        <Link href="/signup">
+          <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            Start Free
+          </button>
+        </Link>
       </div>
     </section>
   );
