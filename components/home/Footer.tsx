@@ -27,15 +27,15 @@ const Footer = (): JSX.Element => {
           </div>
           <div className="px-5 py-2">
             <a
-              href="#"
+              href="#features"
               className="text-base leading-6 text-gray-600 hover:text-gray-800"
             >
-              About
+              Features
             </a>
           </div>
           <div className="px-5 py-2">
             <a
-              href="#"
+              href="#pricing"
               className="text-base leading-6 text-gray-600 hover:text-gray-800"
             >
               Pricing
@@ -43,7 +43,7 @@ const Footer = (): JSX.Element => {
           </div>
           <div className="px-5 py-2">
             <a
-              href="#"
+              href="#team"
               className="text-base leading-6 text-gray-600 hover:text-gray-800"
             >
               Team

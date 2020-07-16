@@ -1,29 +1,25 @@
 import Link from 'next/link';
 
-interface Props {
-  post: Post;
-}
-
-const BlogCard: React.FC<Props> = ({ post }) => {
-  if (!post) return null;
+const BlogCard: React.FC<{ post: any }> = ({ post }) => {
+  const { attributes } = post;
 
   return (
     <div className="flex flex-col h-full border-2 border-gray-200 rounded-lg overflow-hidden">
       <img
         className="lg:h-48 md:h-36 w-full object-cover object-center"
-        src={post.data.image.url}
+        src={attributes.image}
         alt="blog"
       />
       <div className="p-6">
         <h2 className="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">
-          {post.data.subtitle}
+          {attributes.category}
         </h2>
         <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-          {post.data.title}
+          {attributes.title}
         </h1>
-        <p className="leading-relaxed mb-3">{post.data.summary}</p>
+        <p className="leading-relaxed mb-3">{attributes.description}</p>
         <div className="flex items-center flex-wrap ">
-          <Link href="/blog/[uid]" as={`/blog/${post.uid}`}>
+          <Link href="/blog/[uid]" as={`/blog/${attributes.slug}`}>
             <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
               Read more
               <svg

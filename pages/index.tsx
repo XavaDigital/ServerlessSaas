@@ -1,7 +1,7 @@
 import { NextPage, GetStaticProps } from 'next';
+import Head from 'next/head';
 
 import HeroSection from 'components/home/HeroSection';
-import { Client, Prismic } from 'config/prismic';
 import BlogSection from 'components/home/BlogSections';
 import Layout from 'components/home/Layout';
 import FeatureSection from 'components/home/FeatureSection';
@@ -10,33 +10,53 @@ import TeamSection from 'components/home/TeamSection';
 import PricingSection from 'components/home/PricingSection';
 
 interface Props {
-  posts: Post[];
+  content: { attributes: any };
 }
 
-const HomePage: NextPage<Props> = ({ posts }) => {
+const HomePage: NextPage<Props> = ({ content }) => {
+  const { attributes } = content;
+
   return (
-    <Layout>
-      <HeroSection />
-      <FeatureSection />
-      <StepsSection />
-      <PricingSection />
-      <TeamSection />
-      <BlogSection posts={posts} />
-    </Layout>
+    <>
+      <Head>
+        <title>Serverless SaaS</title>
+      </Head>
+      <Layout>
+        <HeroSection
+          title={attributes.hero_title}
+          description={attributes.hero_description}
+          image={attributes.hero_image}
+        />
+        <FeatureSection
+          title={attributes.feature_title}
+          description={attributes.feature_description}
+          features={attributes.features}
+        />
+        <StepsSection steps={attributes.steps} image={attributes.steps_image} />
+        <PricingSection
+          title={attributes.pricing_title}
+          description={attributes.pricing_description}
+          plans={attributes.plans}
+        />
+        <TeamSection
+          title={attributes.team_title}
+          description={attributes.team_description}
+          team={attributes.team}
+        />
+        <BlogSection
+          title={attributes.blog_title}
+          description={attributes.blog_description}
+          slugs={attributes.posts}
+        />
+      </Layout>
+    </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  try {
-    const response = await Client().query(
-      Prismic.Predicates.at('document.type', 'blog'),
-      { pageSize: 3, orderings: '[my.blog.date desc]' }
-    );
+  const content = await import(`../content/pages/${'home'}.md`);
 
-    return { props: { posts: response.results } };
-  } catch (error) {
-    return { props: { error } };
-  }
+  return { props: { content: content.default } };
 };
 
 export default HomePage;

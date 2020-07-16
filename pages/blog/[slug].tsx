@@ -1,38 +1,31 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import { RichText } from 'prismic-reactjs';
-
-import { Client, Prismic } from 'config/prismic';
-import Header from 'components/home/Header';
 import Link from 'next/link';
-import Layout from 'components/home/Layout';
 
-interface Props {
-  post: Post;
-}
+import Footer from 'components/home/Footer';
 
-const BlogDetailPage: React.FC<Props> = ({ post }) => {
-  if (!post) return null;
+const BlogDetailPage: React.FC<{ content: any }> = ({ content }) => {
+  const { title, image } = content.attributes;
 
   return (
     <article>
       <Head>
-        <title>{post.data.title}</title>
-        <meta property="og:image" content={post.data.image.url} />
+        <title>{title}</title>
+        <meta property="og:image" content={image} />
       </Head>
-      <Layout>
-        <div className="bg-royal-blue-500 pb-32">
-          <header className="pt-16 pb-12 container mx-auto">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl leading-9 font-bold text-white text-center">
-                {post.data.title}
+      <div className="min-h-screen bg-gray-50">
+        <div className="bg-gray-900 pb-32">
+          <header className="py-16 md:py-24 container mx-auto">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h1 className="text-4xl leading-9 font-bold text-white text-center">
+                {title}
               </h1>
             </div>
           </header>
         </div>
 
         <main className="-mt-32 container mx-auto md:px-6 lg:px-32">
-          <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
             <div>
               <nav className="sm:hidden">
                 <Link href="/blog">
@@ -83,62 +76,43 @@ const BlogDetailPage: React.FC<Props> = ({ post }) => {
                     Blogs
                   </a>
                 </Link>
-                <svg
-                  className="flex-shrink-0 mx-2 h-5 w-5 text-gray-200"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <a
-                  href="#"
-                  className="text-gray-200 hover:text-white transition duration-150 ease-in-out"
-                >
-                  {post.data.title}
-                </a>
               </nav>
             </div>
-            <div className="rich-text bg-white rounded-lg shadow-xl px-5 py-6 sm:px-6 text-lg">
-              {RichText.render(post.data.content)}
+            <div className="rich-text bg-white rounded-lg shadow-xl p-6 sm:p-8 text-lg">
+              <div dangerouslySetInnerHTML={{ __html: content.html }}></div>
             </div>
           </div>
         </main>
-      </Layout>
+        <Footer />
+      </div>
     </article>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  try {
-    const response = await Client().getByUID('blog', params.uid);
+  const content = await import(`../../content/posts/${params.slug}.md`);
 
-    return { props: { post: response || null } };
-  } catch (error) {
-    return { props: { error } };
-  }
+  return { props: { content: content.default } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await Client().query(
-    Prismic.Predicates.at('document.type', 'blog')
-  );
+  const postSlugs = ((context) => {
+    const keys = context.keys();
+    const data = keys.map((key) => {
+      const slug = key.replace(/^.*[\\\/]/, '').slice(0, -3);
 
-  const paths =
-    response.results.map((post) => {
-      return {
-        params: {
-          uid: `/blog/${post.uid}`,
-        },
-      };
-    }) || [];
+      return slug;
+    });
+    return data;
+  })(require.context('../../content/posts', true, /\.md$/));
+
+  const paths = postSlugs.map((slug) => {
+    return `/blog/${slug}`;
+  });
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
