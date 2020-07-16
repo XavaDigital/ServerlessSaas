@@ -3,7 +3,7 @@ export default {
   backend: {
     name: 'github',
     repo: 'jakeprins/serverless-saas',
-    branch: 'netlify-cms',
+    branch: 'master',
     squash_merges: true,
   },
   media_folder: 'public/img',
