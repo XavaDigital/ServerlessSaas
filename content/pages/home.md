@@ -4,7 +4,7 @@ hero_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
   do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
   minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
   commodo consequat.
-hero_image: img/harps-joseph-tavpde7fxgy-unsplash.jpg
+hero_image: img/xps-ezyq1hol5_8-unsplash.jpg
 hero_button_label: Sign up
 feature_title: Our amazing features
 feature_description: Blue bottle crucifix vinyl post-ironic fourd dollar toast
