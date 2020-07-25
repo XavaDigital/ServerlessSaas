@@ -56,67 +56,63 @@ steps_image: img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
 pricing_title: Simple Pricing
 pricing_description: Start free. Upgrade whenever you want.
 plans:
-  - description: Try for free
+  - description: Try for free or just pay wh
     name: Free Plan
-    price: '0'
+    price: "0"
     usps:
       - Fingerstache disrupt
       - Franzen hashtag
-  - description: 'For the hobbyist '
-    name: Hobby Plan
-    price: '29'
+  - description: "For the hobbyist "
+    name: Starter Plan
+    price: "29"
     usps:
       - All features included in Free Plan
       - Tilde art party
       - Banh mi cornhole
   - description: For the Pros
     name: Pro Plan
-    price: '49'
+    price: "49"
     usps:
       - All features included in Hobby Plan
       - Waistcoat squid hexagon
       - Pinterest occupy authentic
-blog_title: From our blog
-blog_description: Read more about how we develop software
 posts:
   - code-splitting-by-routes-and-components
   - interesting-web-technologies-to-follow-in-2019
-  - why-side-projects-are-so-damn-important
-team_title: Our Team
+  - here-is-what-i-learned-at-the-worlds-biggest-react-conference
+team_title: Our Team of devs
 team_description: Whatever cardigan tote bag tumblr hexagon brooklyn
   asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably
   haven't heard of them.
+blog_title: From our blog
 team:
-  - name: Holden Caulfield
+  - name: Holden Jones
     photo: /img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
-    position: UI Developer
-    description:
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+    position: Vue Developer
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
     image: img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
-  - name: Alper Kamu
+  - name: Alper Kamuu
     photo: /img/foto-sushi-6anudmpilw4-unsplash.jpg
-    position: Designer
-    description:
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+    position: UX Designer
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
     image: img/foto-sushi-6anudmpilw4-unsplash.jpg
   - name: Atticus Finch
     photo: /img/kal-visuals-b1hg7qi-zcc-unsplash.jpg
     position: UI Developer
-    description:
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
     image: img/harps-joseph-tavpde7fxgy-unsplash.jpg
   - name: Henry Letham
     photo: /img/harps-joseph-tavpde7fxgy-unsplash.jpg
     position: Designer
-    description:
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
     image: img/kal-visuals-b1hg7qi-zcc-unsplash.jpg
+blog_description: Read more about how we develop software
 ---
