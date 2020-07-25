@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import * as functions from 'firebase-functions';
 
-import { catchErrors, getUID } from './helpers';
+import { catchErrors, getUID } from '../helpers';
 import { stripe } from '../config';
 
 const createCheckoutSession = async (

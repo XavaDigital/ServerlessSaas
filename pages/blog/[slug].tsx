@@ -8,7 +8,7 @@ const BlogDetailPage: React.FC<{ content: any }> = ({ content }) => {
   const { title, image } = content.attributes;
 
   return (
-    <article>
+    <>
       <Head>
         <title>{title}</title>
         <meta property="og:image" content={image} />
@@ -24,7 +24,7 @@ const BlogDetailPage: React.FC<{ content: any }> = ({ content }) => {
           </header>
         </div>
 
-        <main className="-mt-32 container mx-auto md:px-6 lg:px-32">
+        <main className="-mt-32 mx-auto md:px-6 lg:px-32 pb-16">
           <div className="max-w-4xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
             <div>
               <nav className="sm:hidden">
@@ -78,14 +78,17 @@ const BlogDetailPage: React.FC<{ content: any }> = ({ content }) => {
                 </Link>
               </nav>
             </div>
-            <div className="rich-text bg-white rounded-lg shadow-xl p-6 sm:p-8 text-lg">
-              <div dangerouslySetInnerHTML={{ __html: content.html }}></div>
+            <div className="bg-white rounded-lg shadow-xl py-8 md:py-12 px-8 text-lg">
+              <article
+                className="prose lg:prose-lg mx-auto"
+                dangerouslySetInnerHTML={{ __html: content.html }}
+              ></article>
             </div>
           </div>
         </main>
         <Footer />
       </div>
-    </article>
+    </>
   );
 };
 

@@ -91,15 +91,20 @@ const useAuthProvider = () => {
 
   // Get the user data from Firestore
   const getUserAdditionalData = async (user: firebase.User) => {
-    const userData = await db.collection('users').doc(user.uid).get();
-    if (userData.data()) {
-      setUser(userData.data());
-    }
+    db.collection('users')
+      .doc(user.uid)
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          setUser({ ...user, ...doc.data() });
+        } else {
+          console.log('No such document!');
+        }
+      });
   };
 
   /// We need to get the user data from the Firestore db
   const handleAuthStateChanged = (user: firebase.User) => {
-    setUser(user);
     if (user) {
       getUserAdditionalData(user);
     }
