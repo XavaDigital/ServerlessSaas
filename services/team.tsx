@@ -11,7 +11,7 @@ export const createTeam = (data: { name: string }): Promise<any> => {
       email: auth.currentUser.email,
       role: 'owner',
       status: 'active',
-      createdAt: now,
+      createdAt: Date.now(),
     },
   ];
 
@@ -19,6 +19,10 @@ export const createTeam = (data: { name: string }): Promise<any> => {
     .collection('teams')
     .doc(id)
     .set({ id, name, ownerId, users }, { merge: true });
+};
+
+export const updateTeam = (id: string, data: any): Promise<any> => {
+  return db.collection('teams').doc(id).update(data);
 };
 
 export const getTeam = (teamId: string): Promise<any> => {

@@ -47,13 +47,13 @@ const useAuthProvider = () => {
     }
   };
 
-  const signUp = async ({ name, email, password }) => {
+  const signUp = async ({ name, email, password }, teamId) => {
     try {
       return await auth
         .createUserWithEmailAndPassword(email, password)
         .then((response) => {
           auth.currentUser.sendEmailVerification();
-          return createUser({ uid: response.user.uid, email, name });
+          return createUser({ uid: response.user.uid, email, name, teamId });
         });
     } catch (error) {
       return { error };

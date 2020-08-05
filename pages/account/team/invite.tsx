@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import firebase from 'firebase/app';
 
 import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
@@ -8,6 +9,8 @@ import AccountMenu from 'components/dashboard/AccountMenu';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { functions, db } from 'config/firebase';
+import { updateTeam } from 'services/team';
 
 const breadCrumbs = {
   back: {
@@ -37,12 +40,31 @@ const Account: React.FC = () => {
   const auth = useAuth();
   if (!auth.user) return null;
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const payload = {
+      status: 'invited',
+      invitedAt: Date.now(),
+      role: 'member',
+      ...data,
+    };
     setIsLoading(true);
     setError(null);
-
-    console.log(data);
-    router.push('/account/team');
+    updateTeam(router.query.teamId as string, {
+      users: firebase.firestore.FieldValue.arrayUnion({ ...payload }),
+    }).then(() => {
+      const sendTeamInviteEmail = functions.httpsCallable(
+        'sendTeamInviteEmail'
+      );
+      sendTeamInviteEmail({
+        emailTo: data.email,
+        teamName: 'Jakes team',
+        teamId: router.query.teamId,
+        teamOwnerName: auth.user.name,
+      }).then((response) => {
+        console.log(response);
+        router.push('/account/team');
+      });
+    });
   };
 
   return (

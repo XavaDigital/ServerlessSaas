@@ -1,3 +1,4 @@
+import firebase from 'firebase/app';
 import { useRequireAuth } from 'hooks/useRequireAuth';
 import Layout from 'components/dashboard/Layout';
 import AccountMenu from 'components/dashboard/AccountMenu';
@@ -5,7 +6,9 @@ import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 import Link from 'next/link';
 import Button from 'components/elements/Button';
 import { useEffect, useState } from 'react';
-import { getTeam } from 'services/team';
+import { getTeam, updateTeam } from 'services/team';
+import { useForm } from 'react-hook-form';
+import { functions } from 'config/firebase';
 
 const breadCrumbs = {
   back: {
@@ -24,21 +27,74 @@ const breadCrumbs = {
 
 const Team: React.FC = () => {
   const [team, setTeam] = useState(null);
+  const [formOpen, setFormOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasResendInvite, setHasResendInvite] = useState(null);
+  const [error, setError] = useState(null);
+
+  const { register, errors, handleSubmit } = useForm();
 
   const auth = useRequireAuth();
 
   useEffect(() => {
-    console.log(team);
     if (!team && auth.user?.teamId) {
-      getTeam(auth.user.teamId).then((doc) => {
-        if (doc.exists) {
-          setTeam(doc.data());
-        } else {
-          console.log('No such document!');
-        }
-      });
+      fetchTeam();
     }
   }, [team, auth.user?.teamId]);
+
+  const fetchTeam = () => {
+    getTeam(auth.user.teamId).then((doc) => {
+      if (doc.exists) {
+        setTeam(doc.data());
+      }
+    });
+  };
+
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    setError(null);
+
+    const payload = {
+      status: 'invited',
+      invitedAt: Date.now(),
+      role: 'member',
+      ...data,
+    };
+    updateTeam(team.id as string, {
+      users: firebase.firestore.FieldValue.arrayUnion({ ...payload }),
+    }).then(() => {
+      const sendTeamInviteEmail = functions.httpsCallable(
+        'sendTeamInviteEmail'
+      );
+      sendTeamInviteEmail({
+        emailTo: data.email,
+        teamName: team.name,
+        teamId: team.id,
+        teamOwnerName: auth.user.name,
+      })
+        .then(() => {
+          setFormOpen(false);
+          setIsLoading(false);
+          fetchTeam();
+        })
+        .catch((error) => console.log(error));
+    });
+  };
+
+  const resendInvite = (email) => {
+    setIsLoading(email);
+    const sendTeamInviteEmail = functions.httpsCallable('sendTeamInviteEmail');
+    sendTeamInviteEmail({
+      emailTo: email,
+      teamName: team.name,
+      teamId: team.id,
+      teamOwnerName: auth.user.name,
+    }).then(() => {
+      setHasResendInvite(email);
+      setFormOpen(false);
+      setIsLoading(false);
+    });
+  };
 
   if (!auth.user) return null;
 
@@ -125,18 +181,29 @@ const Team: React.FC = () => {
                             </div>
                             <p className="mt-1 text-gray-500 text-sm leading-5 truncate">
                               {user.createdAt &&
-                                `Joined on ${new Date(
+                                `joinedAt on ${new Date(
                                   user.createdAt.seconds * 1000
                                 ).toLocaleDateString()}`}
                             </p>
                           </div>
                           <div className="flex">
                             {user.status !== 'active' &&
-                              auth.user.isTeamOwner && (
-                                <button className="mr-3 inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-                                  Resend invite
-                                </button>
-                              )}
+                            auth.user.isTeamOwner ? (
+                              <button
+                                className="mr-3 inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                                onClick={() => resendInvite(user.email)}
+                              >
+                                {isLoading === user.email
+                                  ? 'Sending...'
+                                  : (hasResendInvite === user.email &&
+                                      'Resented') ||
+                                    'Resend invite'}
+                              </button>
+                            ) : (
+                              <span className="mr-3 inline-flex justify-center w-full px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 sm:text-sm sm:leading-5">
+                                Active
+                              </span>
+                            )}
                             {user.role !== 'owner' && auth.user.isTeamOwner && (
                               <button className="flex items-center justify-center px-3 py-2 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                                 Delete
@@ -149,15 +216,55 @@ const Team: React.FC = () => {
                   })}
                 </ul>
                 <div className="border-t border-gray-200 pt-5">
-                  <div className="flex justify-end">
-                    <span className="rounded-md shadow-sm">
-                      {auth.user.isTeamOwner && (
-                        <Link href="/account/team/invite">
-                          <Button title="Invite a member" />
-                        </Link>
+                  {auth.user.isTeamOwner && !formOpen && (
+                    <div className="flex justify-end">
+                      <span className="rounded-md shadow-sm">
+                        <Button
+                          title="Invite a member"
+                          onClick={() => setFormOpen(true)}
+                        />
+                      </span>
+                    </div>
+                  )}
+                  {formOpen && (
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      {error?.message && (
+                        <div className="mb-4 text-red-500 text-center border-dashed border border-red-600 p-2 rounded">
+                          <span>{error.message}</span>
+                        </div>
                       )}
-                    </span>
-                  </div>
+                      <div className="flex justify-end">
+                        <div className="w-full rounded-md shadow-sm mr-3">
+                          <input
+                            id="email"
+                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            ref={register({
+                              required: 'Please enter an email',
+                              pattern: {
+                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                message: 'Not a valid email',
+                              },
+                            })}
+                          />
+                          {errors.email && (
+                            <div className="mt-2 text-xs text-red-600">
+                              {errors.email.message}
+                            </div>
+                          )}
+                        </div>
+
+                        <button
+                          className="flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-royal-blue-600 hover:bg-royal-blue-500 focus:outline-none focus:border-royal-blue-700 focus:shadow-outline-royal-blue active:bg-royal-blue-700 transition duration-150 ease-in-out"
+                          type="submit"
+                        >
+                          {isLoading ? 'Sending...' : 'Send'}
+                        </button>
+                      </div>
+                    </form>
+                  )}
                 </div>
               </div>
             )}

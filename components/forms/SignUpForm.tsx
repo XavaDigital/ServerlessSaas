@@ -6,7 +6,7 @@ import { useAuth } from 'hooks/useAuth';
 import { User } from 'interfaces/user';
 import Button from 'components/elements/Button';
 
-const SignUpForm: React.FC = () => {
+const SignUpForm: React.FC<{ teamId?: string }> = ({ teamId }) => {
   const { register, errors, handleSubmit } = useForm();
   const auth = useAuth();
   const router = useRouter();
@@ -16,10 +16,12 @@ const SignUpForm: React.FC = () => {
   const onSubmit = (data: User) => {
     setIsLoading(true);
     setError(null);
-    auth.signUp(data).then((response: { error?: { massage: string } }) => {
-      setIsLoading(false);
-      response?.error ? setError(response.error) : router.push('/dashboard');
-    });
+    auth
+      .signUp(data, teamId)
+      .then((response: { error?: { massage: string } }) => {
+        setIsLoading(false);
+        response?.error ? setError(response.error) : router.push('/dashboard');
+      });
   };
 
   return (
