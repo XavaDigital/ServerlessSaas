@@ -112,8 +112,25 @@ if (process.env.NODE_ENV === 'development') {
 
 When you start the emulators you can view the status and logs in the Emulator UI at http://localhost:4000.
 
-### Rules
-- @TODO
+### Firebase Security Rules
+[Firebase Security Rules](https://firebase.google.com/docs/rules) stand between your data and malicious users. You can write simple or complex rules that protect your app's data to the level of granularity that your specific app requires.
+
+Rules use the following syntax:
+```
+service <<name>> {
+  // Match the resource path.
+  match <<path>> {
+    // Allow the request if the following conditions are true.
+    allow <<methods>> : if <<condition>>
+  }
+}
+```
+This starter-kit comes with a set of Firebase rules and helper functions so you can easily protect your db.
+You can see and manage the rules inside the `firestore.rules` file at the root of this project.
+
+When you make changes to the `firestore.rules`, make sure you deploy them by running `firebase deploy --only firestore:rules`.
+You can also access your rules from the Firebase console. Select your project, then navigate to Cloud Firestore and click Rules once you're in the correct database.
+
 
 
 ### Emulators
