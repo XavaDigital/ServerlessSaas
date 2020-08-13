@@ -46,10 +46,12 @@ export const onTeamMemberCreate = functions.firestore
 
       await db.collection('teams').doc(user.teamId).update(team);
       functions.logger.log('team!!!', team);
-      return { yo: true };
+
+      // TODO: Send email to owner to inform about team member joining
+      return { status: 'success' };
     }
 
-    return { yo: false };
+    return { status: 'success' };
   });
 
 /**
