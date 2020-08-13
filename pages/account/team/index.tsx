@@ -46,6 +46,7 @@ const Team: React.FC = () => {
     getTeam(auth.user.teamId).then((doc) => {
       if (doc.exists) {
         setTeam(doc.data());
+        console.log(doc.data());
       }
     });
   };
@@ -180,10 +181,13 @@ const Team: React.FC = () => {
                               </span>
                             </div>
                             <p className="mt-1 text-gray-500 text-sm leading-5 truncate">
-                              {user.createdAt &&
-                                `joinedAt on ${new Date(
-                                  user.createdAt.seconds * 1000
-                                ).toLocaleDateString()}`}
+                              {user.status === 'active'
+                                ? `Joined on ${new Date(
+                                    user.joinedAt
+                                  ).toLocaleDateString()}`
+                                : `Invited on ${new Date(
+                                    user.invitedAt
+                                  ).toLocaleDateString()}`}
                             </p>
                           </div>
                           <div className="flex">

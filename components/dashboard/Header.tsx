@@ -53,17 +53,6 @@ export const DashboardHeader: React.FC = () => {
                       Account
                     </a>
                   </Link>
-                  <Link href="/team">
-                    <a
-                      className={
-                        router.pathname.includes('team')
-                          ? 'ml-4 px-3 py-2 rounded text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700'
-                          : 'ml-4 px-3 py-2 rounded text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
-                      }
-                    >
-                      Team
-                    </a>
-                  </Link>
                 </div>
               </div>
             </div>
@@ -113,24 +102,24 @@ export const DashboardHeader: React.FC = () => {
                             Account
                           </a>
                         </Link>
-                        <Link href="/pro">
+                        <Link href="/account/team">
                           <a
-                            href="#"
+                            href=""
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
-                            Upgrade to Pro
+                            Team
                           </a>
                         </Link>
-                        <Link href="/subscriptions">
+                        <Link href="/account/billing">
                           <a
-                            href="#"
+                            href=""
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
-                            Subscriptions
+                            Billing
                           </a>
                         </Link>
                         <a
-                          href="/#"
+                          href="/"
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           onClick={() => auth.signOut()}
                         >
@@ -204,18 +193,6 @@ export const DashboardHeader: React.FC = () => {
                 }
               >
                 Account
-              </a>
-            </Link>
-            <Link href="/team">
-              <a
-                href="#"
-                className={
-                  router.pathname.includes('team')
-                    ? 'mt-1 block px-3 py-2 rounded text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700'
-                    : 'mt-1 block px-3 py-2 rounded text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
-                }
-              >
-                Team
               </a>
             </Link>
           </div>

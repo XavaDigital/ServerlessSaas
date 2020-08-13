@@ -27,10 +27,7 @@ export const onTeamMemberCreate = functions.firestore
   .onCreate(async (snap, context) => {
     const user = snap.data();
 
-    functions.logger.log('user', user);
-
     if (user.teamId) {
-      functions.logger.log('user.teamId!!!', user.teamId);
       const doc = await getTeam(user.teamId);
       const team = { ...doc };
       const index = team.users.findIndex(
