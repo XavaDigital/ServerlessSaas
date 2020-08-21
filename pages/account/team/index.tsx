@@ -8,7 +8,7 @@ import Button from 'components/elements/Button';
 import { useEffect, useState } from 'react';
 import { getTeam, updateTeam } from 'services/team';
 import { useForm } from 'react-hook-form';
-import { functions } from 'config/firebase';
+import { functions, db } from 'config/firebase';
 
 const breadCrumbs = {
   back: {
@@ -31,9 +31,7 @@ const Team: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasResendInvite, setHasResendInvite] = useState(null);
   const [error, setError] = useState(null);
-
   const { register, errors, handleSubmit } = useForm();
-
   const auth = useRequireAuth();
 
   useEffect(() => {
@@ -104,7 +102,10 @@ const Team: React.FC = () => {
       <div className="max-w-6xl py-10 max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
         <header className="pb-4 sm:py-6 pl-3 border-b-2 border-gray-200 mb-6">
           {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
-          <div className="mt-2 md:flex md:items-center md:justify-between">
+          <div
+            className="mt-2 md:flex md:items-center md:justify-between"
+            onClick={() => test()}
+          >
             <div className="flex-1 min-w-0">
               <h2 className="text-2xl font-bold leading-7 text-gray-800 sm:text-3xl sm:leading-9 sm:truncate">
                 {team ? team.name : 'Team'}
@@ -117,15 +118,7 @@ const Team: React.FC = () => {
             <AccountMenu />
           </div>
           <main className="hidden sm:block w-2/3 mx-auto">
-            {!auth.user?.isPro && (
-              <div className="grid gap-4 grid-cols-2">
-                <h2>
-                  You need to have a Pro account to create a team and invite
-                  members
-                </h2>
-              </div>
-            )}
-            {auth.user.isPro && !auth.user.teamId && (
+            {false && (
               <div className="mt-10 pt-5 px-4 py-5 sm:p-6 bg-white overflow-hidden shadow rounded-lg">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
                   Create your team
@@ -161,9 +154,11 @@ const Team: React.FC = () => {
                 </h3>
                 <div className="mt-2 sm:flex sm:items-start sm:justify-between">
                   <div className="text-sm leading-5 text-gray-500">
-                    <p>{`Team name: ${team.name}`}</p>
+                    <p>{`Team name: ${team.name || ''}`}</p>
                     <p>{`Team ID: ${team.id}`}</p>
+                    <p>{`Team Slug: ${team.slug}`}</p>
                     <p>{`Team Member Count: ${team.users.length}`}</p>
+                    <p>{`Invite link: http://localhost:3000/signup?teamId=${team.id}`}</p>
                   </div>
                 </div>
                 <ul className="mt-5">

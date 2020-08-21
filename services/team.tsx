@@ -1,4 +1,4 @@
-import { auth, db, now } from 'config/firebase';
+import { auth, db } from 'config/firebase';
 import { makeId } from 'utils/makeId';
 
 export const createTeam = (data: { name: string }): Promise<any> => {
@@ -27,4 +27,20 @@ export const updateTeam = (id: string, data: any): Promise<any> => {
 
 export const getTeam = (teamId: string): Promise<any> => {
   return db.collection('teams').doc(teamId).get();
+};
+
+export const getTeamName = (teamId: string): Promise<any> => {
+  return db
+    .collection('teams')
+    .doc(teamId)
+    .get()
+    .then((doc) => doc.data()?.name);
+};
+
+/**
+ * isSlugAvailable checks if a team already has the given slug
+ */
+export const isSlugAvailable = async (slug: string): Promise<boolean> => {
+  const teams = await db.collection('teams').where('slug', '==', slug).get();
+  return teams.empty;
 };

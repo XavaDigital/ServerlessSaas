@@ -53,7 +53,12 @@ const useAuthProvider = () => {
         .createUserWithEmailAndPassword(email, password)
         .then((response) => {
           auth.currentUser.sendEmailVerification();
-          return createUser({ uid: response.user.uid, email, name, teamId });
+          return createUser({
+            uid: response.user.uid,
+            email,
+            name,
+            teamId: teamId || '',
+          });
         });
     } catch (error) {
       return { error };

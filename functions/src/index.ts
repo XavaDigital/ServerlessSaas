@@ -1,5 +1,6 @@
 export { stripeCreateCheckoutSession } from './stripe/checkout';
 export { stripeCreateBillingSession } from './stripe/billing';
 export { stripeWebhook } from './stripe/webhooks';
-export { onTeamCreate, onTeamMemberCreate } from './teams';
-export { onNewUserSetup, sendTeamInviteEmail } from './emails';
+export { onTeamCreate } from './teams';
+export { sendTeamInviteEmail } from './emails';
+export { onUserCreate } from './users';

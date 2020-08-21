@@ -9,6 +9,7 @@ const BlogCard: React.FC<{ post: any }> = ({ post }) => {
         className="lg:h-48 md:h-36 w-full object-cover object-center"
         src={attributes.image}
         alt="blog"
+        loading="lazy"
       />
       <div className="p-6">
         <h2 className="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">

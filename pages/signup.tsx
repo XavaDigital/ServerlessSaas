@@ -3,6 +3,7 @@ import SignUpForm from '../components/forms/SignUpForm';
 import Layout from 'components/home/Layout';
 import { GetServerSideProps } from 'next';
 import { db } from 'config/firebase';
+import { getTeamName } from 'services/team';
 
 const SignUpPage: React.FC = ({ teamId, teamName }) => {
   return (
@@ -37,23 +38,18 @@ const SignUpPage: React.FC = ({ teamId, teamName }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { teamId } = context.query;
+  let teamName;
+
   if (!teamId) {
     return { props: {} };
   }
 
-  let team = null;
   if (teamId) {
-    const doc = await db
-      .collection('teams')
-      .doc(teamId as string)
-      .get();
-    if (doc.exists) {
-      team = doc.data();
-    }
+    teamName = await getTeamName(teamId as string);
   }
 
   return {
-    props: { teamId, teamName: team?.name },
+    props: { teamId, teamName },
   };
 };
 

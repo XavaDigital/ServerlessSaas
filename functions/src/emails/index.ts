@@ -1,55 +1,34 @@
 import * as functions from 'firebase-functions';
 import {
-  db,
   welcomeTemplateId,
   teamInviteTemplateId,
   postmarkClient,
 } from '../config';
 
-export const onNewUserSetup = functions.auth
-  .user()
-  .onCreate(async (user, context) => {
-    if (!user.email) {
-      return null;
-    }
+export const sendWelcomeEmail = (user) => {
+  // Send welcome email
+  const emailTemplate = {
+    From: 'jake@raterfox.com',
+    To: user.email,
+    TemplateId: welcomeTemplateId,
+    TemplateModel: {
+      product_url: 'http://localhost:3000',
+      product_name: 'Serverless SaaS Demo',
+      name: user.name,
+      action_url: 'http://localhost:3000/account/billing',
+      support_email: 'jake@raterfox.com',
+      sender_name: 'Jake',
+      help_url: 'http://localhost:3000/',
+      company_name: 'Serverless SaaS',
+      company_address: '',
+      login_url: 'http://localhost:3000/login',
+    },
+  };
 
-    // Update user document
-    const ref = db.collection('users').doc(user.uid);
-    const { uid, displayName, photoURL, email } = user;
-    await ref.set(
-      {
-        uid,
-        displayName,
-        photoURL,
-        email,
-        joinedAt: Date.now(),
-      },
-      { merge: true }
-    );
-
-    // Send welcome email
-    const emailTemplate = {
-      From: 'jake@raterfox.com',
-      To: user.email,
-      TemplateId: welcomeTemplateId,
-      TemplateModel: {
-        product_url: 'http://localhost:3000',
-        product_name: 'Serverless SaaS Demo',
-        name: user.displayName || user.email,
-        action_url: 'http://localhost:3000/account/billing',
-        support_email: 'jake@raterfox.com',
-        sender_name: 'Jake',
-        help_url: 'http://localhost:3000/',
-        company_name: 'Serverless SaaS',
-        company_address: '',
-        login_url: 'http://localhost:3000/login',
-      },
-    };
-
-    return postmarkClient
-      .sendEmailWithTemplate(emailTemplate)
-      .catch((e) => console.log(e));
-  });
+  return postmarkClient
+    .sendEmailWithTemplate(emailTemplate)
+    .catch((e) => console.log(e));
+};
 
 // Sends email via HTTP. Can be called from frontend code.
 export const sendTeamInviteEmail = functions.https.onCall(

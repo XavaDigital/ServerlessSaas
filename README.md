@@ -5,6 +5,7 @@ This project is started with the [Serverless SaaS Boilerplate](https://serverles
 ## Getting Started
 
 To be able to use all features included in this project, you need to setup a couple of things before starting:
+
 1. Setup NetlifyCMS. [Instructions](#Netlify CMS).
 2. Setup a Firebase project, with Cloud Firestore and Cloud Functions. [Instructions](#Firebase).
 3. Create a Stripe account and setup your subscription product. [Instructions](#Payments with Stripe).
@@ -17,9 +18,11 @@ npm run dev
 # or
 yarn dev
 ```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Netlify CMS
+
 Netlify CMS is an open source git-based content management library. Content is stored in your Git repository alongside your code for easier versioning, multi-channel publishing, and the option to handle content updates directly in Git. It's basically an UI for editing your markdown files that we use to show the landing page and the blog posts.
 
 - Create create a new repository on [Github](https://github.com/)
@@ -29,11 +32,13 @@ Netlify CMS is an open source git-based content management library. Content is s
 You can now start the project with `yarn dev` or `npm run dev` and navigate to `http://localhost:3000/admin`. You can now login with Github and manage the content of the landing page of blog posts with a nice UI. When you make a change you can hit the "Publish" button, this will result in making a commit to your repository with the changes made to the corresponding markdown file.
 
 #### Test
+
 You can use the `test-repo` backend to try out Netlify CMS without connecting to a Git repo. With this backend, you can write and publish content normally, but any changes will disappear when you reload the page.
 
 Note: The test-repo backend can't access your local file system, nor does it connect to a Git repo, thus you won't see any existing files while using it.
 
 To enable this backend, add the `test-repo` string to your `cms/config.js` file:
+
 ```
 backend: {
     name: 'test-repo',
@@ -69,6 +74,7 @@ var firebaseConfig = {
 We should now activate the sign up methods that we would like to add to our app. Navigate to "Authentication" and start by activating the "Email/password" method.
 
 ### Cloud Firestore
+
 Cloud Firestore](https://firebase.google.com/docs/firestore) is a flexible, scalable database from Firebase. It offers seamless integration with Firebase and other Google Cloud Platform products, like Cloud Functions. And just like Firebase, it starts completely free. Only when your application really starts to scale, you might exceed the free plan, but even then you only pay for what you use.
 
 To setup Firestore, go to your Firebase console and navigate to "Database" and click the first "Create database" button to add Cloud Firestore to your project.
@@ -93,17 +99,19 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = 'yourmeasurementid';
 Keep in mind that when you deploy your application, you first need to set your production environment variables. When deploying on [Vercel](https://vercel.com) you can configure secrets in the [Environment Variables](https://vercel.com/docs/v2/build-step#environment-variables) section of the project in the Vercel dashboard.
 
 ### Cloud Functions
+
 [Cloud Functions](https://firebase.google.com/docs/functions) for Firebase is a serverless framework that lets you automatically run backend code in response to events triggered by Firebase features and HTTPS requests. Your code is stored in Google's cloud and runs in a managed environment. There's no need to manage and scale your own servers.
 
 Cloud Functions are already setup in this project, but you first need to deploy them to your Firebase project before they work: `firebase deploy --only functions`. Make sure you have run `npm i` or `yarn` both inside your project directory as your your `/functions` folder.
 
 The Cloud Functions in this project rely on certain variables. If you want to use all of the functionalities, like updating subscriptions or sending emails, please first follow the instructions to setup Stripe and Postmark before you try this out.
 
-
 #### Emulators
-You cal also run the functions locally by running `firebase emulators:start`. You should create an `runtimeconfig.json` file inside your functions folder to use environment variables inside the emulators when developing locally. You can take a look at the example file at `functions/runtimeconfig.example.json`.
+
+You cal also run the functions locally by running `firebase emulators:start`. You should build your functions when you make changes, so you probably want to run `npm run build && firebase emulators:start`. You should create an `runtimeconfig.json` file inside your functions folder to use environment variables inside the emulators when developing locally. You can take a look at the example file at `functions/runtimeconfig.example.json`.
 
 Make sure you uncomment the code inside `config/firebase.ts` to let the application use the functions emulator.
+
 ```
 if (process.env.NODE_ENV === 'development') {
   functions.useFunctionsEmulator('http://localhost:5001');
@@ -113,9 +121,11 @@ if (process.env.NODE_ENV === 'development') {
 When you start the emulators you can view the status and logs in the Emulator UI at http://localhost:4000.
 
 ### Firebase Security Rules
+
 [Firebase Security Rules](https://firebase.google.com/docs/rules) stand between your data and malicious users. You can write simple or complex rules that protect your app's data to the level of granularity that your specific app requires.
 
 Rules use the following syntax:
+
 ```
 service <<name>> {
   // Match the resource path.
@@ -125,19 +135,18 @@ service <<name>> {
   }
 }
 ```
-This starter-kit comes with a set of Firebase rules and helper functions so you can easily protect your db.
+
+This starter-kit comes with a set of basic Firebase rules and helper functions so you can easily protect your db.
 You can see and manage the rules inside the `firestore.rules` file at the root of this project.
 
 When you make changes to the `firestore.rules`, make sure you deploy them by running `firebase deploy --only firestore:rules`.
 You can also access your rules from the Firebase console. Select your project, then navigate to Cloud Firestore and click Rules once you're in the correct database.
 
-
-
 ### Emulators
 
 ### Deploy
-To deploy your Functions or Rules simply run `firebase deploy`. You could also specify what you want to deploy, like `firebase deploy --only functions`.
 
+To deploy your Functions or Rules simply run `firebase deploy`. You could also specify what you want to deploy, like `firebase deploy --only functions`.
 
 ## Environment variables
 
@@ -151,11 +160,14 @@ For Firebase functions you need to add your secrets like API keys with the Fireb
 You could create an `runtimeconfig.json` file inside your functions folder to use environment variables inside the emulators when developing locally. You can take a look at the example file at `functions/runtimeconfig.example.json`.
 
 ## Payments with Stripe
+
 Stripe is the most popular payment processor for internet businesses. This project comes with a Stripe integration for handling subscription payments. For this we make use of Stripe Checkout and Stripe Billing Customer Portal.
+
 - Stripe Checkout creates a secure, Stripe-hosted payment page that lets you collect payments quickly. It works across devices and is designed to increase your conversion.
 - Stripe Customer portal is a secure, Stripe-hosted page that lets your customers manage their subscriptions and billing details.
 
 #### Getting started
+
 Prior to integrating the customer portal, you must configure its functionality and branding in the Stripe Dashboard. These settings determine the actions that your users can take using the portal. Its features depend on your product and price catalog, so there are different settings for live mode and test mode. Navigate to the portal settings to configure the portal: https://dashboard.stripe.com/test/settings/billing/portal
 
 Set a product catalog
@@ -165,6 +177,7 @@ If you allow customers to change their subscriptions, you also need to set a pro
 - Price: amount, currency, and billing interval—these attributes are immutable and can only be set on creation in the Dashboard and API.
 
 Start doing this by following these steps:
+
 - Create a subscription product on stripe and name it, for example, "Pro Plan".
 - Add multiple prices to the product, for example, "Hobby: €29" and "Premium: €49".
 - Go to `config/stripe.ts` and add the price ID of your just created prices in the plan objects. You can change the values to your needs.
@@ -181,7 +194,6 @@ Note: Because we use TypeScript, we need to rebuild and run the emulators every 
 ```jsx
 npm run build && firebase emulators:start
 ```
-
 
 ## Emails with Postmark
 
@@ -223,7 +235,6 @@ Create the email templates
 - Save your template ID to your Firebase environment variables by running: `firebase functions:config:set postmark.team_invite_template_id=<TEMPLATE_ID_HERE>`
 
 That's it.
-
 
 ## Learn More
 
