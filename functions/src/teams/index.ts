@@ -20,7 +20,13 @@ export const createTeam = async (user) => {
     slug = slugToId(slug);
   }
 
-  const team = { slug, id: user.uid, ownerId: user.uid, users };
+  const team = {
+    slug,
+    name: `${user.name}'s Team`,
+    id: user.uid,
+    ownerId: user.uid,
+    users,
+  };
 
   await db.collection('teams').doc(team.ownerId).set(team, { merge: true });
 };
@@ -29,8 +35,8 @@ export const addTeamMember = async (user) => {
   const team = await getTeam(user.teamId);
   const index = team.users.findIndex((object) => object.email === user.email);
 
-  // The user can't join a team if their email is not present on the teams member list
-  // We fall back to creating a default team for this user
+  // If the user can't join a team because their email is not present on the team members list
+  // we fall back to creating a own team for the user
   if (index === -1) {
     return createTeam(user);
   }

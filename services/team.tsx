@@ -26,7 +26,11 @@ export const updateTeam = (id: string, data: any): Promise<any> => {
 };
 
 export const getTeam = (teamId: string): Promise<any> => {
-  return db.collection('teams').doc(teamId).get();
+  return db
+    .collection('teams')
+    .doc(teamId)
+    .get()
+    .then((doc) => doc.data());
 };
 
 export const getTeamName = (teamId: string): Promise<any> => {

@@ -13,7 +13,7 @@ export const onUserCreate = functions.firestore
     const user = snap.data();
 
     // If the teamId is present, that means the user signed up from a team invite mail
-    if (user?.teamId) {
+    if (user.teamId) {
       await addTeamMember(user);
 
       // Here, you could also send an email to the owner to inform about team member joining
