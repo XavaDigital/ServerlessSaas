@@ -38,7 +38,7 @@ const Account: React.FC = () => {
   return (
     <Layout>
       <div className="max-w-6xl py-10 max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-        <header className="pb-4 sm:py-6 pl-3 border-b-2 border-gray-200 mb-6">
+        <header className="pb-4 sm:py-6 pl-3 border-b-2 border-gray-300 mb-6">
           {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
           <div className="mt-2 md:flex md:items-center md:justify-between">
             <div className="flex-1 min-w-0">

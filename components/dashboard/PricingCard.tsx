@@ -4,7 +4,7 @@ import StripeCheckoutButton from './CheckoutButton';
 const PricingCard: React.FC<{ plan: any }> = ({ plan }) => {
   return (
     <div className="relative">
-      <div className="absolute inset-0 h-1/2 bg-gray-100"></div>
+      <div className="absolute inset-0 h-1/2"></div>
       <div className="relative">
         <div className="rounded-lg shadow-lg overflow-hidden">
           <div className="bg-white px-6 py-8 lg:flex-shrink-1 lg:p-12">

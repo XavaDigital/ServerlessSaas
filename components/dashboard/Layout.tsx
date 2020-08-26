@@ -9,7 +9,7 @@ interface Props {
 
 const Layout: NextPage<Props> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-200">
       <Header />
       {children}
     </div>
