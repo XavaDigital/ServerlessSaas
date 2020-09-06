@@ -5,7 +5,11 @@ import { GetServerSideProps } from 'next';
 import { db } from 'config/firebase';
 import { getTeamName } from 'services/team';
 
-const SignUpPage: React.FC = ({ teamId, teamName }) => {
+const SignUpPage: React.FC<{
+  teamId?: string;
+  teamName?: string;
+  email?: string;
+}> = ({ teamId, teamName, email }) => {
   return (
     <Layout>
       <div className="min-h-screen flex bg-gray-100">
@@ -28,7 +32,7 @@ const SignUpPage: React.FC = ({ teamId, teamName }) => {
             )}
           </div>
           <div className="mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <SignUpForm teamId={teamId} />
+            <SignUpForm teamId={teamId} email={email} />
           </div>
         </div>
       </div>
@@ -37,7 +41,7 @@ const SignUpPage: React.FC = ({ teamId, teamName }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { teamId } = context.query;
+  const { teamId, email } = context.query;
   let teamName;
 
   if (!teamId) {
@@ -49,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: { teamId, teamName },
+    props: { teamId, teamName, email: email || '' },
   };
 };
 

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const AccountMenu: React.FC = () => {
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   return (
     <nav>
@@ -10,14 +10,18 @@ const AccountMenu: React.FC = () => {
         <a
           href="#"
           className={
-            router.pathname === '/account'
-              ? 'group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-300 hover:text-gray-900 hover:bg-gray-300 focus:outline-none focus:text-gray-900 focus:bg-gray-300 transition ease-in-out duration-150'
-              : 'group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-300 focus:outline-none focus:text-gray-900 focus:bg-gray-300 transition ease-in-out duration-150'
+            pathname === '/account'
+              ? 'group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
+              : 'group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
           }
           aria-current="page"
         >
           <svg
-            className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-hover:text-gray-500 group-focus:text-gray-600 transition ease-in-out duration-150"
+            className={`flex-shrink-0 -ml-1 mr-3 h-6 w-6 transition ease-in-out duration-150 ${
+              pathname === '/account'
+                ? 'text-gray-900 group-'
+                : 'text-gray-500 group-focus:text-gray-500'
+            }`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -36,13 +40,17 @@ const AccountMenu: React.FC = () => {
         <a
           href=""
           className={
-            router.pathname === '/account/team'
-              ? 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-300 hover:text-gray-900 hover:bg-gray-300 focus:outline-none focus:text-gray-900 focus:bg-gray-300 transition ease-in-out duration-150'
-              : 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-300 focus:outline-none focus:text-gray-900 focus:bg-gray-300 transition ease-in-out duration-150'
+            pathname === '/account/team'
+              ? 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
+              : 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
           }
         >
           <svg
-            className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-focus:text-gray-500 transition ease-in-out duration-150"
+            className={`flex-shrink-0 -ml-1 mr-3 h-6 w-6 transition ease-in-out duration-150 ${
+              pathname === '/account/team'
+                ? 'text-gray-900 group-'
+                : 'text-gray-500 group-focus:text-gray-500'
+            }`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -61,13 +69,17 @@ const AccountMenu: React.FC = () => {
         <a
           href=""
           className={
-            router.pathname === '/account/billing'
-              ? 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-300 hover:text-gray-900 hover:bg-gray-300 focus:outline-none focus:text-gray-900 focus:bg-gray-300 transition ease-in-out duration-150'
-              : 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-300 focus:outline-none focus:text-gray-900 focus:bg-gray-300 transition ease-in-out duration-150'
+            pathname === '/account/billing'
+              ? 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
+              : 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
           }
         >
           <svg
-            className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-focus:text-gray-500 transition ease-in-out duration-150"
+            className={`flex-shrink-0 -ml-1 mr-3 h-6 w-6 transition ease-in-out duration-150 ${
+              pathname === '/account/billing'
+                ? 'text-gray-900 group-'
+                : 'text-gray-500 group-focus:text-gray-500'
+            }`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

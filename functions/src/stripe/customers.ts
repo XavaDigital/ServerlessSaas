@@ -46,13 +46,3 @@ export const getUserByStripeId = async (
       return user;
     });
 };
-
-/**
- * Updates the user document non-destructively
- */
-export const updateUser = async (
-  uid: string,
-  data: { [key: string]: any }
-): Promise<FirebaseFirestore.WriteResult> => {
-  return await db.collection('users').doc(uid).set(data, { merge: true });
-};

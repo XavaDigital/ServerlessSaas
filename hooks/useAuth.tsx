@@ -27,7 +27,7 @@ export const useAuth: any = () => {
 const useAuthProvider = () => {
   const [user, setUser] = useState(null);
 
-  const createUser = async (currentUser: User) => {
+  const createUser = async (currentUser: any) => {
     try {
       return db
         .collection('users')
@@ -101,7 +101,7 @@ const useAuthProvider = () => {
       .get()
       .then(function (doc) {
         if (doc.exists) {
-          setUser({ ...user, ...doc.data() });
+          setUser({ ...doc.data(), ...user });
         } else {
           console.log('No such document!');
         }

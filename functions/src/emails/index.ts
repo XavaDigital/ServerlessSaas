@@ -33,7 +33,6 @@ export const sendWelcomeEmail = (user) => {
 // Sends email via HTTP. Can be called from frontend code.
 export const sendTeamInviteEmail = functions.https.onCall(
   async (data, context) => {
-    console.log(data);
     if (!context?.auth?.token?.email) {
       throw new functions.https.HttpsError(
         'failed-precondition',
@@ -52,7 +51,7 @@ export const sendTeamInviteEmail = functions.https.onCall(
         name: '',
         invite_sender_name: data.teamOwnerName,
         invite_sender_organization_name: data.teamName,
-        action_url: `http://localhost:3000/signup?teamId=${data.teamId}`,
+        action_url: `http://localhost:3000/signup?teamId=${data.teamId}&email=${data.emailTo}`,
         support_email: 'http://localhost:3000/',
         live_chat_url: 'http://localhost:3000/',
         help_url: 'http://localhost:3000/',

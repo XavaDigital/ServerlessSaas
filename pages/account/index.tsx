@@ -28,10 +28,10 @@ const Account: React.FC = () => {
   const { user } = useRequireAuth();
 
   useEffect(() => {
-    if (user) {
+    if (user?.teamId && !plan) {
       getPlan(user).then((plan) => setPlan(plan));
     }
-  }, []);
+  }, [user?.teamId]);
 
   if (!user) return null;
 

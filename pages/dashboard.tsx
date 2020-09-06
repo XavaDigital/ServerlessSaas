@@ -42,7 +42,7 @@ const DashboardPage: React.FC = () => {
             </div>
           </div>
         </header>
-        <div className="bg-white overflow-hidden shadow rounded-lg">
+        <div className="bg-white overflow-hidden shadow rounded-lg h-48">
           <div className="px-4 py-5 sm:p-6">Your dashboard page</div>
         </div>
       </div>

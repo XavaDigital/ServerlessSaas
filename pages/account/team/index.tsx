@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { getTeam, updateTeam } from 'services/team';
 import { useForm } from 'react-hook-form';
 import { functions, db } from 'config/firebase';
+import ConfirmModal from 'components/dashboard/ConfirmModal';
+import { useTeam } from 'hooks/useTeam';
 
 const breadCrumbs = {
   back: {
@@ -26,24 +28,14 @@ const breadCrumbs = {
 };
 
 const Team: React.FC = () => {
-  const [team, setTeam] = useState(null);
   const [formOpen, setFormOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasResendInvite, setHasResendInvite] = useState(null);
   const [error, setError] = useState(null);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { register, errors, handleSubmit } = useForm();
   const { user } = useRequireAuth();
-
-  useEffect(() => {
-    if (!team && user?.teamId) {
-      fetchTeam();
-    }
-  }, [team, user?.teamId]);
-
-  const fetchTeam = async () => {
-    const team = await getTeam(user.teamId);
-    setTeam(team);
-  };
+  const { team } = useTeam();
 
   const onSubmit = async (data) => {
     setIsLoading(true);
@@ -70,7 +62,6 @@ const Team: React.FC = () => {
         .then(() => {
           setFormOpen(false);
           setIsLoading(false);
-          fetchTeam();
         })
         .catch((error) => console.log(error));
     });
@@ -89,6 +80,20 @@ const Team: React.FC = () => {
       setFormOpen(false);
       setIsLoading(false);
     });
+  };
+
+  const deleteMember = (email) => {
+    setIsLoading(true);
+    const updatedTeamMembers = team.users.filter(
+      (user) => user.email !== email
+    );
+    const updatedTeam = { ...team, users: updatedTeamMembers };
+    updateTeam(team.id, updatedTeam)
+      .catch((error) => setError(error))
+      .finally(() => {
+        setIsLoading(false);
+        setShowConfirmModal(false);
+      });
   };
 
   if (!user) return null;
@@ -173,39 +178,40 @@ const Team: React.FC = () => {
                     Team members
                   </h3>
                   <ul className="mt-5">
-                    {team?.users.map((user, i) => {
+                    {team?.users.map((member, i) => {
                       return (
                         <li className="border-t border-gray-200" key={i}>
                           <div className="w-full flex items-center justify-between py-6">
                             <div className="flex-1 truncate">
                               <div className="flex items-center space-x-3">
                                 <h3 className="text-gray-900 text-sm leading-5 font-medium truncate">
-                                  {user.email}
+                                  {member.email}
                                 </h3>
                                 <span className="flex-shrink-0 inline-block px-2 py-0.5 text-teal-800 text-xs leading-4 font-medium bg-teal-100 rounded-full">
-                                  {user.role}
+                                  {member.role}
                                 </span>
                               </div>
                               <p className="mt-1 text-gray-500 text-sm leading-5 truncate">
-                                {user.status === 'active'
+                                {member.status === 'active'
                                   ? `Joined on ${new Date(
-                                      user.joinedAt
+                                      member.joinedAt
                                     ).toLocaleDateString()}`
                                   : `Invited on ${new Date(
-                                      user.invitedAt
+                                      member.invitedAt
                                     ).toLocaleDateString()}`}
                               </p>
                             </div>
                             <div className="flex">
-                              {user.status !== 'active' && user.isTeamOwner ? (
+                              {member.status !== 'active' &&
+                              user.isTeamOwner ? (
                                 <button
                                   className="mr-3 inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                                  onClick={() => resendInvite(user.email)}
+                                  onClick={() => resendInvite(member.email)}
                                 >
-                                  {isLoading === user.email
-                                    ? 'Sending...'
-                                    : (hasResendInvite === user.email &&
-                                        'Resented') ||
+                                  {isLoading === member.email
+                                    ? 'Sending invite...'
+                                    : (hasResendInvite === member.email &&
+                                        'Invite is resent') ||
                                       'Resend invite'}
                                 </button>
                               ) : (
@@ -213,8 +219,13 @@ const Team: React.FC = () => {
                                   Active
                                 </span>
                               )}
-                              {user.role !== 'owner' && user.isTeamOwner && (
-                                <button className="flex items-center justify-center px-3 py-2 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                              {member.role !== 'owner' && user.isTeamOwner && (
+                                <button
+                                  className="flex items-center justify-center px-3 py-2 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                                  onClick={() =>
+                                    setShowConfirmModal(member.email)
+                                  }
+                                >
                                   Delete
                                 </button>
                               )}
@@ -282,6 +293,18 @@ const Team: React.FC = () => {
           </main>
         </div>
       </div>
+
+      {showConfirmModal && (
+        <ConfirmModal
+          closeModal={() => setShowConfirmModal(false)}
+          title={'Are you sure?'}
+          text={
+            "The team member will be deleted from your team. This user will lose all access to your team's resources. If there is still a pending invitation it will no longer be valid."
+          }
+          confirmText={isLoading ? 'Deleting...' : 'Delete member'}
+          confirmAction={() => deleteMember(showConfirmModal)}
+        />
+      )}
     </Layout>
   );
 };

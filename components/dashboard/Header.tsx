@@ -52,7 +52,7 @@ export const DashboardHeader: React.FC = () => {
                   <Link href="/account">
                     <a
                       className={
-                        router.pathname === '/account'
+                        router.pathname.includes('/account')
                           ? 'px-3 py-2 rounded text-sm font-medium text-gray-900 bg-gray-200 focus:outline-none focus:text-gray-600 focus:bg-gray-100'
                           : 'px-3 py-2 rounded text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-200 focus:outline-none focus:bg-gray-100'
                       }
@@ -71,7 +71,7 @@ export const DashboardHeader: React.FC = () => {
                       onClick={() => setDropdownOpen(!dropdownOpen)}
                       className="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
                     >
-                      <span className="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-100">
+                      <span className="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-200">
                         {auth.user?.avatarUrl ? (
                           <img
                             className="h-full w-full object-cover rounded"
@@ -80,7 +80,7 @@ export const DashboardHeader: React.FC = () => {
                           />
                         ) : (
                           <svg
-                            className="h-full w-full text-gray-300"
+                            className="h-full w-full text-gray-700"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                           >

@@ -1,4 +1,4 @@
-# Serverless SaaS Boilerpalte
+# Serverless SaaS Boilerplate
 
 This project is started with the [Serverless SaaS Boilerplate](https://serverlesssaas.com/), a starter-kit that is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -102,7 +102,7 @@ Keep in mind that when you deploy your application, you first need to set your p
 
 [Cloud Functions](https://firebase.google.com/docs/functions) for Firebase is a serverless framework that lets you automatically run backend code in response to events triggered by Firebase features and HTTPS requests. Your code is stored in Google's cloud and runs in a managed environment. There's no need to manage and scale your own servers.
 
-Cloud Functions are already setup in this project, but you first need to deploy them to your Firebase project before they work: `firebase deploy --only functions`. Make sure you have run `npm i` or `yarn` both inside your project directory as your your `/functions` folder.
+Cloud Functions are already setup in this project, but you first need to deploy them to your Firebase project before they work: `firebase deploy --only functions`. Make sure you have run `npm run build` or `yarn build` inside your `/functions` folder. The easiest way is to just always run `npm run build && firebase deploy --only functions` from your within your `/functions` folder.
 
 The Cloud Functions in this project rely on certain variables. If you want to use all of the functionalities, like updating subscriptions or sending emails, please first follow the instructions to setup Stripe and Postmark before you try this out.
 
@@ -194,7 +194,6 @@ Note: Because we use TypeScript, we need to rebuild and run the emulators every 
 ```jsx
 npm run build && firebase emulators:start
 ```
-
 ## Emails with Postmark
 
 Every SaaS application needs to send some transactional emails. Think about sending a welcome email to new users, an email to invite new users to your company/team, and an email to notify you whenever that team member has joined.
@@ -236,6 +235,26 @@ Create the email templates
 
 That's it.
 
+---
+
+## Teams
+
+This project sets you up to built multi-tenant SaaS applications. Here is a quick summary of what is implemented for you. If your application does not require Teams, you could remove all code related to Teams.
+
+#### On Sign up
+
+When a user signs up, we automatically create a team for that user. It's important to understand that this only happens when no team ID is provided during sign up. If we do have a team ID, this means the user is joining an existing team. If you look at the `onUserCreate` Cloud Function inside `functions/users/index.ts` you see that we call the `createTeam` function when a new user document is created (and no team ID is provided). When we create a new team, we make the team ID the same as the user ID so we can easily check the user's plan when team members are logged in (in the `getPlan` helper you can see that we check if the user is a team owner and if not, we check the plan of the team owner).
+
+When a new team is created, another Cloud Function runs to update the team owners document. The `onTeamCreate` function will set the `isTeamOwner` property to `true` on the user that signed up.
+
+#### Invite members
+
+Team owners can invite new members to their team. Invites are send by calling the Cloud Function `sendTeamInviteEmail` from `pages/account/team`. If you have set up Postmark, then this will send out a email with an invite link. This link will contain the following query params: `teamId=<TEAM_ID>&email=<INVITED_EMAIL>`. When the invited user goes to that page we fetch the Team name and pre-fill the email field. When this users signs up, the same `onUserCreate` functions gets called but this time it will not create a team but updates the user inside the team with the given ID. If the user exists on the team, the status will be updated to `active`.
+
+Not: Users can only be part of 1 team. They can't join multiple teams or be both team owner as a member in a different team.
+
+---
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
@@ -243,10 +262,11 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
+
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

@@ -7,7 +7,7 @@ export const createTeam = (data: { name: string }): Promise<any> => {
   const ownerId = auth.currentUser.uid;
   const users = [
     {
-      userId: auth.currentUser.uid,
+      uid: auth.currentUser.uid,
       email: auth.currentUser.email,
       role: 'owner',
       status: 'active',

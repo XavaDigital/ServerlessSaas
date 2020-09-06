@@ -5,7 +5,7 @@ import { nameToSlug, slugToId } from './helpers';
 export const createTeam = async (user) => {
   const users = [
     {
-      userId: user.uid,
+      uid: user.uid,
       email: user.email,
       name: user.name,
       role: 'owner',
@@ -43,7 +43,7 @@ export const addTeamMember = async (user) => {
 
   team.users[index] = {
     ...team.users[index],
-    userId: user.uid,
+    uid: user.uid,
     name: user.name,
     status: 'active',
     joinedAt: Date.now(),
@@ -83,4 +83,32 @@ export const onTeamCreate = functions.firestore
       .collection('users')
       .doc(teamId)
       .set({ teamId, isTeamOwner: true }, { merge: true });
+  });
+
+/**
+ * onTeamUpdate we check if a team member has been removed from the team
+ * If so, it will create an own team and update the given user's teamID.
+ * It results in this removed user becoming a team owner of a new team.
+ */
+export const onTeamUpdate = functions.firestore
+  .document('teams/{teamId}')
+  .onUpdate(async (change) => {
+    const previousUsers = change.before.data().users;
+    const previousUsersIds = previousUsers.map((user) => user.uid);
+    const newUsers = change.after.data().users;
+    const newUsersIds = newUsers.map((user) => user.uid);
+    const removedUserId = previousUsersIds.find(
+      (uid) => newUsersIds.indexOf(uid) === -1
+    );
+    const removedUser = previousUsers.find(
+      (user) => user.uid === removedUserId
+    );
+
+    // If removedUser exists that means it's deleted from the team
+    // and we create a new team for this user.
+    if (removedUser?.uid) {
+      await createTeam(removedUser);
+    }
+
+    return { status: 200 };
   });
