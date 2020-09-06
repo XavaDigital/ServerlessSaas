@@ -4,14 +4,14 @@ This project is started with the [Serverless SaaS Boilerplate](https://serverles
 
 ## Getting Started
 
-To be able to use all features included in this project, you need to setup a couple of things before starting:
+To be able to use all features included in this project, you need to set up a couple of things before starting:
 
-1. Setup NetlifyCMS. [Instructions](#Netlify CMS).
+1. Setup NetlifyCMS. [Instructions](#Netlify-CMS).
 2. Setup a Firebase project, with Cloud Firestore and Cloud Functions. [Instructions](#Firebase).
-3. Create a Stripe account and setup your subscription product. [Instructions](#Payments with Stripe).
-4. Create a Postmark account and setup you email templates. [Instructions](#Emails with Postmark).
+3. Create a Stripe account and set up your subscription product. [Instructions](#Payments-with-Stripe).
+4. Create a Postmark account and set up your email templates. [Instructions](#Emails-with-Postmark).
 
-When this is done, make sure you have you have run `npm i` or `yarn` both inside your project directory as your your `/functions` folder. Then, run the development server:
+When this is done, make sure you have run `npm i` or `yarn` both inside your project directory as your your `/functions` folder. Then, run the development server:
 
 ```bash
 npm run dev
@@ -23,9 +23,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Netlify CMS
 
-Netlify CMS is an open source git-based content management library. Content is stored in your Git repository alongside your code for easier versioning, multi-channel publishing, and the option to handle content updates directly in Git. It's basically an UI for editing your markdown files that we use to show the landing page and the blog posts.
+Netlify CMS is an open-source git-based content management library. Content is stored in your Git repository alongside your code for easier versioning, multi-channel publishing, and the option to handle content updates directly in Git. It's basically a UI for editing your markdown files that we use to show the landing page and the blog posts.
 
-- Create create a new repository on [Github](https://github.com/)
+- Create a new repository on [Github](https://github.com/)
 - Open `cms/config.js` in this project and update `backend.repo` with your new repository name.
 - Push the code of this project to this new repo.
 
@@ -48,13 +48,13 @@ backend: {
 
 ## Firebase
 
-Firebase helps you build apps fast, without managing infrastructure. It is built on Google infrastructure and scales automatically, for even the largest apps. It also starts completly free, and when you start to grow you will only pay for what you use.
+Firebase helps you build apps fast, without managing infrastructure. It is built on Google infrastructure and scales automatically, for even the largest apps. It also starts completely free, and when you start to grow you will only pay for what you use.
 
 Before you start creating your Firebase project, be sure you have the [Firebase CLI](https://firebase.google.com/docs/cli) installed globally by running `npm install -g firebase-tools`. We use it to manage and deploy the project to Firebase.
 
 ### Create a Firebase project
 
-Go to [https://firebase.google.com/](https://firebase.google.com/), click the "Get started" button and follow the instructions to create your project.
+Go to [https://firebase.google.com/](https://firebase.google.com/), click the "Get started" button, and follow the instructions to create your project.
 
 Once your project is created, you should register your app inside the Firebase console. From the project overview page, click the web icon to add Firebase to your web application. Once created, you will receive your firebase config, which should look something like this:
 
@@ -71,7 +71,7 @@ var firebaseConfig = {
 };
 ```
 
-We should now activate the sign up methods that we would like to add to our app. Navigate to "Authentication" and start by activating the "Email/password" method.
+We should now activate the signup methods that we would like to add to our app. Navigate to "Authentication" and start by activating the "Email/password" method.
 
 ### Cloud Firestore
 
@@ -102,13 +102,13 @@ Keep in mind that when you deploy your application, you first need to set your p
 
 [Cloud Functions](https://firebase.google.com/docs/functions) for Firebase is a serverless framework that lets you automatically run backend code in response to events triggered by Firebase features and HTTPS requests. Your code is stored in Google's cloud and runs in a managed environment. There's no need to manage and scale your own servers.
 
-Cloud Functions are already setup in this project, but you first need to deploy them to your Firebase project before they work: `firebase deploy --only functions`. Make sure you have run `npm run build` or `yarn build` inside your `/functions` folder. The easiest way is to just always run `npm run build && firebase deploy --only functions` from your within your `/functions` folder.
+Cloud Functions are already set up in this project, but you first need to deploy them to your Firebase project before they work: `firebase deploy --only functions`. Make sure you have run `npm run build` or `yarn build` inside your `/functions` folder. The easiest way is to just always run `npm run build && firebase deploy --only functions` from your within your `/functions` folder.
 
-The Cloud Functions in this project rely on certain variables. If you want to use all of the functionalities, like updating subscriptions or sending emails, please first follow the instructions to setup Stripe and Postmark before you try this out.
+The Cloud Functions in this project rely on certain variables. If you want to use all of the functionalities, like updating subscriptions or sending emails, please first follow the instructions to set up Stripe and Postmark before you try this out.
 
 #### Emulators
 
-You cal also run the functions locally by running `firebase emulators:start`. You should build your functions when you make changes, so you probably want to run `npm run build && firebase emulators:start`. You should create an `runtimeconfig.json` file inside your functions folder to use environment variables inside the emulators when developing locally. You can take a look at the example file at `functions/runtimeconfig.example.json`.
+You cal also run the functions locally by running `firebase emulators:start`. You should build your functions when you make changes, so you probably want to run `npm run build && firebase emulators:start`. You should create a `runtimeconfig.json` file inside your functions folder to use environment variables inside the emulators when developing locally. You can take a look at the example file at `functions/runtimeconfig.example.json`.
 
 Make sure you uncomment the code inside `config/firebase.ts` to let the application use the functions emulator.
 
@@ -136,7 +136,7 @@ service <<name>> {
 }
 ```
 
-This starter-kit comes with a set of basic Firebase rules and helper functions so you can easily protect your db.
+This starter kit comes with a set of basic Firebase rules and helper functions so you can easily protect your DB.
 You can see and manage the rules inside the `firestore.rules` file at the root of this project.
 
 When you make changes to the `firestore.rules`, make sure you deploy them by running `firebase deploy --only firestore:rules`.
@@ -150,7 +150,7 @@ To deploy your Functions or Rules simply run `firebase deploy`. You could also s
 
 ## Environment variables
 
-Steps to setup your environment variables
+Steps to set up your environment variables
 
 - `.env.local`
 
@@ -161,10 +161,10 @@ You could create an `runtimeconfig.json` file inside your functions folder to us
 
 ## Payments with Stripe
 
-Stripe is the most popular payment processor for internet businesses. This project comes with a Stripe integration for handling subscription payments. For this we make use of Stripe Checkout and Stripe Billing Customer Portal.
+Stripe is the most popular payment processor for internet businesses. This project comes with Stripe integration for handling subscription payments. For this, we make use of Stripe Checkout and Stripe Billing Customer Portal.
 
 - Stripe Checkout creates a secure, Stripe-hosted payment page that lets you collect payments quickly. It works across devices and is designed to increase your conversion.
-- Stripe Customer portal is a secure, Stripe-hosted page that lets your customers manage their subscriptions and billing details.
+- The stripe Customer portal is a secure, Stripe-hosted page that lets your customers manage their subscriptions and billing details.
 
 #### Getting started
 
@@ -187,24 +187,25 @@ Start doing this by following these steps:
 
 Note: make sure you are on the Blaze plan of Firebase, otherwise you cannot connect to an external API (like Stripe).
 
-Note: If you want to start project locally with the Cloud Functions Emulator, make sure they have access to your environment variables by creating a .runtimeconfig.json. There is an example file inside the project that you can copy and add your variables to. Or if you have already added your variables to firebase you can extract them with this command: `firebase functions:config:get > .runtimeconfig.json`.
+Note: If you want to start a project locally with the Cloud Functions Emulator, make sure they have access to your environment variables by creating a .runtimeconfig.json. There is an example file inside the project that you can copy and add your variables to. Or if you have already added your variables to firebase you can extract them with this command: `firebase functions:config:get > .runtimeconfig.json`.
 
 Note: Because we use TypeScript, we need to rebuild and run the emulators every time we make a change to our functions. This sucks a little, but luckily it's pretty fast.
 
 ```jsx
 npm run build && firebase emulators:start
 ```
+
 ## Emails with Postmark
 
 Every SaaS application needs to send some transactional emails. Think about sending a welcome email to new users, an email to invite new users to your company/team, and an email to notify you whenever that team member has joined.
 
-Sending these type of emails can be done easily with Cloud Functions. You can call the function from your front-end application, or you can listen to changes in your Firestore to trigger an email.
+Sending these types of emails can be done easily with Cloud Functions. You can call the function from your front-end application, or you can listen to changes in your Firestore to trigger an email.
 
-In this project, we have a couple of emails we send out by using [Postmark](https://postmarkapp.com/). This is one of the many email providers that is specialized in sending transactional emails. We have tried out different providers for this starter-kit and found that Postmark is in our opinion the best fit. They provide a higher delivery rate than most other prodivder and also some great email templates to get started quickly.
+In this project, we have a couple of emails we send out by using [Postmark](https://postmarkapp.com/). This is one of the many email providers that is specialized in sending transactional emails. We have tried out different providers for this starter-kit and found that Postmark is in our opinion the best fit. They provide a higher delivery rate than most other providers and also some great email templates to get started quickly.
 
-If you rather want to use a different provider, you could easily adjust the related the Cloud Functions to fit your needs. For example Sendgrid, has a very similar npm package to acieve the same thing. Just make sure you provide the correct link (including the teamId) to the "team invite" email.
+If you rather want to use a different provider, you could easily adjust the related Cloud Functions to fit your needs. For example, Sendgrid has a very similar npm package to acieve the same thing. Just make sure you provide the correct link (including the teamId) to the "team invite" email.
 
-This project includes th following Cloud Functions that trigger an email:
+This project includes the following Cloud Functions that trigger an email:
 
 - `onNewUserSetup` - This function is automatically called whenever a new user signs up and sends out a welcome email.
 - `sendTeamInviteEmail` - This is a callable function and will be called from the `invite/index.ts` page.
@@ -217,7 +218,7 @@ To get started you need to do the following:
 Setup your account
 
 - Create your account on Postmark (https://account.postmarkapp.com/sign_up).
-- Go through the steps to setup your Sender Signature
+- Go through the steps to set up your Sender Signature
 - Go to Your Server overview, select "API tokens" and generate your API key
 - Save your API keys to your Firebase environment variables by running `firebase functions:config:set postmark.api_key=<YOUR_KEY_HERE>`
 
@@ -245,13 +246,13 @@ This project sets you up to built multi-tenant SaaS applications. Here is a quic
 
 When a user signs up, we automatically create a team for that user. It's important to understand that this only happens when no team ID is provided during sign up. If we do have a team ID, this means the user is joining an existing team. If you look at the `onUserCreate` Cloud Function inside `functions/users/index.ts` you see that we call the `createTeam` function when a new user document is created (and no team ID is provided). When we create a new team, we make the team ID the same as the user ID so we can easily check the user's plan when team members are logged in (in the `getPlan` helper you can see that we check if the user is a team owner and if not, we check the plan of the team owner).
 
-When a new team is created, another Cloud Function runs to update the team owners document. The `onTeamCreate` function will set the `isTeamOwner` property to `true` on the user that signed up.
+When a new team is created, another Cloud Function runs to update the team owners' document. The `onTeamCreate` function will set the `isTeamOwner` property to `true` on the user that signed up.
 
 #### Invite members
 
-Team owners can invite new members to their team. Invites are send by calling the Cloud Function `sendTeamInviteEmail` from `pages/account/team`. If you have set up Postmark, then this will send out a email with an invite link. This link will contain the following query params: `teamId=<TEAM_ID>&email=<INVITED_EMAIL>`. When the invited user goes to that page we fetch the Team name and pre-fill the email field. When this users signs up, the same `onUserCreate` functions gets called but this time it will not create a team but updates the user inside the team with the given ID. If the user exists on the team, the status will be updated to `active`.
+Team owners can invite new members to their team. Invites are send by calling the Cloud Function `sendTeamInviteEmail` from `pages/account/team`. If you have set up Postmark, then this will send out a email with an invite link. This link will contain the following query params: `teamId=<TEAM_ID>&email=<INVITED_EMAIL>`. When the invited user goes to that page we fetch the Team name and pre-fill the email field. When this user signs up, the same `onUserCreate` functions get called but this time it will not create a team but updates the user inside the team with the given ID. If the user exists on the team, the status will be updated to `active`.
 
-Not: Users can only be part of 1 team. They can't join multiple teams or be both team owner as a member in a different team.
+Not: Users can only be part of 1 team. They can't join multiple teams or be both team owner as a member of a different team.
 
 ---
 
@@ -263,7 +264,6 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 ---
-
 
 ## Deploy on Vercel
 
