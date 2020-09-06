@@ -1,26 +1,52 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 
 import { useAuth } from 'hooks/useAuth';
-import { User } from 'interfaces/user';
 import Button from 'components/elements/Button';
+import { useTeam } from 'hooks/useTeam';
 
-const SignUpForm: React.FC = () => {
-  const { register, errors, handleSubmit } = useForm();
+export interface SignUpData {
+  name: string;
+  email: string;
+  password: string;
+}
+
+const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
+  teamId,
+  email,
+}) => {
+  const { register, errors, handleSubmit } = useForm({
+    defaultValues: {
+      name: '',
+      email,
+      password: '',
+    },
+  });
   const auth = useAuth();
+  const { team } = useTeam();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const onSubmit = (data: User) => {
+  const onSubmit = (data: SignUpData): void => {
     setIsLoading(true);
     setError(null);
-    auth.signUp(data).then((response: { error?: { massage: string } }) => {
-      setIsLoading(false);
-      response?.error ? setError(response.error) : router.push('/dashboard');
-    });
+    auth
+      .signUp(data, teamId)
+      .then((response: { error?: { massage: string } }) => {
+        setIsLoading(false);
+        if (response?.error) {
+          setError(response.error);
+        }
+      });
   };
+
+  useEffect(() => {
+    if (team?.id) {
+      router.push(`/dashboard`);
+    }
+  }, [team]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -63,7 +89,9 @@ const SignUpForm: React.FC = () => {
         <div className="mt-1 rounded-md">
           <input
             id="email"
-            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm"
+            className={`appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm ${
+              !!email && 'cursor-not-allowed'
+            }`}
             type="email"
             name="email"
             ref={register({

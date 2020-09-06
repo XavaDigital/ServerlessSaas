@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
 import Stripe from 'stripe';
-import { catchErrors, getUID } from './helpers';
+import { catchErrors, getUID } from '../helpers';
 import { stripe } from '../config';
 import { getCustomerId } from './customers';
 

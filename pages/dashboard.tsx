@@ -1,32 +1,53 @@
 import { useRequireAuth } from 'hooks/useRequireAuth';
 import Layout from 'components/dashboard/Layout';
+import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 
-const DashBoardPage: React.FC = () => {
-  const auth = useRequireAuth();
-  if (!auth.user) return null;
+const DashboardPage: React.FC = () => {
+  const { user } = useRequireAuth();
+  if (!user) return null;
+
+  const greetUser = () => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour < 12) {
+      return `Good morning, ${user.name}`;
+    }
+    if (currentHour < 18) {
+      return `Good afternoon, ${user.name}`;
+    }
+    return `Good evening, ${user.name}`;
+  };
+
+  const breadCrumbs = {
+    back: {
+      path: '/dashboard',
+      text: 'Back',
+    },
+    first: {
+      path: '/dashboard',
+      text: 'Dashboard',
+    },
+  };
 
   return (
     <Layout>
-      <div className="flex">
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="text-center mt-24">
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              {`Welcome ${auth.user.name}!`}
-            </h2>
-            <p className="mt-2 text-center text-md text-gray-600">
-              {`You are logged in with ${auth.user.email}`}
-            </p>
-            <button
-              onClick={() => auth.signOut()}
-              className="mt-5 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-royal-blue-600 hover:bg-royal-blue-500 focus:outline-none focus:border-royal-blue-700 focus:shadow-outline-royal-blue active:bg-royal-blue-700 transition duration-150 ease-in-out"
-            >
-              Sign out
-            </button>
+      <div className="max-w-6xl py-10 max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+        <header className="pb-4 sm:py-6 pl-3 border-b-2 border-gray-300 mb-6">
+          {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
+          <div className="mt-2 md:flex md:items-center md:justify-between">
+            <div className="flex-1 min-w-0">
+              <h2 className="text-2xl font-bold leading-7 text-gray-800 sm:text-3xl sm:leading-9 sm:truncate">
+                {greetUser()}
+              </h2>
+            </div>
           </div>
+        </header>
+        <div className="bg-white overflow-hidden shadow rounded-lg h-48">
+          <div className="px-4 py-5 sm:p-6">Your dashboard page</div>
         </div>
       </div>
     </Layout>
   );
 };
 
-export default DashBoardPage;
+export default DashboardPage;

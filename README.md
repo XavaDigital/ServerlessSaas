@@ -1,8 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Serverless SaaS Boilerplate
+
+This project is started with the [Serverless SaaS Boilerplate](https://serverlesssaas.com/), a starter-kit that is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+To be able to use all features included in this project, you need to setup a couple of things before starting:
+
+1. Setup NetlifyCMS. [Instructions](#Netlify CMS).
+2. Setup a Firebase project, with Cloud Firestore and Cloud Functions. [Instructions](#Firebase).
+3. Create a Stripe account and setup your subscription product. [Instructions](#Payments with Stripe).
+4. Create a Postmark account and setup you email templates. [Instructions](#Emails with Postmark).
+
+When this is done, make sure you have you have run `npm i` or `yarn` both inside your project directory as your your `/functions` folder. Then, run the development server:
 
 ```bash
 npm run dev
@@ -12,30 +21,42 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Netlify CMS
 
-## Learn More
+Netlify CMS is an open source git-based content management library. Content is stored in your Git repository alongside your code for easier versioning, multi-channel publishing, and the option to handle content updates directly in Git. It's basically an UI for editing your markdown files that we use to show the landing page and the blog posts.
 
-To learn more about Next.js, take a look at the following resources:
+- Create create a new repository on [Github](https://github.com/)
+- Open `cms/config.js` in this project and update `backend.repo` with your new repository name.
+- Push the code of this project to this new repo.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+You can now start the project with `yarn dev` or `npm run dev` and navigate to `http://localhost:3000/admin`. You can now login with Github and manage the content of the landing page of blog posts with a nice UI. When you make a change you can hit the "Publish" button, this will result in making a commit to your repository with the changes made to the corresponding markdown file.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Test
 
-## Deploy on Vercel
+You can use the `test-repo` backend to try out Netlify CMS without connecting to a Git repo. With this backend, you can write and publish content normally, but any changes will disappear when you reload the page.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Note: The test-repo backend can't access your local file system, nor does it connect to a Git repo, thus you won't see any existing files while using it.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To enable this backend, add the `test-repo` string to your `cms/config.js` file:
+
+```
+backend: {
+    name: 'test-repo',
+    ...
+},
+```
 
 ## Firebase
+
+Firebase helps you build apps fast, without managing infrastructure. It is built on Google infrastructure and scales automatically, for even the largest apps. It also starts completly free, and when you start to grow you will only pay for what you use.
+
+Before you start creating your Firebase project, be sure you have the [Firebase CLI](https://firebase.google.com/docs/cli) installed globally by running `npm install -g firebase-tools`. We use it to manage and deploy the project to Firebase.
 
 ### Create a Firebase project
 
 Go to [https://firebase.google.com/](https://firebase.google.com/), click the "Get started" button and follow the instructions to create your project.
 
-Once your poject is created, you should register your app inside the Firebase console. From the project overview page, click the web icon to add Firebase to your web application. Once created, you will receive your firebase config, wich should look something like this:
+Once your project is created, you should register your app inside the Firebase console. From the project overview page, click the web icon to add Firebase to your web application. Once created, you will receive your firebase config, which should look something like this:
 
 ```jsx
 var firebaseConfig = {
@@ -52,10 +73,11 @@ var firebaseConfig = {
 
 We should now activate the sign up methods that we would like to add to our app. Navigate to "Authentication" and start by activating the "Email/password" method.
 
-**Add Firestore**
-If you want to save additional information during sign up, like an username or full name, you need to setup a database to save that data. [Cloud Firestore](https://firebase.google.com/docs/firestore) is a flexible, scalable database from Firebase. It offers seamless integration with Firebase and other Google Cloud Platform products, like Cloud Functions. And just like Firebase, it starts compeletly free. Only when your application really starts to scale, you might exceed the free plan, but even then you only pay for what you use. A very interesting price model if you don't want to spend a lot (or any) money when you are just starting out.
+### Cloud Firestore
 
-If you want to setup Firestore then navigate to "Database" and click the first "Create database" button to add Cloud Firestore to your project. Select the option to start in testmode.
+Cloud Firestore](https://firebase.google.com/docs/firestore) is a flexible, scalable database from Firebase. It offers seamless integration with Firebase and other Google Cloud Platform products, like Cloud Functions. And just like Firebase, it starts completely free. Only when your application really starts to scale, you might exceed the free plan, but even then you only pay for what you use.
+
+To setup Firestore, go to your Firebase console and navigate to "Database" and click the first "Create database" button to add Cloud Firestore to your project.
 
 We need the save our Firebase configuration to some [environment variables](https://nextjs.org/docs/basic-features/environment-variables).
 
@@ -74,84 +96,177 @@ NEXT_PUBLIC_FIREBASE_APP_ID = 'yourappid';
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = 'yourmeasurementid';
 ```
 
-K
-eep in mind that when you deploy your application, you first need to set your production environment variables. When deploying on [Vercel](https://vercel.com) you can configure secrets in the [Environment Variables](https://vercel.com/docs/v2/build-step#environment-variables) section of the project in the Vercel dashboard.
+Keep in mind that when you deploy your application, you first need to set your production environment variables. When deploying on [Vercel](https://vercel.com) you can configure secrets in the [Environment Variables](https://vercel.com/docs/v2/build-step#environment-variables) section of the project in the Vercel dashboard.
 
-## Prismic
+### Cloud Functions
 
-@NOTE This feature is only partly done! It's only implemented for blog posts.
+[Cloud Functions](https://firebase.google.com/docs/functions) for Firebase is a serverless framework that lets you automatically run backend code in response to events triggered by Firebase features and HTTPS requests. Your code is stored in Google's cloud and runs in a managed environment. There's no need to manage and scale your own servers.
 
-To setup prismic, follow these instructions:
+Cloud Functions are already setup in this project, but you first need to deploy them to your Firebase project before they work: `firebase deploy --only functions`. Make sure you have run `npm run build` or `yarn build` inside your `/functions` folder. The easiest way is to just always run `npm run build && firebase deploy --only functions` from your within your `/functions` folder.
 
-Step 1. Create an account and a repository on Prismic
-First, create an account on Prismic.
+The Cloud Functions in this project rely on certain variables. If you want to use all of the functionalities, like updating subscriptions or sending emails, please first follow the instructions to setup Stripe and Postmark before you try this out.
 
-After creating an account, create a repository from the dashboard and assign to it any name of your liking.
+#### Emulators
 
-Step 2. Create an author type
-From the repository page, create a new custom type:
+You cal also run the functions locally by running `firebase emulators:start`. You should build your functions when you make changes, so you probably want to run `npm run build && firebase emulators:start`. You should create an `runtimeconfig.json` file inside your functions folder to use environment variables inside the emulators when developing locally. You can take a look at the example file at `functions/runtimeconfig.example.json`.
 
-The name should be author.
-Next, add these fields (you don't have to modify the settings):
+Make sure you uncomment the code inside `config/firebase.ts` to let the application use the functions emulator.
 
-name - Key Text field
-picture - Image field
-Alternatively, you can copy the JSON in types/author.json, then click on JSON editor and paste it there.
+```
+if (process.env.NODE_ENV === 'development') {
+  functions.useFunctionsEmulator('http://localhost:5001');
+}
+```
 
-Save the type and continue.
+When you start the emulators you can view the status and logs in the Emulator UI at http://localhost:4000.
 
-Step 3. Create a post type
-From the repository page, create a new custom type:
+### Firebase Security Rules
 
-The name should be post.
-Next, add these fields (you don't have to modify the settings unless specified):
+[Firebase Security Rules](https://firebase.google.com/docs/rules) stand between your data and malicious users. You can write simple or complex rules that protect your app's data to the level of granularity that your specific app requires.
 
-title - Key Text field
-subtitle - Key Text field (optional)
-content - Rich Text field
-summary - Key Text field
-image - Image field
-date - Date field
-author - Content relationship field, you may also add author to the Constraint to custom type option to only accept documents from the author type.
-slug - UID field.
-Alternatively, you can copy the JSON in types/post.json, then click on JSON editor and paste it there.
+Rules use the following syntax:
 
-Save the type and continue.
+```
+service <<name>> {
+  // Match the resource path.
+  match <<path>> {
+    // Allow the request if the following conditions are true.
+    allow <<methods>> : if <<condition>>
+  }
+}
+```
 
-Step 4. Populate Content
-Go to the Content page, it's in the menu at the top left, then click on Create new and select the author type:
+This starter-kit comes with a set of basic Firebase rules and helper functions so you can easily protect your db.
+You can see and manage the rules inside the `firestore.rules` file at the root of this project.
 
-You just need 1 author document.
-Use dummy data for the text.
-For the image, you can download one from Unsplash.
-Next, select Post and create a new document.
+When you make changes to the `firestore.rules`, make sure you deploy them by running `firebase deploy --only firestore:rules`.
+You can also access your rules from the Firebase console. Select your project, then navigate to Cloud Firestore and click Rules once you're in the correct database.
 
-We recommend creating at least 2 or 3 Post documents.
-Use dummy data for the text.
-You can write markdown for the content field.
-For images, you can download them from Unsplash.
-Pick the author you created earlier.
-Important: For each document, you need to click Publish after saving. If not, the document will be in the draft state.
+### Emulators
 
-Step 5. Set up environment variables
-To generate a token, follow these steps on Prismic:
+### Deploy
 
-Go to your repository's Settings / API & Security
-At the bottom find the section called "Generate an Access Token"
-Add an application name. This doesn't matter much, you can add something like "My Website"
-Click the "Add this application" button
+To deploy your Functions or Rules simply run `firebase deploy`. You could also specify what you want to deploy, like `firebase deploy --only functions`.
 
-Next, set each variable on .env.local:
+## Environment variables
 
-PRISMIC_API_TOKEN should be the Permanent access token you just created
-PRISMIC_REPOSITORY_NAME is the name of your repository (the one in the URL)
-PRISMIC_REPOSITORY_LOCALE is the locale of your repository. Defaults to en-us
+Steps to setup your environment variables
 
-Your .env.local file should look like this:
+- `.env.local`
 
-NEXT_PUBLIC_PRISMIC_API_ENDPOINT=...
-NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN=...
-NEXT_PUBLIC_PRISMIC_REPOSITORY_NAME=...
-NEXT_PUBLIC_PRISMIC_REPOSITORY_LOCALE=...
+For Firebase functions you need to add your secrets like API keys with the Firebase CLI. For example:
+`firebase functions:config:set stripe.secret="mysecretkey"`
 
-Make sure the locale matches your settings in the Prismic dashboard.
+You could create an `runtimeconfig.json` file inside your functions folder to use environment variables inside the emulators when developing locally. You can take a look at the example file at `functions/runtimeconfig.example.json`.
+
+## Payments with Stripe
+
+Stripe is the most popular payment processor for internet businesses. This project comes with a Stripe integration for handling subscription payments. For this we make use of Stripe Checkout and Stripe Billing Customer Portal.
+
+- Stripe Checkout creates a secure, Stripe-hosted payment page that lets you collect payments quickly. It works across devices and is designed to increase your conversion.
+- Stripe Customer portal is a secure, Stripe-hosted page that lets your customers manage their subscriptions and billing details.
+
+#### Getting started
+
+Prior to integrating the customer portal, you must configure its functionality and branding in the Stripe Dashboard. These settings determine the actions that your users can take using the portal. Its features depend on your product and price catalog, so there are different settings for live mode and test mode. Navigate to the portal settings to configure the portal: https://dashboard.stripe.com/test/settings/billing/portal
+
+Set a product catalog
+If you allow customers to change their subscriptions, you also need to set a product catalog. This includes the products and prices that your customers can upgrade or downgrade to. The portal displays the following attributes of your product catalog:
+
+- Product: name and description—these attributes are editable in the Dashboard and API.
+- Price: amount, currency, and billing interval—these attributes are immutable and can only be set on creation in the Dashboard and API.
+
+Start doing this by following these steps:
+
+- Create a subscription product on stripe and name it, for example, "Pro Plan".
+- Add multiple prices to the product, for example, "Hobby: €29" and "Premium: €49".
+- Go to `config/stripe.ts` and add the price ID of your just created prices in the plan objects. You can change the values to your needs.
+- Get your API keys. To interact with the Stripe API you need to have a Publishable and Secret API key, you can find them in your [Dashboard](https://dashboard.stripe.com/test/apikeys). When in development, you can use the test key token.
+- Add them to Firebase with the following command: `firebase functions:config:set stripe.publishable_key=<YOUR PUBLISHABLE KEY> stripe.test_key=<YOUR TEST KEY>`
+- Add your Stripe publishable key to `.env.local` like this `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=<YOUR PUBLISHABLE KEY>`
+
+Note: make sure you are on the Blaze plan of Firebase, otherwise you cannot connect to an external API (like Stripe).
+
+Note: If you want to start project locally with the Cloud Functions Emulator, make sure they have access to your environment variables by creating a .runtimeconfig.json. There is an example file inside the project that you can copy and add your variables to. Or if you have already added your variables to firebase you can extract them with this command: `firebase functions:config:get > .runtimeconfig.json`.
+
+Note: Because we use TypeScript, we need to rebuild and run the emulators every time we make a change to our functions. This sucks a little, but luckily it's pretty fast.
+
+```jsx
+npm run build && firebase emulators:start
+```
+## Emails with Postmark
+
+Every SaaS application needs to send some transactional emails. Think about sending a welcome email to new users, an email to invite new users to your company/team, and an email to notify you whenever that team member has joined.
+
+Sending these type of emails can be done easily with Cloud Functions. You can call the function from your front-end application, or you can listen to changes in your Firestore to trigger an email.
+
+In this project, we have a couple of emails we send out by using [Postmark](https://postmarkapp.com/). This is one of the many email providers that is specialized in sending transactional emails. We have tried out different providers for this starter-kit and found that Postmark is in our opinion the best fit. They provide a higher delivery rate than most other prodivder and also some great email templates to get started quickly.
+
+If you rather want to use a different provider, you could easily adjust the related the Cloud Functions to fit your needs. For example Sendgrid, has a very similar npm package to acieve the same thing. Just make sure you provide the correct link (including the teamId) to the "team invite" email.
+
+This project includes th following Cloud Functions that trigger an email:
+
+- `onNewUserSetup` - This function is automatically called whenever a new user signs up and sends out a welcome email.
+- `sendTeamInviteEmail` - This is a callable function and will be called from the `invite/index.ts` page.
+- `onTeamMemberCreate` - This function is automatically called whenever a new user signs up and gets added to a team. It sends out an email to the owner of the team to inform.
+
+#### Get started
+
+To get started you need to do the following:
+
+Setup your account
+
+- Create your account on Postmark (https://account.postmarkapp.com/sign_up).
+- Go through the steps to setup your Sender Signature
+- Go to Your Server overview, select "API tokens" and generate your API key
+- Save your API keys to your Firebase environment variables by running `firebase functions:config:set postmark.api_key=<YOUR_KEY_HERE>`
+
+Create the email templates
+
+- In Postmark, go to your server overview and select "Templates"
+- Click the "Add template" button and select the "Welcome" template
+- You can adjust this template to your needs, just make sure you provide the dynamic variables in the `onNewUserSetup` function.
+- Hit the save button and copy the template ID (usually right above the save button).
+- Save your template ID to your Firebase environment variables by running the following command in your terminal: `firebase functions:config:set postmark.welcome_template_id=<TEMPLATE_ID_HERE>`
+- Now go back to the template overview and select the "User invitation" template
+- Again, you can adjust this template to your needs but make sure you provide the dynamic variables in the `sendTeamInviteEmail` function.
+- Hit the save button and copy the template ID
+- Save your template ID to your Firebase environment variables by running: `firebase functions:config:set postmark.team_invite_template_id=<TEMPLATE_ID_HERE>`
+
+That's it.
+
+---
+
+## Teams
+
+This project sets you up to built multi-tenant SaaS applications. Here is a quick summary of what is implemented for you. If your application does not require Teams, you could remove all code related to Teams.
+
+#### On Sign up
+
+When a user signs up, we automatically create a team for that user. It's important to understand that this only happens when no team ID is provided during sign up. If we do have a team ID, this means the user is joining an existing team. If you look at the `onUserCreate` Cloud Function inside `functions/users/index.ts` you see that we call the `createTeam` function when a new user document is created (and no team ID is provided). When we create a new team, we make the team ID the same as the user ID so we can easily check the user's plan when team members are logged in (in the `getPlan` helper you can see that we check if the user is a team owner and if not, we check the plan of the team owner).
+
+When a new team is created, another Cloud Function runs to update the team owners document. The `onTeamCreate` function will set the `isTeamOwner` property to `true` on the user that signed up.
+
+#### Invite members
+
+Team owners can invite new members to their team. Invites are send by calling the Cloud Function `sendTeamInviteEmail` from `pages/account/team`. If you have set up Postmark, then this will send out a email with an invite link. This link will contain the following query params: `teamId=<TEAM_ID>&email=<INVITED_EMAIL>`. When the invited user goes to that page we fetch the Team name and pre-fill the email field. When this users signs up, the same `onUserCreate` functions gets called but this time it will not create a team but updates the user inside the team with the given ID. If the user exists on the team, the status will be updated to `active`.
+
+Not: Users can only be part of 1 team. They can't join multiple teams or be both team owner as a member in a different team.
+
+---
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+---
+
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import) from the creators of Next.js.
+
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

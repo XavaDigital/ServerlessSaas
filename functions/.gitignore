@@ -14,3 +14,4 @@ node_modules/
 ui-debug.log
 firebase-debug.log
 firestore-debug.log
+pubsub-debug.log

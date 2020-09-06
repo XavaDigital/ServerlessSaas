@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -13,17 +13,23 @@ interface LoginData {
 
 const LoginForm: React.FC = () => {
   const { register, errors, handleSubmit } = useForm();
-  const auth = useAuth();
-  const router = useRouter();
+  const { user, signIn } = useAuth();
+  const { push } = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      push('/dashboard');
+    }
+  }, [user]);
 
   const onSubmit = (data: LoginData) => {
     setIsLoading(true);
     setError(null);
-    auth.signIn(data).then((response: { error?: { massage: string } }) => {
+    signIn(data).then((response: { error?: { massage: string } }) => {
       setIsLoading(false);
-      response?.error ? setError(response.error) : router.push('/dashboard');
+      response?.error ? setError(response.error) : push('/dashboard');
     });
   };
 

@@ -5,6 +5,8 @@ import Layout from 'components/dashboard/Layout';
 import Button from 'components/elements/Button';
 import AccountMenu from 'components/dashboard/AccountMenu';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
+import { getPlan } from 'utils/getPlan';
+import { useState, useEffect } from 'react';
 
 const breadCrumbs = {
   back: {
@@ -22,13 +24,21 @@ const breadCrumbs = {
 };
 
 const Account: React.FC = () => {
-  const auth = useRequireAuth();
-  if (!auth.user) return null;
+  const [plan, setPlan] = useState(null);
+  const { user } = useRequireAuth();
+
+  useEffect(() => {
+    if (user?.teamId && !plan) {
+      getPlan(user).then((plan) => setPlan(plan));
+    }
+  }, [user?.teamId]);
+
+  if (!user) return null;
 
   return (
     <Layout>
       <div className="max-w-6xl py-10 max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-        <header className="pb-4 sm:py-6 pl-3 border-b-2 border-gray-200 mb-6">
+        <header className="pb-4 sm:py-6 pl-3 border-b-2 border-gray-300 mb-6">
           {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
           <div className="mt-2 md:flex md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
@@ -50,7 +60,7 @@ const Account: React.FC = () => {
                     Name
                   </dt>
                   <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    {auth.user.name}
+                    {user.name}
                   </dd>
                 </div>
                 <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
@@ -58,7 +68,7 @@ const Account: React.FC = () => {
                     Email address
                   </dt>
                   <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    {auth.user.email}
+                    {user.email}
                   </dd>
                 </div>
                 <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
@@ -66,7 +76,31 @@ const Account: React.FC = () => {
                     Email verified
                   </dt>
                   <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    {auth.user.emailVerified ? 'Yes' : 'No'}
+                    {user.emailVerified ? 'Yes' : 'No'}
+                  </dd>
+                </div>
+                <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                  <dt className="text-sm leading-5 font-medium text-gray-600">
+                    Team ID
+                  </dt>
+                  <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    {user.teamId}
+                  </dd>
+                </div>
+                <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                  <dt className="text-sm leading-5 font-medium text-gray-600">
+                    Team Owner
+                  </dt>
+                  <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    {user.isTeamOwner ? 'Yes' : 'No'}
+                  </dd>
+                </div>
+                <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                  <dt className="text-sm leading-5 font-medium text-gray-600">
+                    Plan
+                  </dt>
+                  <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    {plan}
                   </dd>
                 </div>
                 <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
@@ -75,12 +109,12 @@ const Account: React.FC = () => {
                   </dt>
                   <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                      {auth.user.avatarUrl ? (
+                      {user.avatarUrl ? (
                         <span className="inline-block relative">
                           <img
                             className="h-12 w-12 object-cover rounded-full"
-                            src={auth.user.avatarUrl}
-                            alt={auth.user.name}
+                            src={user.avatarUrl}
+                            alt={user.name}
                           />
                         </span>
                       ) : (

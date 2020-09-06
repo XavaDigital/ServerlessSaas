@@ -27,7 +27,7 @@ export const useAuth: any = () => {
 const useAuthProvider = () => {
   const [user, setUser] = useState(null);
 
-  const createUser = async (currentUser: User) => {
+  const createUser = async (currentUser: any) => {
     try {
       return db
         .collection('users')
@@ -47,13 +47,18 @@ const useAuthProvider = () => {
     }
   };
 
-  const signUp = async ({ name, email, password }) => {
+  const signUp = async ({ name, email, password }, teamId) => {
     try {
       return await auth
         .createUserWithEmailAndPassword(email, password)
         .then((response) => {
           auth.currentUser.sendEmailVerification();
-          return createUser({ uid: response.user.uid, email, name });
+          return createUser({
+            uid: response.user.uid,
+            email,
+            name,
+            teamId: teamId || '',
+          });
         });
     } catch (error) {
       return { error };
@@ -91,15 +96,20 @@ const useAuthProvider = () => {
 
   // Get the user data from Firestore
   const getUserAdditionalData = async (user: firebase.User) => {
-    const userData = await db.collection('users').doc(user.uid).get();
-    if (userData.data()) {
-      setUser(userData.data());
-    }
+    db.collection('users')
+      .doc(user.uid)
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          setUser({ ...doc.data(), ...user });
+        } else {
+          console.log('No such document!');
+        }
+      });
   };
 
   /// We need to get the user data from the Firestore db
   const handleAuthStateChanged = (user: firebase.User) => {
-    setUser(user);
     if (user) {
       getUserAdditionalData(user);
     }

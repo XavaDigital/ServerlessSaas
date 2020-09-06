@@ -20,3 +20,14 @@ export const proProductId = functions.config().stripe.pro_product_id;
 // Initialize Stripe
 import Stripe from 'stripe';
 export const stripe = new Stripe(stripeSecretKey, { apiVersion: '2020-03-02' });
+
+// Postmark
+export const postMarkApiKey = functions.config().postmark.api_key;
+export const welcomeTemplateId = functions.config().postmark
+  .welcome_template_id;
+export const teamInviteTemplateId = functions.config().postmark
+  .team_invite_template_id;
+
+// Initialize Postmark
+import { ServerClient } from 'postmark';
+export const postmarkClient = new ServerClient(postMarkApiKey);

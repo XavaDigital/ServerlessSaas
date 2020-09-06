@@ -11,6 +11,9 @@ const CMS = dynamic(
       cms.registerPreviewStyle(
         'https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css'
       );
+      cms.registerPreviewStyle(
+        'https://unpkg.com/@tailwindcss/typography@0.2.x/dist/typography.min.css'
+      );
       cms.registerPreviewTemplate('home', HomePreview);
       cms.registerPreviewTemplate('posts', PostPreview);
     }),
