@@ -102,7 +102,7 @@ Keep in mind that when you deploy your application, you first need to set your p
 
 [Cloud Functions](https://firebase.google.com/docs/functions) for Firebase is a serverless framework that lets you automatically run backend code in response to events triggered by Firebase features and HTTPS requests. Your code is stored in Google's cloud and runs in a managed environment. There's no need to manage and scale your own servers.
 
-Cloud Functions are already set up in this project, but you first need to deploy them to your Firebase project before they work: `firebase deploy --only functions`. Make sure you have run `npm run build` or `yarn build` inside your `/functions` folder. The easiest way is to just always run `npm run build && firebase deploy --only functions` from your within your `/functions` folder.
+Cloud Functions are already set up in this project, but you first need to deploy them to your Firebase project before they work: `firebase deploy --only functions`. Make sure you have run `npm run build` inside your `/functions` folder. The easiest way is to just always run `npm run build && firebase deploy --only functions` from your within your `/functions` folder.
 
 The Cloud Functions in this project rely on certain variables. If you want to use all of the functionalities, like updating subscriptions or sending emails, please first follow the instructions to set up Stripe and Postmark before you try this out.
 
@@ -142,22 +142,9 @@ You can see and manage the rules inside the `firestore.rules` file at the root o
 When you make changes to the `firestore.rules`, make sure you deploy them by running `firebase deploy --only firestore:rules`.
 You can also access your rules from the Firebase console. Select your project, then navigate to Cloud Firestore and click Rules once you're in the correct database.
 
-### Emulators
-
 ### Deploy
 
 To deploy your Functions or Rules simply run `firebase deploy`. You could also specify what you want to deploy, like `firebase deploy --only functions`.
-
-## Environment variables
-
-Steps to set up your environment variables
-
-- `.env.local`
-
-For Firebase functions you need to add your secrets like API keys with the Firebase CLI. For example:
-`firebase functions:config:set stripe.secret="mysecretkey"`
-
-You could create an `runtimeconfig.json` file inside your functions folder to use environment variables inside the emulators when developing locally. You can take a look at the example file at `functions/runtimeconfig.example.json`.
 
 ## Payments with Stripe
 
@@ -197,7 +184,7 @@ npm run build && firebase emulators:start
 
 ## Emails with Postmark
 
-Every SaaS application needs to send some transactional emails. Think about sending a welcome email to new users, an email to invite new users to your company/team, and an email to notify you whenever that team member has joined.
+Every SaaS application needs to send some transactional emails. Think about sending a welcome email to new users, an email to invite new users to your company/team, and an email to notify you whenever that a team member has joined.
 
 Sending these types of emails can be done easily with Cloud Functions. You can call the function from your front-end application, or you can listen to changes in your Firestore to trigger an email.
 
@@ -209,7 +196,7 @@ This project includes the following Cloud Functions that trigger an email:
 
 - `onNewUserSetup` - This function is automatically called whenever a new user signs up and sends out a welcome email.
 - `sendTeamInviteEmail` - This is a callable function and will be called from the `invite/index.ts` page.
-- `onTeamMemberCreate` - This function is automatically called whenever a new user signs up and gets added to a team. It sends out an email to the owner of the team to inform.
+- `onTeamMemberCreate` - This function is automatically called whenever a new user signs up and gets added to a team. It sends out an email to the owner of the team to inform. (TODO)
 
 #### Get started
 
@@ -252,7 +239,37 @@ When a new team is created, another Cloud Function runs to update the team owner
 
 Team owners can invite new members to their team. Invites are send by calling the Cloud Function `sendTeamInviteEmail` from `pages/account/team`. If you have set up Postmark, then this will send out a email with an invite link. This link will contain the following query params: `teamId=<TEAM_ID>&email=<INVITED_EMAIL>`. When the invited user goes to that page we fetch the Team name and pre-fill the email field. When this user signs up, the same `onUserCreate` functions get called but this time it will not create a team but updates the user inside the team with the given ID. If the user exists on the team, the status will be updated to `active`.
 
-Not: Users can only be part of 1 team. They can't join multiple teams or be both team owner as a member of a different team.
+Note: Users can only be part of 1 team. They can't join multiple teams or be both team owner as a member of a different team.
+
+#### How to use
+
+When you want to scope newly created documents to a certain team, it's recommended to create sub-collections inside the team document. For example, a team member creates a "project", you could have the following structure: `/teams/{teamId}/projects`. This way, you can simply fetch all projects of a certain team with `db.collection("teams").doc("team-123").collection("projects").get()`. It's recommended to always save the userId on the project document as well, so you can list all project created by a single users like `db.collection("teams").doc("team-123").collection("projects").where("userId", "==", "user-123").get()`.
+
+You do not have to use sub-collections. A different way would be to save the team ID on the project document, so you can query for all projects with a given teamID. Just keep in mind that this will result in a lot more reads, especially when your application starts to grow. Since Firestore has a pay-for-what-you-use pricing model, it's recommended to think about how you structure your data so you have a little reads/writes as possible. If you do this well, you can start completely free or at least keep your bills very low. Check out this short video on [How to NOT get a 30K Firebase Bill](https://www.youtube.com/watch?v=Lb-Pnytoi-8).
+
+---
+
+## Environment variables
+
+Next.js comes with built-in support for environment variables, which allows you to use .env.local to load environment variables and expose environment variables to the browser.
+
+Steps to set up your environment variables:
+
+- Duplicate the `.env.local.example` file and rename it to `.env.local`
+- Enter your own project values to the variables
+
+Note: When you deploy your application, you first need to set your production environment variables. When deploying on [Vercel](https://vercel.com/) you can configure secrets in the [Environment Variables](https://vercel.com/docs/build-step#environment-variables) section of the project in the Vercel dashboard.
+
+For Firebase functions you need to add your secrets like API keys with the Firebase CLI. For example:
+`firebase functions:config:set stripe.secret="mysecretkey"`
+
+You could create an `runtimeconfig.json` file inside your functions folder to use environment variables inside the emulators when developing locally. You can take a look at the example file at `functions/runtimeconfig.example.json`.
+
+---
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import) from the creators of Next.js. Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details. Make sure you set up your production environment variables. You can configure secrets in the [Environment Variables](https://vercel.com/docs/build-step#environment-variables) section of the project in the Vercel dashboard.
 
 ---
 
@@ -262,11 +279,3 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
----
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import) from the creators of Next.js.
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
