@@ -1,6 +1,6 @@
 # Serverless SaaS Boilerplate
 
-This project is started with the [Serverless SaaS Boilerplate](https://serverlesssaas.com/), a starter-kit that is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project is started with the [Serverless SaaS Boilerplate](https://serverlesssaas.com/), a React starter-kit that is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
