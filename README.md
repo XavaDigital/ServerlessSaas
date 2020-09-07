@@ -142,17 +142,20 @@ You can see and manage the rules inside the `firestore.rules` file at the root o
 When you make changes to the `firestore.rules`, make sure you deploy them by running `firebase deploy --only firestore:rules`.
 You can also access your rules from the Firebase console. Select your project, then navigate to Cloud Firestore and click Rules once you're in the correct database.
 
-### Emulators
-
 ### Deploy
 
 To deploy your Functions or Rules simply run `firebase deploy`. You could also specify what you want to deploy, like `firebase deploy --only functions`.
 
 ## Environment variables
 
-Steps to set up your environment variables
+Next.js comes with built-in support for environment variables, which allows you to use .env.local to load environment variables and expose environment variables to the browser.
 
-- `.env.local`
+Steps to set up your environment variables:
+
+- Duplicate the `.env.local.example` file and rename it to `.env.local`
+- Enter your own project values to the variables
+
+Note: When you deploy your application, you first need to set your production environment variables. When deploying on [Vercel](https://vercel.com/) you can configure secrets in the [Environment Variables](https://vercel.com/docs/build-step#environment-variables) section of the project in the Vercel dashboard.
 
 For Firebase functions you need to add your secrets like API keys with the Firebase CLI. For example:
 `firebase functions:config:set stripe.secret="mysecretkey"`
@@ -252,7 +255,19 @@ When a new team is created, another Cloud Function runs to update the team owner
 
 Team owners can invite new members to their team. Invites are send by calling the Cloud Function `sendTeamInviteEmail` from `pages/account/team`. If you have set up Postmark, then this will send out a email with an invite link. This link will contain the following query params: `teamId=<TEAM_ID>&email=<INVITED_EMAIL>`. When the invited user goes to that page we fetch the Team name and pre-fill the email field. When this user signs up, the same `onUserCreate` functions get called but this time it will not create a team but updates the user inside the team with the given ID. If the user exists on the team, the status will be updated to `active`.
 
-Not: Users can only be part of 1 team. They can't join multiple teams or be both team owner as a member of a different team.
+Note: Users can only be part of 1 team. They can't join multiple teams or be both team owner as a member of a different team.
+
+#### How to use
+
+When you want to scope newly created documents to a certain team, it's recommended to create sub-collections inside the team document. For example, a team member creates a "project", you could have the following structure: `/teams/{teamId}/projects`. This way, you can simply fetch all projects of a certain team with `db.collection("teams").doc("team-123").collection("projects").get()`. It's recommended to always save the userId on the project document as well, so you can list all project created by a single users like `db.collection("teams").doc("team-123").collection("projects").where("userId", "==", "user-123").get()`.
+
+You do not have to use sub-collections. A different way would be to save the team ID on the project document, so you can query for all projects with a given teamID. Just keep in mind that this will result in a lot more reads, especially when your application starts to grow. Since Firestore has a pay-for-what-you-use pricing model, it's recommended to think about how you structure your data so you have a little reads/writes as possible. If you do this well, you can start completely free or at least keep your bills very low. Check out this short video on [How to NOT get a 30K Firebase Bill](https://www.youtube.com/watch?v=Lb-Pnytoi-8).
+
+---
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import) from the creators of Next.js. Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details. Make sure you set up your production environment variables. You can configure secrets in the [Environment Variables](https://vercel.com/docs/build-step#environment-variables) section of the project in the Vercel dashboard.
 
 ---
 
@@ -262,11 +277,3 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
----
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import) from the creators of Next.js.
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
