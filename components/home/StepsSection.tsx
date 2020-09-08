@@ -99,11 +99,11 @@ const StepsSection: React.FC<Props> = ({ image, steps }) => {
                       <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
                     )}
                   </div>
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-royal-blue-500 inline-flex items-center justify-center text-white relative z-10">
                     {renderIcon(i)}
                   </div>
                   <div className="flex-grow pl-4">
-                    <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                    <h2 className="font-bold title-font text-sm text-gray-900 mb-1 tracking-wider">
                       {step.name}
                     </h2>
                     <p className="leading-relaxed">{step.description}</p>
@@ -116,6 +116,7 @@ const StepsSection: React.FC<Props> = ({ image, steps }) => {
             className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12"
             src={image}
             alt="step"
+            loading="lazy"
           />
         </div>
       </div>

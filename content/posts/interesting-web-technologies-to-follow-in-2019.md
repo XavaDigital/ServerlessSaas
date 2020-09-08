@@ -11,7 +11,7 @@ description: >-
   suitable for your web application? Let’s discuss six interesting technologies
   for web development.
 category: article
-image: img/foto-sushi-6anudmpilw4-unsplash.jpg
+image: img/xps-ezyq1hol5_8-unsplash.jpg
 tags:
   - react
   - vue

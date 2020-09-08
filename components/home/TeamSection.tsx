@@ -14,7 +14,7 @@ const TeamSection: React.FC<Props> = ({ title, description, team }) => {
     <section className="text-gray-700 body-font" id="team">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
-          <h1 className="text-2xl font-medium title-font mb-4 text-gray-900 tracking-widest">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold title-font mb-4 text-gray-900">
             {title}
           </h1>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
@@ -30,6 +30,7 @@ const TeamSection: React.FC<Props> = ({ title, description, team }) => {
                     alt="team"
                     className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
                     src={team.image}
+                    loading="lazy"
                   />
                   <div className="flex-grow sm:pl-8">
                     <h2 className="title-font font-medium text-lg text-gray-900">

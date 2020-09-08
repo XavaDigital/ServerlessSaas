@@ -31,6 +31,8 @@ Netlify CMS is an open-source git-based content management library. Content is s
 
 You can now start the project with `yarn dev` or `npm run dev` and navigate to `http://localhost:3000/admin`. You can now login with Github and manage the content of the landing page of blog posts with a nice UI. When you make a change you can hit the "Publish" button, this will result in making a commit to your repository with the changes made to the corresponding markdown file.
 
+Note: Before you deploy your application, don't forget to update the `SEO` component with your meta tags.
+
 #### Test
 
 You can use the `test-repo` backend to try out Netlify CMS without connecting to a Git repo. With this backend, you can write and publish content normally, but any changes will disappear when you reload the page.

@@ -8,10 +8,9 @@ description: >-
   On Friday, April 13th, I attended the biggest React conference in the world:
   React Amsterdam. Together with 1200 frontend and full-stack developers from
   across the globe, we gathered in the tech heart of Europe for an event with
-  over 25 speakers. Let me tell you five things I learned on a day filled with
-  great talks, lots of coffee, and of course some beers.
+  over 25 speakers.
 category: article
-image: img/harps-joseph-tavpde7fxgy-unsplash.jpg
+image: img/scott-graham-5fNmWej4tAA-unsplash.jpg
 tags:
   - react
   - events

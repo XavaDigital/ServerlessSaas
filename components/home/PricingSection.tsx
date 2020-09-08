@@ -16,7 +16,7 @@ const PricingSection: React.FC<Props> = ({ title, description, plans }) => {
     <section className="text-gray-700 body-font" id="pricing">
       <div className="md:max-w-5xl lg:max-w-6xl px-5 py-24 mx-auto">
         <div className="text-center mb-20">
-          <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">
+          <h1 className="lg:text-4xl sm:text-3xl text-2xl font-bold title-font text-gray-900 mb-4">
             {title}
           </h1>
           <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">

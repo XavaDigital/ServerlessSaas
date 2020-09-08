@@ -22,7 +22,7 @@
     "firebase-admin": "^8.12.1",
     "firebase-functions": "^3.7.0",
     "netlify-cms-app": "^2.12.16",
-    "next": "^9.5.2",
+    "next": "^9.5.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-dropzone": "^11.0.1",

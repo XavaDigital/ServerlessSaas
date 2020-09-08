@@ -4,7 +4,7 @@ import FeatureSection from 'components/home/FeatureSection';
 import StepsSection from 'components/home/StepsSection';
 import TeamSection from 'components/home/TeamSection';
 import PricingSection from 'components/home/PricingSection';
-import BlogSection from 'components/home/BlogSections';
+import BlogSection from 'components/home/BlogSection';
 
 const HomePreview: ComponentType<any> = ({ entry, widgetsFor }) => {
   const features = [];

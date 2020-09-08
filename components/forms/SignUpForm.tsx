@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import { useAuth } from 'hooks/useAuth';
 import Button from 'components/elements/Button';
-import { useTeam } from 'hooks/useTeam';
 
 export interface SignUpData {
   name: string;
@@ -23,30 +22,29 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
       password: '',
     },
   });
-  const auth = useAuth();
-  const { team } = useTeam();
-  const router = useRouter();
+  const { user, signUp } = useAuth();
+  const { push } = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const onSubmit = (data: SignUpData): void => {
     setIsLoading(true);
     setError(null);
-    auth
-      .signUp(data, teamId)
-      .then((response: { error?: { massage: string } }) => {
-        setIsLoading(false);
-        if (response?.error) {
-          setError(response.error);
-        }
-      });
+    signUp(data, teamId).then((response: { error?: { massage: string } }) => {
+      setIsLoading(false);
+      if (response?.error) {
+        setError(response.error);
+      } else {
+        push(`/dashboard`);
+      }
+    });
   };
 
   useEffect(() => {
-    if (team?.id) {
-      router.push(`/dashboard`);
+    if (user) {
+      push('/dashboard');
     }
-  }, [team]);
+  }, [user]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

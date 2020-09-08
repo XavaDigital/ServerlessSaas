@@ -10,7 +10,7 @@ description: >-
   simple tutorial on how to implement code-splitting by routes and by components
   in React using React Loadable.
 category: tutorials
-image: img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
+image: img/headway-jfR5wu2hMI0-unsplash.jpg
 tags:
   - react
   - code-splitting

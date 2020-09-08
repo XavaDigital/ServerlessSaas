@@ -31,7 +31,7 @@ const SignUpPage: React.FC<{
               </p>
             )}
           </div>
-          <div className="mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <div className="mt-8 bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10">
             <SignUpForm teamId={teamId} email={email} />
           </div>
         </div>

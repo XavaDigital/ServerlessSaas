@@ -1,8 +1,8 @@
 import { NextPage, GetStaticProps } from 'next';
-import Head from 'next/head';
 
+import SEO from 'components/home/SEO';
 import HeroSection from 'components/home/HeroSection';
-import BlogSection from 'components/home/BlogSections';
+import BlogSection from 'components/home/BlogSection';
 import Layout from 'components/home/Layout';
 import FeatureSection from 'components/home/FeatureSection';
 import StepsSection from 'components/home/StepsSection';
@@ -18,9 +18,7 @@ const HomePage: NextPage<Props> = ({ content }) => {
 
   return (
     <>
-      <Head>
-        <title>Serverless SaaS</title>
-      </Head>
+      <SEO />
       <Layout>
         <HeroSection
           title={attributes.hero_title}

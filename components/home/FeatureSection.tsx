@@ -63,14 +63,14 @@ const FeatureSection: React.FC<Props> = ({ title, description, features }) => {
     <section className="text-gray-700 body-font" id="features">
       <div className="container px-5 py-24 mx-auto">
         <div className="text-center mb-20">
-          <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold title-font text-gray-900 mb-4">
             {title}
           </h1>
           <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
             {description}
           </p>
           <div className="flex mt-6 justify-center">
-            <div className="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
+            <div className="w-16 h-1 rounded-full bg-royal-blue-500 inline-flex"></div>
           </div>
         </div>
         <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
@@ -80,7 +80,7 @@ const FeatureSection: React.FC<Props> = ({ title, description, features }) => {
                 className="p-4 md:w-1/3 md:mb-0 mb-6 flex flex-col text-center items-center"
                 key={i}
               >
-                <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0">
+                <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-royal-blue-100 text-royal-blue-500 mb-5 flex-shrink-0">
                   {renderIcon(i)}
                 </div>
                 <div className="flex-grow">
@@ -96,7 +96,7 @@ const FeatureSection: React.FC<Props> = ({ title, description, features }) => {
           })}
         </div>
         <Link href="/signup">
-          <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+          <button className="flex mx-auto mt-16 text-white bg-royal-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-royal-blue-600 rounded text-lg">
             Start Free
           </button>
         </Link>
