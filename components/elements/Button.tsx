@@ -18,7 +18,7 @@ const Button = ({
       {...buttonProps}
     >
       {isLoading ? (
-        <Spinner width="20" fill="white" className="spinner" />
+        <Spinner width="20" fill="white" className="animate-spin" />
       ) : (
         title
       )}

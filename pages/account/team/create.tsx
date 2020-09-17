@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import Layout from 'components/dashboard/Layout';
-import Button from 'components/elements/Button';
 import AccountMenu from 'components/dashboard/AccountMenu';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 import { useState } from 'react';
