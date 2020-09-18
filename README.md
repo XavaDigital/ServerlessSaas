@@ -200,6 +200,8 @@ This project includes the following Cloud Functions that trigger an email:
 - `sendTeamInviteEmail` - This is a callable function and will be called from the `invite/index.ts` page.
 - `onTeamMemberCreate` - This function is automatically called whenever a new user signs up and gets added to a team. It sends out an email to the owner of the team to inform. (TODO)
 
+Note: Make sure you replace `http://localhost:3000` with your own domain inside the `sendWelcomeEmail` function before you deploy to production.
+
 #### Get started
 
 To get started you need to do the following:
