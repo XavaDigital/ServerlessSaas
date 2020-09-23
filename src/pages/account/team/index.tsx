@@ -157,7 +157,7 @@ const Team: React.FC = () => {
                       <p>{`Team ID: ${team.id}`}</p>
                       <p>{`Team Slug: ${team.slug}`}</p>
                       <p>{`Team Member Count: ${team.users.length}`}</p>
-                      <p>{`Invite link: http://localhost:3000/signup?teamId=${team.id}`}</p>
+                      <p>{`Invite link: https://demo.serverless.page/signup?teamId=${team.id}`}</p>
                     </div>
                   </div>
                   <div className="border-t border-gray-200 pt-5">

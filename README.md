@@ -48,6 +48,8 @@ backend: {
 },
 ```
 
+Note: When you deploy your app NOT to Netlify, you need to run your own authentication server to use GitHub authentication for NetlifyCMS. This is already implemented for your with some Cloud Functions (see `/functions/oauth/`), but you still need to follow the steps described [here](#Deploy-on-Vercel) before you deploy to production.
+
 ## Firebase
 
 Firebase helps you build apps fast, without managing infrastructure. It is built on Google infrastructure and scales automatically, for even the largest apps. It also starts completely free, and when you start to grow you will only pay for what you use.
@@ -271,9 +273,46 @@ You could create an `runtimeconfig.json` file inside your functions folder to us
 
 ---
 
-## Deploy on Vercel
+## Deployment
+
+When you are ready to deploy your application to production make sure you search for `https://demo.serverless.page/` inside the project and replace it with your own base URL (if you haven't done so already). You could choose to host your application on services like Firebase Hosting, Netlify, Vercel, Render etc. Below you can read some more instructions on which steps to take when you deploy your app.
+
+### Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import) from the creators of Next.js. Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details. Make sure you set up your production environment variables. You can configure secrets in the [Environment Variables](https://vercel.com/docs/build-step#environment-variables) section of the project in the Vercel dashboard.
+
+One important thing to consider when deploying to Vercel is that you need to run your own authentication server to use GitHub authentication for NetlifyCMS. To do this follow these steps:
+
+#### Create an OAuth app
+
+In GitHub, go to your account Settings, and click Oauth Applications under Developer Settings (or use [this shortcut](https://github.com/settings/developers)).
+Select "Register a new application" and fill in your app information. -
+You can read more about that in the [documentation](https://www.netlifycms.org/docs/backends-overview/#github-backend) or simply follow [this tutorial](https://docs.netlify.com/visitor-access/oauth-provider-tokens/#setup-and-settings) to set this up. On localhost you won't find any problems, but when you deploy your application (and not hsot it on Netlify) you will get a "No Auth Provider Found" message. The authorization callback URL will need to be configured once you have the Firebase Function URL in order for the service to work.
+
+#### Configure the Firebase environment
+
+Set the `oauth.client_id` and `oauth.client_secret` Firebase environment variables using the values from the GitHub OAuth app:
+
+`firebase functions:config:set oauth.client_id=yourclientid oauth.client_secret=yourclientsecret`
+
+For GitHub Enterprise and GitLab you will need to set the `oauth.git_hostname` environment variable.
+
+For GitLab you will also need to set the following additional environment variables as specified:
+
+```
+oauth.provider=gitlab
+oauth.scopes=api
+oauth.authorize_path=/oauth/authorize
+oauth.token_path=/oauth/token
+```
+
+### Deploy on Netlify
+
+Before deploying your application to Netlify you have to use the [next-on-netlify](https://github.com/netlify/next-on-netlify) NPM package, a utility for hosting NextJS applications with Server-Side Rendering on Netlify. It wraps your NextJS application in a tiny compatibility layer, so that pages can be server-side rendered with Netlify functions. You can follow [these steps](https://www.netlify.com/blog/2020/06/10/2-ways-to-create-server-rendered-routes-using-next.js-and-netlify/) or just check out the README of [next-on-netlify](https://github.com/netlify/next-on-netlify).
+
+### Deploy to Firebase Hosting
+
+If you want to keep everything in one place, you may want to host you application on [Firebase](https://firebase.google.com/docs/hosting) as well. [This tutorial](https://medium.com/wesionary-team/deploying-next-js-application-on-firebase-platform-using-cloud-function-with-firebase-hosting-920157f03267) explains you all the steps you need to take to make that happen.
 
 ---
 

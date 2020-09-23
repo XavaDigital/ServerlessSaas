@@ -2,6 +2,10 @@
   "client": {
     "host": "http://localhost:3000"
   },
+  "oauth": {
+    "client_id": "client_id",
+    "client_secret": "client_secret"
+  },
   "postmark": {
     "api_key": "api_key",
     "welcome_template_id": "template_id",
