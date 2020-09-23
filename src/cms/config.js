@@ -10,8 +10,8 @@ export default {
   },
   media_folder: 'public/img',
   public_folder: 'img',
-  logo_url: 'https://serverless.page/img/logo-cms.jpg',
-  site_url: 'https://serverless.page',
+  logo_url: 'https://demo.serverless.page/img/logo-cms.jpg',
+  site_url: 'https://demo.serverless.page',
   collections: [
     {
       name: 'pages',
