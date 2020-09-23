@@ -10,6 +10,8 @@ export default {
   },
   media_folder: 'public/img',
   public_folder: 'img',
+  logo_url: 'https://serverless.page/img/logo-cms.jpg',
+  site_url: 'https://serverless.page',
   collections: [
     {
       name: 'pages',
@@ -18,7 +20,7 @@ export default {
         {
           label: 'Home',
           name: 'home',
-          file: 'content/pages/home.md',
+          file: 'src/content/pages/home.md',
           fields: [
             {
               label: 'Hero Title',
@@ -180,7 +182,7 @@ export default {
     {
       name: 'posts',
       label: 'Posts',
-      folder: 'content/posts',
+      folder: 'src/content/posts',
       create: true,
       slug: '{{slug}}',
       preview_path: 'posts/{{fields.slug}}',

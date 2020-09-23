@@ -47,7 +47,7 @@ export const oauthAuthorize = functions.https.onRequest(
   async (_, response): Promise<any> => {
     const authorizationUri = oauth2.authorizationCode.authorizeURL({
       redirect_uri: oauth.redirect_url,
-      scope: oauth.scopes || 'repo,user',
+      scope: oauth.scopes || 'repo',
       state: randomstring.generate(32),
     });
 
