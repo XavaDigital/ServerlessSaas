@@ -5,12 +5,13 @@ import AccountMenu from 'components/dashboard/AccountMenu';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 import Link from 'next/link';
 import Button from 'components/elements/Button';
-import { useEffect, useState } from 'react';
-import { getTeam, updateTeam } from 'services/team';
+import { useState } from 'react';
+import { updateTeam } from 'services/team';
 import { useForm } from 'react-hook-form';
 import { functions, db } from 'config/firebase';
 import ConfirmModal from 'components/dashboard/ConfirmModal';
 import { useTeam } from 'hooks/useTeam';
+import Spinner from 'components/icons/Spinner';
 
 const breadCrumbs = {
   back: {
@@ -116,36 +117,10 @@ const Team: React.FC = () => {
             <AccountMenu />
           </div>
           <main className="hidden sm:block w-2/3 mx-auto">
-            {false && (
-              <div className="mt-10 pt-5 px-4 py-5 sm:p-6 bg-white overflow-hidden shadow rounded-lg">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Create your team
-                </h3>
-                <div className="mt-2 sm:flex sm:items-start sm:justify-between">
-                  <div className="text-sm leading-5 text-gray-500">
-                    <p>
-                      {`If you like to invite users to your organization, start by creating a Team. After you have created a team you can send invites.`}
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-8 border-t border-gray-200 pt-5">
-                  <div className="flex justify-end">
-                    <span className="rounded-md shadow-sm">
-                      {user.teamId ? (
-                        <Link href="/account/team/invite">
-                          <Button title="Invite a member" />
-                        </Link>
-                      ) : (
-                        <Link href="/account/team/create">
-                          <Button title="Create a Team" />
-                        </Link>
-                      )}
-                    </span>
-                  </div>
-                </div>
-              </div>
+            {!team && (
+              <Spinner width="30" className="animate-spin mt-6 m-auto" />
             )}
-            {user.teamId && team && (
+            {team && (
               <div>
                 <div className="mt-10 pt-5 px-4 py-5 sm:p-6 bg-white overflow-hidden shadow rounded-lg">
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -164,10 +139,9 @@ const Team: React.FC = () => {
                     <div className="flex justify-end">
                       <span className="rounded-md shadow-sm">
                         <Link href="/account/team/edit">
-                          <Button
-                            title="Edit"
-                            onClick={() => setFormOpen(true)}
-                          />
+                          <a href="">
+                            <Button title="Edit" />
+                          </a>
                         </Link>
                       </span>
                     </div>

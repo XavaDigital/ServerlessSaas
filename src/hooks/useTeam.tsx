@@ -7,35 +7,35 @@ import {
 } from 'react';
 import { auth, db } from 'config/firebase';
 import * as teamService from 'services/team';
-import * as userService from 'services/user';
 
 const authContext = createContext({ team: {} });
 const { Provider } = authContext;
 
-// TeamProvider is a Context Provider that wraps our app and makes an auth object
+// TeamProvider is a Context Provider that wraps our app and makes an team object
 // available to any child component that calls the useTeam() hook.
 export function TeamProvider(props: { children: ReactNode }): JSX.Element {
   const team = useTeamProvider();
   return <Provider value={team}>{props.children}</Provider>;
 }
 
-// useTeam is a hook that enables any component to subscribe to auth state
+// useTeam is a hook that enables any component to subscribe to team state
 export const useTeam: any = () => {
   return useContext(authContext);
 };
 
-// Provider hook that creates auth object and handles state
+// Provider hook that creates team object and handles state
 const useTeamProvider = () => {
   const [team, setTeam] = useState(null);
 
-  /// We need to get the team data from the Firestore db
+  /// We need to get the team data from the db
   const handleAuthStateChanged = async (user: firebase.User) => {
-    if (user) {
+    if (user?.uid && !team) {
       db.collection('users')
         .doc(user.uid)
         .onSnapshot(async (doc) => {
-          if (doc.data()?.teamId) {
-            const team = await teamService.getTeam(doc.data()?.teamId);
+          const teamId = doc.data()?.teamId;
+          if (teamId) {
+            const team = await teamService.getTeam(teamId);
             setTeam(team);
           }
         });
@@ -55,7 +55,11 @@ const useTeamProvider = () => {
     if (team?.id) {
       db.collection('teams')
         .doc(team.id)
-        .onSnapshot((doc) => setTeam(doc.data()));
+        .onSnapshot((doc) => {
+          if (doc.exists) {
+            setTeam(doc.data());
+          }
+        });
     }
   }, [team?.id]);
 

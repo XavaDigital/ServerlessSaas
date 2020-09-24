@@ -50,6 +50,8 @@ backend: {
 
 Note: When you deploy your app NOT to Netlify, you need to run your own authentication server to use GitHub authentication for NetlifyCMS. This is already implemented for your with some Cloud Functions (see `/functions/oauth/`), but you still need to follow the steps described [here](#Deploy-on-Vercel) before you deploy to production.
 
+Note: It's recommended to connect your git repo with Vercel (or Netlify) for automatic deployments on each push to the project. When you hit the "publish" button inside the CMS, a commit will be made to your repo that includes the changes you made to the page. With automatic deployments activated this means, a deployment will be triggered after you publish any changes. After this deployment, your changes will be live.
+
 ## Firebase
 
 Firebase helps you build apps fast, without managing infrastructure. It is built on Google infrastructure and scales automatically, for even the largest apps. It also starts completely free, and when you start to grow you will only pay for what you use.
