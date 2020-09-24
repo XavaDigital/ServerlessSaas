@@ -23,9 +23,7 @@ const createCheckoutSession = async (
       },
     ],
     mode: 'subscription',
-    success_url: `${
-      functions.config().client.host
-    }/account/billing/success?session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `https://demo.serverless.page/account/billing/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${functions.config().client.host}/account/billing/cancel`,
   });
 

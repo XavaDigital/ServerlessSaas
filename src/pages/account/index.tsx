@@ -7,6 +7,7 @@ import AccountMenu from 'components/dashboard/AccountMenu';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 import { getPlan } from 'utils/getPlan';
 import { useState, useEffect } from 'react';
+import PlanPill from 'components/dashboard/PlanPill';
 
 const breadCrumbs = {
   back: {
@@ -100,7 +101,7 @@ const Account: React.FC = () => {
                     Plan
                   </dt>
                   <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    {plan}
+                    <PlanPill />
                   </dd>
                 </div>
                 <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">

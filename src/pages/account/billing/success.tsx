@@ -55,7 +55,7 @@ const Upgrade: React.FC = () => {
                 <div className="flex justify-end">
                   <span className="rounded-md shadow-sm">
                     <Link href="/account/billing">
-                      <Button title="Cancel" />
+                      <Button title="Back" />
                     </Link>
                   </span>
                 </div>

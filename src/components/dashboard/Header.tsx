@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Transition from 'components/shared/Transition';
 import { useAuth } from 'hooks/useAuth';
 import { useOnClickOutside } from 'hooks/useClickOutside';
-import { parentPort } from 'worker_threads';
+import PlanPill from './PlanPill';
 
 export const DashboardHeader: React.FC = () => {
   const router = useRouter();
@@ -63,33 +63,35 @@ export const DashboardHeader: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden md:flex flex-row items-center">
+              <div>
+                <PlanPill />
+              </div>
               <div className="ml-4 flex items-center md:ml-6">
                 <div className="ml-3 relative" ref={dropdownNode}>
-                  <div>
-                    <button
-                      onClick={() => setDropdownOpen(!dropdownOpen)}
-                      className="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
-                    >
-                      <span className="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-200">
-                        {auth.user?.avatarUrl ? (
-                          <img
-                            className="h-full w-full object-cover rounded"
-                            src={auth.user.avatarUrl}
-                            alt={auth.user.name}
-                          />
-                        ) : (
-                          <svg
-                            className="h-full w-full text-gray-700"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                          </svg>
-                        )}
-                      </span>
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
+                  >
+                    <span className="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-200">
+                      {auth.user?.avatarUrl ? (
+                        <img
+                          className="h-full w-full object-cover rounded"
+                          src={auth.user.avatarUrl}
+                          alt={auth.user.name}
+                        />
+                      ) : (
+                        <svg
+                          className="h-full w-full text-gray-700"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                      )}
+                    </span>
+                  </button>
+
                   <Transition
                     show={dropdownOpen}
                     enter="transition ease-out duration-100 transform"

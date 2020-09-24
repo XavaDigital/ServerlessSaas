@@ -180,6 +180,8 @@ Start doing this by following these steps:
 
 Note: make sure you are on the Blaze plan of Firebase, otherwise you cannot connect to an external API (like Stripe).
 
+Note: For testing you can use credit card number `4242 4242 4242 4242`. Read more about testing with Stripe [here](https://stripe.com/docs/testing).
+
 Note: If you want to start a project locally with the Cloud Functions Emulator, make sure they have access to your environment variables by creating a .runtimeconfig.json. There is an example file inside the project that you can copy and add your variables to. Or if you have already added your variables to firebase you can extract them with this command: `firebase functions:config:get > .runtimeconfig.json`.
 
 Note: Because we use TypeScript, we need to rebuild and run the emulators every time we make a change to our functions. This sucks a little, but luckily it's pretty fast.
