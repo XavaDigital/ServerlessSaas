@@ -7,8 +7,9 @@ hero_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 hero_image: img/serverless-saas.jpg
 hero_button_label: Sign up
 feature_title: Our amazing features
-feature_description: Blue bottle crucifix vinyl post-ironic fourd dollar toast
-  vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh pug.
+feature_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+  minim veniam, quis nostrud exercitation ullamco.
 features:
   - description: >+
       Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy.
@@ -56,22 +57,22 @@ steps_image: img/nesa-by-makers-IgUR1iX0mqM-unsplash.jpg
 pricing_title: Simple Pricing
 pricing_description: Start free. Upgrade whenever you want.
 plans:
-  - description: Try for free or just pay wh
+  - description: Try out for free
     name: Free Plan
-    price: '0'
+    price: "0"
     usps:
       - Fingerstache disrupt
       - Franzen hashtag
-  - description: 'For the hobbyist '
+  - description: "For the hobbyist "
     name: Starter Plan
-    price: '29'
+    price: "29"
     usps:
       - All features included in Free Plan
       - Tilde art party
       - Banh mi cornhole
   - description: For the Pros
     name: Pro Plan
-    price: '49'
+    price: "49"
     usps:
       - All features included in Hobby Plan
       - Waistcoat squid hexagon
@@ -89,32 +90,28 @@ team:
   - name: Holden Jones
     photo: /img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
     position: Vue Developer
-    description:
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
     image: img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
   - name: Alper Kamuu
     photo: /img/foto-sushi-6anudmpilw4-unsplash.jpg
     position: UX Designer
-    description:
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
     image: img/foto-sushi-6anudmpilw4-unsplash.jpg
   - name: Atticus Finch
     photo: /img/kal-visuals-b1hg7qi-zcc-unsplash.jpg
     position: UI Developer
-    description:
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
     image: img/harps-joseph-tavpde7fxgy-unsplash.jpg
   - name: Henry Letham
     photo: /img/harps-joseph-tavpde7fxgy-unsplash.jpg
     position: Designer
-    description:
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
     image: img/kal-visuals-b1hg7qi-zcc-unsplash.jpg
