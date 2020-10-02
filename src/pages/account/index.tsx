@@ -135,7 +135,9 @@ const Account: React.FC = () => {
                 <div className="flex justify-end">
                   <span className="rounded-md shadow-sm">
                     <Link href="/account/edit">
-                      <Button title="Edit" />
+                      <a href="">
+                        <Button title="Edit" />
+                      </a>
                     </Link>
                   </span>
                 </div>

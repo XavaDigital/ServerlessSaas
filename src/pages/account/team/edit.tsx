@@ -43,8 +43,6 @@ const EditTeamPage: React.FC = () => {
     },
   });
 
-  console.log(team);
-
   const onSubmit = (data: { name: string }) => {
     setIsLoading(true);
     setError(null);

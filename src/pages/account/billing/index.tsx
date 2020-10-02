@@ -25,8 +25,6 @@ const Billing: React.FC = () => {
   const auth = useRequireAuth();
   if (!auth.user) return null;
 
-  console.log(auth.user);
-
   return (
     <Layout>
       <div className="max-w-6xl py-10 max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">

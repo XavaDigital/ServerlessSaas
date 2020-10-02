@@ -11,27 +11,28 @@ import { useRequireAuth } from 'hooks/useRequireAuth';
 import Button from 'components/elements/Button';
 import AccountMenu from 'components/dashboard/AccountMenu';
 
-// const breadCrumbs = {
-//   back: {
-//     path: '/account',
-//     text: 'Back',
-//   },
-//   first: {
-//     path: '/account',
-//     text: 'Account',
-//   },
-//   second: {
-//     path: '/account/edit',
-//     text: 'Edit',
-//   },
-// };
+const breadCrumbs = {
+  back: {
+    path: '/account',
+    text: 'Back',
+  },
+  first: {
+    path: '/account',
+    text: 'Account',
+  },
+  second: {
+    path: '/account/edit',
+    text: 'Edit',
+  },
+};
 
-const Editaccount: React.FC = () => {
+const EditAccount: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [progress, setProgress] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
 
+  const router = useRouter();
   const auth = useRequireAuth();
   if (!auth.user) return null;
 
@@ -52,8 +53,6 @@ const Editaccount: React.FC = () => {
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-
-  const router = useRouter();
 
   const handleUpload = (image) => {
     const uploadTask = storage.ref(`avatars/${image.name}`).put(image);
@@ -83,17 +82,17 @@ const Editaccount: React.FC = () => {
     );
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (values) => {
     setIsLoading(true);
     setError(null);
 
-    const user = { ...data };
+    const data = { ...values };
     if (avatarUrl) {
-      user.avatarUrl = avatarUrl;
+      data.avatarUrl = avatarUrl;
     }
 
     auth
-      .updateUser({ id: auth.user.uid, user })
+      .updateUser({ id: auth.user.uid, data })
       .then((response: { error?: { massage: string } }) => {
         setIsLoading(false);
         response?.error ? setError(response.error) : router.push('/account');
@@ -104,7 +103,7 @@ const Editaccount: React.FC = () => {
     <Layout>
       <div className="container py-10 max-w-6xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
         <header className="pb-4 sm:py-6">
-          {/* {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />} */}
+          {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
           <div className="mt-2 md:flex md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
               <h2 className="text-2xl font-bold leading-7 text-gray-800 sm:text-3xl sm:leading-9 sm:truncate">
@@ -169,14 +168,8 @@ const Editaccount: React.FC = () => {
                         Email address
                       </label>
                       <div className="mt-1 sm:mt-0 sm:col-span-2">
-                        <div className="max-w-xs rounded-md shadow-sm">
-                          <input
-                            id="email"
-                            type="email"
-                            disabled
-                            value={auth.user.email}
-                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                          />
+                        <div className="max-w-xs mt-1 text-sm leading-5 text-gray-900 ">
+                          {auth.user.email}
                         </div>
                       </div>
                     </div>
@@ -278,4 +271,4 @@ const Editaccount: React.FC = () => {
   );
 };
 
-export default Editaccount;
+export default EditAccount;

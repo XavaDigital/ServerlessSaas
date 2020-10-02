@@ -38,10 +38,10 @@ const useAuthProvider = () => {
     }
   };
 
-  const updateUser = async ({ id, user }) => {
+  const updateUser = async ({ id, data }) => {
     try {
-      await db.collection('users').doc(id).update(user);
-      setUser(user);
+      await db.collection('users').doc(id).update(data);
+      setUser({ ...user, ...data });
     } catch (error) {
       return { error };
     }
@@ -101,7 +101,7 @@ const useAuthProvider = () => {
       .get()
       .then(function (doc) {
         if (doc.exists) {
-          setUser({ ...doc.data(), ...user });
+          setUser({ ...user, ...doc.data() });
         } else {
           console.log('No such document!');
         }
