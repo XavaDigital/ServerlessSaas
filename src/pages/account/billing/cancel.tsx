@@ -25,14 +25,14 @@ const breadCrumbs = {
   },
 };
 
-const Success: React.FC = () => {
+const Cancel: React.FC = () => {
   const auth = useRequireAuth();
   if (!auth.user) return null;
 
   return (
     <Layout>
       <div className="max-w-6xl py-10 max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-        <header className="pb-4 sm:py-4 sm:py-6">
+        <header className="pb-4 sm:py-6">
           {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
           <div className="mt-2 md:flex md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
@@ -48,8 +48,8 @@ const Success: React.FC = () => {
           </div>
           <main className="hidden sm:block w-2/3 mx-auto bg-white overflow-hidden shadow rounded-lg">
             <div className="mt-5 pt-5 px-4 py-5 sm:p-6">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                You successfully upgraded your plan!
+              <h3 className="leading-6 font-medium text-gray-900">
+                You did not successfully upgraded your plan. Please try again.
               </h3>
               <div className="mt-8 border-t border-gray-200 pt-5">
                 <div className="flex justify-end">
@@ -68,4 +68,4 @@ const Success: React.FC = () => {
   );
 };
 
-export default Success;
+export default Cancel;

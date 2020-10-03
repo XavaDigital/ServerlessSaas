@@ -24,7 +24,7 @@ const createCheckoutSession = async (
     ],
     mode: 'subscription',
     success_url: `https://demo.serverless.page/account/billing/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${functions.config().client.host}/account/billing/cancel`,
+    cancel_url: `https://demo.serverless.page/account/billing/cancel?session_id={CHECKOUT_SESSION_ID}`,
   });
 
   return session;

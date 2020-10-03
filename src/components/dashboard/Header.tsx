@@ -52,7 +52,7 @@ export const DashboardHeader: React.FC = () => {
                   <Link href="/account">
                     <a
                       className={
-                        router.pathname.includes('/account')
+                        router.pathname?.includes('/account')
                           ? 'px-3 py-2 rounded text-sm font-medium text-gray-900 bg-gray-200 focus:outline-none focus:text-gray-600 focus:bg-gray-100'
                           : 'px-3 py-2 rounded text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-200 focus:outline-none focus:bg-gray-100'
                       }
@@ -184,7 +184,7 @@ export const DashboardHeader: React.FC = () => {
               <a
                 href="#"
                 className={
-                  router.pathname.includes('dashboard')
+                  router.pathname?.includes('dashboard')
                     ? 'block px-3 py-2 rounded text-base font-medium text-gray-900 bg-gray-200 focus:outline-none focus:text-white focus:bg-gray-100'
                     : 'block px-3 py-2 rounded text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-200 focus:outline-none focus:text-white focus:bg-gray-100'
                 }
@@ -196,7 +196,7 @@ export const DashboardHeader: React.FC = () => {
               <a
                 href="#"
                 className={
-                  router.pathname.includes('account')
+                  router.pathname?.includes('account')
                     ? 'mt-1 block px-3 py-2 rounded text-base font-medium text-gray-900 bg-gray-200 focus:outline-none focus:text-white focus:bg-gray-100'
                     : 'mt-1 block px-3 py-2 rounded text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-200 focus:outline-none focus:text-white focus:bg-gray-100'
                 }
