@@ -10,7 +10,7 @@ const createBillingSession = async (
 ): Promise<Stripe.BillingPortal.Session> => {
   const session = await stripe.billingPortal.sessions.create({
     customer,
-    return_url: `${functions.config().client.host}/account/billing`,
+    return_url: `https://demo.serverless.page/account/billing`,
   });
 
   return session;
