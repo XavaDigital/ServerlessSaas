@@ -1,7 +1,5 @@
 import { useState } from 'react';
-
 import { functions } from 'config/firebase';
-import Spinner from 'components/icons/Spinner';
 
 const BillingButton: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,11 +19,7 @@ const BillingButton: React.FC = () => {
   return (
     <button className="rounded-md shadow" onClick={() => redirectToBilling()}>
       <a className="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-        {isLoading ? (
-          <Spinner width="20" fill="white" className="spinner" />
-        ) : (
-          'Go to billing portal'
-        )}
+        {isLoading ? 'Loading...' : 'Go to billing portal'}
       </a>
     </button>
   );
