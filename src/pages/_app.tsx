@@ -1,10 +1,10 @@
 import { AppProps } from 'next/app';
 
-import '../css/index.css';
-import { AuthProvider } from '../hooks/useAuth';
+import { AuthProvider } from 'hooks/useAuth';
 import { TeamProvider } from 'hooks/useTeam';
+import 'css/tailwind.css';
 
-export default function App({ Component, pageProps }: AppProps): any {
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <AuthProvider>
       <TeamProvider>

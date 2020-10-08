@@ -110,7 +110,7 @@ const useAuthProvider = () => {
 
   /// We need to get the user data from the Firestore db
   const handleAuthStateChanged = (user: firebase.User) => {
-    if (user) {
+    if (user?.uid) {
       getUserAdditionalData(user);
     }
   };

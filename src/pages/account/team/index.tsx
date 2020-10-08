@@ -190,7 +190,9 @@ const Team: React.FC = () => {
                                 </button>
                               ) : (
                                 <span className="mr-3 inline-flex justify-center w-full px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 sm:text-sm sm:leading-5">
-                                  Active
+                                  {member.status == 'active'
+                                    ? 'Active'
+                                    : 'Invited'}
                                 </span>
                               )}
                               {member.role !== 'owner' && user.isTeamOwner && (
