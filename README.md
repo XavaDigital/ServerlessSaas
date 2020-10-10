@@ -4,7 +4,7 @@ This project is started with the [Serverless SaaS Boilerplate](https://serverles
 
 ## Get Started
 
-You can run `npm install && npm run dev` to start the project, but to be able to use all features included in this project you need to set a couple of things up before you can use them:
+You can run remove the `.example` part of the `.env.local.example` file and run `npm install && npm run dev` to start the project. To be able to use all features included in this project you need to set a couple of things up before you can use them. Please follow the instructions for each subject in order for it to work (order does not matter):
 
 1. Setup NetlifyCMS. [Instructions](#Netlify-CMS).
 2. Setup a Firebase project, with Cloud Firestore and Cloud Functions. [Instructions](#Firebase).
