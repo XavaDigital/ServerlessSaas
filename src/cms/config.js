@@ -23,6 +23,15 @@ export default {
           file: 'src/content/pages/home.md',
           fields: [
             {
+              label: 'Hero Version',
+              name: 'hero_version',
+              widget: 'number',
+              default: 1,
+              value_type: 'int',
+              min: 1,
+              max: 3,
+            },
+            {
               label: 'Hero Title',
               name: 'hero_title',
               widget: 'string',
