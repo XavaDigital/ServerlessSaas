@@ -310,6 +310,10 @@ oauth.authorize_path=/oauth/authorize
 oauth.token_path=/oauth/token
 ```
 
+#### Deploy the Cloud Functions
+
+Uncomment the line in `functions/index.ts` that imports the oauth functions and run `firebase deploy --only functions`.
+
 ### Deploy on Netlify
 
 Before deploying your application to Netlify you have to use the [next-on-netlify](https://github.com/netlify/next-on-netlify) NPM package, a utility for hosting NextJS applications with Server-Side Rendering on Netlify. It wraps your NextJS application in a tiny compatibility layer so that pages can be server-side rendered with Netlify functions. You can follow [these steps](https://www.netlify.com/blog/2020/06/10/2-ways-to-create-server-rendered-routes-using-next.js-and-netlify/) or just check out the README of [next-on-netlify](https://github.com/netlify/next-on-netlify).
