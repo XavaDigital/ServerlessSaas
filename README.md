@@ -312,7 +312,7 @@ oauth.token_path=/oauth/token
 
 #### Deploy the Cloud Functions
 
-Uncomment the line in `functions/index.ts` that imports the oauth functions and run `firebase deploy --only functions`.
+Uncomment the line in `functions/index.ts` that imports the oauth functions and run `yarn deploy:functions`.
 
 ### Deploy on Netlify
 
