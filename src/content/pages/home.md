@@ -6,7 +6,6 @@ hero_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
   minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
   commodo consequat.
 hero_image: img/serverless-saas.jpg
-hero_button_label: Sign up
 feature_title: Our amazing features
 feature_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

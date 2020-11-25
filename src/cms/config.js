@@ -23,7 +23,7 @@ export default {
           file: 'src/content/pages/home.md',
           fields: [
             {
-              label: 'Hero Version',
+              label: 'Hero Section Version',
               name: 'hero_version',
               widget: 'number',
               default: 1,
@@ -47,9 +47,13 @@ export default {
               widget: 'image',
             },
             {
-              label: 'Hero Button Label',
-              name: 'hero_button_label',
-              widget: 'string',
+              label: 'Feature Section Version',
+              name: 'feature_version',
+              widget: 'number',
+              default: 1,
+              value_type: 'int',
+              min: 1,
+              max: 3,
             },
             {
               label: 'Feature Title',

@@ -60,6 +60,7 @@ const HomePreview: ComponentType<any> = ({ entry, widgetsFor }) => {
         title={entry.getIn(['data', 'feature_title'])}
         description={entry.getIn(['data', 'feature_description'])}
         features={features}
+        version={entry.getIn(['data', 'feature_version'])}
       />
       <StepsSection
         image={entry.getIn(['data', 'steps_image'])}

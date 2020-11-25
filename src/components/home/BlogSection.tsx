@@ -23,15 +23,15 @@ const BlogSection: React.FC<{
   return (
     <section className="text-gray-700 body-font">
       <div className="container px-5 py-24 mx-auto">
-        <div className="text-center w-full mb-20">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold title-font mb-4 text-gray-900">
+        <div className="w-full mb-20 text-center">
+          <h1 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl title-font">
             {title}
           </h1>
-          <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
+          <p className="mx-auto text-base leading-relaxed lg:w-2/3">
             {description}
           </p>
         </div>
-        <div className="flex flex-wrap -m-4 mt-4">
+        <div className="flex flex-wrap mt-4 -m-4">
           {posts?.map((post, i) => {
             return (
               <div className="p-4 md:w-1/3" key={i}>
