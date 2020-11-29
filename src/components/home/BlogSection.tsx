@@ -2,10 +2,11 @@ import BlogCard from 'components/home/BlogCard';
 import { useEffect, useState } from 'react';
 
 const BlogSection: React.FC<{
+  version: number;
   title: string;
   description: string;
   slugs: string[];
-}> = ({ title, description, slugs }) => {
+}> = ({ title, description, slugs, version }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const BlogSection: React.FC<{
           {posts?.map((post, i) => {
             return (
               <div className="p-4 md:w-1/3" key={i}>
-                <BlogCard post={post} />
+                <BlogCard post={post} version={version} />
               </div>
             );
           })}
