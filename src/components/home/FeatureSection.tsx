@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { getIcon } from 'utils/getIcon';
 
 interface Props {
@@ -157,11 +156,9 @@ const FeatureSection: React.FC<Props> = ({
             );
           })}
         </div>
-        <Link href="/signup">
-          <button className="flex px-8 py-2 mx-auto mt-16 text-lg text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
-            Start Free
-          </button>
-        </Link>
+        <button className="flex px-8 py-2 mx-auto mt-16 text-lg text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
+          Start Free
+        </button>
       </div>
     </section>
   );
