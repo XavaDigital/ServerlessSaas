@@ -1,6 +1,6 @@
 ---
 hero_version: 1
-hero_title: Break the world and make it nice
+hero_title: Build a SaaS faster than ever
 hero_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
   do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
   minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
