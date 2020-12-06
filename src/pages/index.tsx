@@ -28,22 +28,29 @@ const HomePage: NextPage<Props> = ({ content }) => {
           image={attributes.hero_image}
         />
         <FeatureSection
+          version={attributes.feature_version}
           title={attributes.feature_title}
           description={attributes.feature_description}
           features={attributes.features}
         />
-        <StepsSection steps={attributes.steps} image={attributes.steps_image} />
+        <StepsSection
+          version={attributes.steps_version}
+          steps={attributes.steps}
+          image={attributes.steps_image}
+        />
         <PricingSection
           title={attributes.pricing_title}
           description={attributes.pricing_description}
           plans={attributes.plans}
         />
         <TeamSection
+          version={attributes.team_version}
           title={attributes.team_title}
           description={attributes.team_description}
           team={attributes.team}
         />
         <BlogSection
+          version={attributes.blog_version}
           title={attributes.blog_title}
           description={attributes.blog_description}
           slugs={attributes.posts}

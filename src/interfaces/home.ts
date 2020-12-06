@@ -23,23 +23,23 @@ export interface HomeAttributes {
   posts: string[];
 }
 
-interface Feature {
+export interface Feature {
   name: string;
   description: string;
 }
-interface Step {
+export interface Step {
   name: string;
   description: string;
 }
 
-interface Plan {
+export interface Plan {
   name: string;
   description: string;
   price: string;
   usps: { name: string }[];
 }
 
-interface Team {
+export interface Team {
   name: string;
   description: string;
   position: string;

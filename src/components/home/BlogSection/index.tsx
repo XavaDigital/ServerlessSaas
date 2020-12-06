@@ -1,5 +1,7 @@
-import BlogCard from 'components/home/BlogCard';
 import { useEffect, useState } from 'react';
+import Posts1 from './Posts1';
+import Posts2 from './Posts2';
+import Posts3 from './Posts3';
 
 const BlogSection: React.FC<{
   version: number;
@@ -12,7 +14,7 @@ const BlogSection: React.FC<{
   useEffect(() => {
     const getPosts = async () => {
       const postsPromises = await slugs.map(async (slug) => {
-        return import(`../../content/posts/${slug}.md`);
+        return import(`../../../content/posts/${slug}.md`);
       });
 
       Promise.all(postsPromises).then(setPosts);
@@ -20,6 +22,16 @@ const BlogSection: React.FC<{
 
     getPosts();
   }, [slugs]);
+
+  // List of different component versions. You can easily switch between versions from the CMS.
+  const components = {
+    1: Posts1,
+    2: Posts2,
+    3: Posts3,
+  };
+
+  // Use the version prop to determine which component to render. Fallback to 1.
+  const BlogPostList = components[version] || components[1];
 
   return (
     <section className="text-gray-700 body-font">
@@ -32,15 +44,7 @@ const BlogSection: React.FC<{
             {description}
           </p>
         </div>
-        <div className="flex flex-wrap mt-4 -m-4">
-          {posts?.map((post, i) => {
-            return (
-              <div className="p-4 md:w-1/3" key={i}>
-                <BlogCard post={post} version={version} />
-              </div>
-            );
-          })}
-        </div>
+        <BlogPostList posts={posts} />
       </div>
     </section>
   );
