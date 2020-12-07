@@ -25,13 +25,13 @@ const BreadCrumbs: React.FC<Props> = ({ breadCrumbs }) => {
   return (
     <>
       <nav className="sm:hidden">
-        <Link href={breadCrumbs.back.path} as={breadCrumbs.back.path}>
+        <Link href={breadCrumbs.back.path}>
           <a
             href=""
-            className="flex items-center text-sm leading-5 font-medium text-gray-600 hover:text-gray-500 focus:outline-none focus:underline transition duration-150 ease-in-out"
+            className="flex items-center text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out hover:text-gray-500 focus:outline-none focus:underline"
           >
             <svg
-              className="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-500"
+              className="flex-shrink-0 w-5 h-5 mr-1 -ml-1 text-gray-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -45,11 +45,11 @@ const BreadCrumbs: React.FC<Props> = ({ breadCrumbs }) => {
           </a>
         </Link>
       </nav>
-      <nav className="hidden sm:flex items-center text-sm leading-5 font-medium">
-        <Link href={breadCrumbs.first.path} as={breadCrumbs.first.path}>
+      <nav className="items-center hidden text-sm font-medium leading-5 sm:flex">
+        <Link href={breadCrumbs.first.path}>
           <a
             href=""
-            className="text-gray-600 hover:text-gray-500 focus:outline-none focus:underline transition duration-150 ease-in-out"
+            className="text-gray-600 transition duration-150 ease-in-out hover:text-gray-500 focus:outline-none focus:underline"
           >
             {breadCrumbs.first.text}
           </a>
@@ -57,7 +57,7 @@ const BreadCrumbs: React.FC<Props> = ({ breadCrumbs }) => {
         {breadCrumbs.second && (
           <>
             <svg
-              className="flex-shrink-0 mx-2 h-5 w-5 text-gray-500"
+              className="flex-shrink-0 w-5 h-5 mx-2 text-gray-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -67,10 +67,10 @@ const BreadCrumbs: React.FC<Props> = ({ breadCrumbs }) => {
                 clipRule="evenodd"
               />
             </svg>
-            <Link href={breadCrumbs.second.path} as={breadCrumbs.second.path}>
+            <Link href={breadCrumbs.second.path}>
               <a
                 href=""
-                className="text-gray-600 hover:text-gray-500 focus:outline-none focus:underline transition duration-150 ease-in-out"
+                className="text-gray-600 transition duration-150 ease-in-out hover:text-gray-500 focus:outline-none focus:underline"
               >
                 {breadCrumbs.second.text}
               </a>
@@ -78,7 +78,7 @@ const BreadCrumbs: React.FC<Props> = ({ breadCrumbs }) => {
             {breadCrumbs.third && (
               <>
                 <svg
-                  className="flex-shrink-0 mx-2 h-5 w-5 text-gray-500"
+                  className="flex-shrink-0 w-5 h-5 mx-2 text-gray-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -88,10 +88,10 @@ const BreadCrumbs: React.FC<Props> = ({ breadCrumbs }) => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <Link href={breadCrumbs.third.path} as={breadCrumbs.third.path}>
+                <Link href={breadCrumbs.third.path}>
                   <a
                     href=""
-                    className="text-gray-600 hover:text-gray-500 focus:outline-none focus:underline transition duration-150 ease-in-out"
+                    className="text-gray-600 transition duration-150 ease-in-out hover:text-gray-500 focus:outline-none focus:underline"
                   >
                     {breadCrumbs.third.text}
                   </a>
