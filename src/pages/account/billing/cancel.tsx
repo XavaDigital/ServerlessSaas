@@ -31,7 +31,7 @@ const Cancel: React.FC = () => {
 
   return (
     <Layout>
-      <div className="max-w-6xl py-10 max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+      <div className="px-4 py-10 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <header className="pb-4 sm:py-6">
           {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
           <div className="mt-2 md:flex md:items-center md:justify-between">
@@ -46,12 +46,12 @@ const Cancel: React.FC = () => {
           <div className="w-full sm:w-1/3 sm:pr-16">
             <AccountMenu />
           </div>
-          <main className="hidden sm:block w-2/3 mx-auto bg-white overflow-hidden shadow rounded-lg">
-            <div className="mt-5 pt-5 px-4 py-5 sm:p-6">
-              <h3 className="leading-6 font-medium text-gray-900">
+          <main className="hidden w-2/3 mx-auto overflow-hidden bg-white rounded-lg shadow sm:block">
+            <div className="px-4 py-5 pt-5 mt-5 sm:p-6">
+              <h3 className="font-medium leading-6 text-gray-900">
                 You did not successfully upgraded your plan. Please try again.
               </h3>
-              <div className="mt-8 border-t border-gray-200 pt-5">
+              <div className="pt-5 mt-8 border-t border-gray-200">
                 <div className="flex justify-end">
                   <span className="rounded-md shadow-sm">
                     <Link href="/account/billing">

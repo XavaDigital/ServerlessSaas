@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 
+import { useToast } from 'hooks/useToast';
 import { useAuth } from 'hooks/useAuth';
 import Button from 'components/elements/Button';
 
@@ -22,8 +23,9 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
       password: '',
     },
   });
-  const { user, signUp } = useAuth();
   const { push } = useRouter();
+  const { addToast } = useToast();
+  const { user, signUp } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -36,6 +38,12 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
         setError(response.error);
       } else {
         push(`/dashboard`);
+        addToast({
+          title: 'Welcome!👋',
+          description:
+            'You have successfully registered. Please confirm your email.',
+          type: 'success',
+        });
       }
     });
   };
@@ -49,7 +57,7 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {error?.message && (
-        <div className="mb-4 text-red-500 text-center border-dashed border border-red-600 p-2 rounded">
+        <div className="p-2 mb-4 text-center text-red-500 border border-red-600 border-dashed rounded">
           <span>{error.message}</span>
         </div>
       )}
@@ -62,7 +70,7 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
         </label>
         <input
           id="name"
-          className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm"
+          className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
           type="text"
           name="name"
           ref={register({
@@ -117,7 +125,7 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
         <div className="mt-1 rounded-md">
           <input
             id="password"
-            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm"
+            className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
             type="password"
             name="password"
             ref={register({
