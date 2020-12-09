@@ -35,12 +35,12 @@ export const ToastProvider = ({ children }) => {
         removeToast,
       }}
     >
-      {children}
       <div className="fixed top-0 right-0 w-full max-w-sm">
         {toasts.map((toast, i) => (
           <Toast toast={toast} key={i} />
         ))}
       </div>
+      {children}
     </ToastContext.Provider>
   );
 };
