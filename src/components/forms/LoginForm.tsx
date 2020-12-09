@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
+import { useToast } from 'hooks/useToast';
 import { useAuth } from 'hooks/useAuth';
 import Button from 'components/elements/Button';
 
@@ -13,8 +14,9 @@ interface LoginData {
 
 const LoginForm: React.FC = () => {
   const { register, errors, handleSubmit } = useForm();
-  const { user, signIn } = useAuth();
   const { push } = useRouter();
+  const { addToast } = useToast();
+  const { user, signIn } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -29,14 +31,23 @@ const LoginForm: React.FC = () => {
     setError(null);
     signIn(data).then((response: { error?: { massage: string } }) => {
       setIsLoading(false);
-      response?.error ? setError(response.error) : push('/dashboard');
+      if (response?.error) {
+        setError(response.error);
+      } else {
+        push('/dashboard');
+        addToast({
+          title: 'Welcome back!👋',
+          description: 'You are successfully signed in.',
+          type: 'success',
+        });
+      }
     });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {error?.message && (
-        <div className="mb-4 text-red-500 text-center border-dashed border border-red-600 p-2 rounded">
+        <div className="p-2 mb-4 text-center text-red-500 border border-red-600 border-dashed rounded">
           <span>{error.message}</span>
         </div>
       )}
@@ -50,7 +61,7 @@ const LoginForm: React.FC = () => {
         <div className="mt-1 rounded-md">
           <input
             id="email"
-            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm"
+            className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
             type="email"
             name="email"
             ref={register({
@@ -78,7 +89,7 @@ const LoginForm: React.FC = () => {
         <div className="mt-1 rounded-md">
           <input
             id="password"
-            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm"
+            className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
             type="password"
             name="password"
             ref={register({
@@ -97,12 +108,12 @@ const LoginForm: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-4 flex items-end">
+      <div className="flex items-end mt-4">
         <div className="text-sm leading-5">
           <Link href="/reset-password">
             <a
               href="#"
-              className="font-medium text-royal-blue-600 hover:text-royal-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+              className="font-medium transition duration-150 ease-in-out text-royal-blue-600 hover:text-royal-blue-500 focus:outline-none focus:underline"
             >
               Forgot your password?
             </a>

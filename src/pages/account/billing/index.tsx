@@ -27,8 +27,8 @@ const Billing: React.FC = () => {
 
   return (
     <Layout>
-      <div className="max-w-6xl py-10 max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-        <header className="pb-4 sm:py-6 pl-3 border-b-2 border-gray-300 mb-6">
+      <div className="px-4 py-10 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <header className="pb-4 pl-3 mb-6 border-b-2 border-gray-300 sm:py-6">
           {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
           <div className="mt-2 md:flex md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
@@ -42,20 +42,20 @@ const Billing: React.FC = () => {
           <div className="w-full sm:w-1/3 sm:pr-16">
             <AccountMenu />
           </div>
-          <main className="hidden sm:block w-2/3 mx-auto">
+          <main className="hidden w-2/3 mx-auto sm:block">
             {!auth.user?.isPro && !auth.user?.isHobby && (
-              <div className="grid gap-4 grid-cols-2">
+              <div className="grid grid-cols-2 gap-4">
                 <PricingCard plan={HOBBY_PLAN} />
                 <PricingCard plan={PRO_PLAN} />
               </div>
             )}
             {(auth.user.isPro || auth.user.isHobby) && (
               <div>
-                <div className="rounded-md bg-green-100 p-4">
+                <div className="p-4 bg-green-100 rounded-md">
                   <div className="flex">
                     <div className="flex-shrink-0">
                       <svg
-                        className="h-5 w-5 text-green-400"
+                        className="w-5 h-5 text-green-400"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -67,7 +67,7 @@ const Billing: React.FC = () => {
                       </svg>
                     </div>
                     <div className="ml-3">
-                      <h3 className="text-sm leading-5 font-medium text-green-800">
+                      <h3 className="text-sm font-medium leading-5 text-green-800">
                         Your
                         <span className="font-bold">
                           {auth.user.isPro ? ' Pro ' : ' Hobby '}
@@ -85,8 +85,8 @@ const Billing: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="mt-10 pt-5 px-4 py-5 sm:p-6 bg-white overflow-hidden shadow rounded-lg">
-                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                <div className="px-4 py-5 pt-5 mt-10 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
                     Manage your subscription
                   </h3>
                   <div className="mt-2 sm:flex sm:items-start sm:justify-between">
@@ -99,7 +99,7 @@ const Billing: React.FC = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="mt-8 border-t border-gray-200 pt-5">
+                  <div className="pt-5 mt-8 border-t border-gray-200">
                     <div className="flex justify-end">
                       <StripeBillingButton />
                     </div>
