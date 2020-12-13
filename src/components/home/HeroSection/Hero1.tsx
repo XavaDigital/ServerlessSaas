@@ -24,7 +24,7 @@ const Hero1: React.FC<Props> = ({ title, description, image }): JSX.Element => {
         </div>
         <div className="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
           <img
-            className="object-cover object-center rounded"
+            className="object-cover object-center rounded-lg"
             alt="hero"
             src={image}
             loading="lazy"
