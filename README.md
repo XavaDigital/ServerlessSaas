@@ -1,17 +1,21 @@
 # Serverless SaaS Boilerplate
 
-This project is started with the [Serverless SaaS Boilerplate](https://serverlesssaas.com/), a React starter-kit that is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project is started with the [Serverless SaaS Boilerplate](https://serverless.page/), a React starter-kit that is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+For the most up-to-date documentation go to: [https://serverless-saas.sidepage.co](serverless-saas.sidepage.co)
 
 ## Get Started
 
-You can run remove the `.example` part of the `.env.local.example` file and run `npm install && npm run dev` to start the project. To be able to use all features included in this project you need to set a couple of things up before you can use them. Please follow the instructions for each subject in order for it to work (order does not matter):
+The first time you setup a new project you can run `npm run install:initial`. This will install all dependencies in both the root and /functions directory. It will also copy the the `.env.local.example` file and rename it to `env.local` (you still need to update this with your credentials later). After running this command (or doing the steps manually), you should be able to run `npm run dev` to start the server on [localhost:3000](http://localhost:3000).
 
-1. Setup NetlifyCMS. [Instructions](#Netlify-CMS).
-2. Setup a Firebase project, with Cloud Firestore and Cloud Functions. [Instructions](#Firebase).
+To be able to use all features included in this starter kit you need to set up a couple of things before you can use them. It might take you up to an hour to completely set up everything you need. Please follow the instructions for each subject in order for it to work (order does not matter):
+
+1. Set up NetlifyCMS. [Instructions](#Netlify-CMS).
+2. Set up a Firebase project, with Cloud Firestore and Cloud Functions. [Instructions](#Firebase).
 3. Create a Stripe account and set up your subscription product. [Instructions](#Payments-with-Stripe).
 4. Create a Postmark account and set up your email templates. [Instructions](#Emails-with-Postmark).
 
-When this is done, make sure you have run `npm install` or `yarn` both inside your project directory as your `/functions` folder. Then, run the development server:
+When all these steps are completed, make sure you have run `npm install` or `yarn` both inside your project directory as your `/functions` folder and run the development server:
 
 ```bash
 npm run dev
