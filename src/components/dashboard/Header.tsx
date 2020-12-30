@@ -34,8 +34,8 @@ export const DashboardHeader: React.FC = () => {
   };
 
   return (
-    <nav className="bg-white shadow">
-      <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
+    <nav className="bg-white shadow-md">
+      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="">
           <div className="flex items-center justify-between h-16 px-4 sm:px-0">
             <div className="flex items-center">

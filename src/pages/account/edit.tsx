@@ -126,7 +126,7 @@ const EditAccount: React.FC = () => {
           <div className="w-full sm:w-1/3 sm:pr-16">
             <AccountMenu />
           </div>
-          <main className="hidden w-2/3 px-5 py-6 mx-auto overflow-hidden bg-white rounded-lg shadow sm:block sm:px-6">
+          <main className="hidden w-2/3 px-5 py-6 mx-auto overflow-hidden bg-white rounded-lg shadow-lg sm:block sm:px-6">
             <form onSubmit={handleSubmit(onSubmit)}>
               {error?.message && (
                 <div className="p-2 mb-4 text-center text-red-500 border border-red-600 border-dashed rounded">

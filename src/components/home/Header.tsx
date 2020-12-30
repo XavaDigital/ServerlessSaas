@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Header = (): JSX.Element => {
   return (
-    <header className="text-gray-700 body-font">
+    <header className="m-auto text-gray-700 body-font max-w-7xl">
       <div className="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
         <Link href="/">
           <a className="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0">

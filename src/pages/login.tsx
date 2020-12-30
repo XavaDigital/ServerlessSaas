@@ -5,13 +5,13 @@ import Layout from 'components/home/Layout';
 const LoginPage: React.FC = () => {
   return (
     <Layout>
-      <div className="min-h-screen bg-gray-100 flex flex-col">
-        <div className="mt-8 mx-4 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="text-center mt-24">
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      <div className="flex flex-col min-h-screen bg-gray-50">
+        <div className="mx-4 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="mt-24 text-center">
+            <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
               Log in
             </h2>
-            <p className="mt-2 text-center text-md text-gray-600">
+            <p className="mt-2 text-center text-gray-600 text-md">
               {"Don't have an account? "}
               <Link href="/signup">
                 <a href="" className="text-royal-blue-500">
@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
               </Link>
             </p>
           </div>
-          <div className="mt-8 bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
+          <div className="px-4 py-8 mt-8 bg-white rounded-lg shadow-lg sm:px-10">
             <LoginForm />
           </div>
         </div>

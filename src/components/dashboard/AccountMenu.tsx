@@ -11,8 +11,8 @@ const AccountMenu: React.FC = () => {
           href="#"
           className={
             pathname === '/account'
-              ? 'group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
-              : 'group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
+              ? 'group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-200 focus:outline-none  focus:bg-gray-200 transition ease-in-out duration-150'
+              : 'group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:bg-gray-200 focus:outline-none  focus:bg-gray-200 transition ease-in-out duration-150'
           }
           aria-current="page"
         >
@@ -41,8 +41,8 @@ const AccountMenu: React.FC = () => {
           href=""
           className={
             pathname === '/account/team'
-              ? 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
-              : 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
+              ? 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-200 focus:outline-none  focus:bg-gray-200 transition ease-in-out duration-150'
+              : 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:bg-gray-200 focus:outline-none  focus:bg-gray-200 transition ease-in-out duration-150'
           }
         >
           <svg
@@ -70,8 +70,8 @@ const AccountMenu: React.FC = () => {
           href=""
           className={
             pathname === '/account/billing'
-              ? 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
-              : 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:bg-gray-300 focus:outline-none  focus:bg-gray-300 transition ease-in-out duration-150'
+              ? 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-200 focus:outline-none  focus:bg-gray-200 transition ease-in-out duration-150'
+              : 'mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:bg-gray-200 focus:outline-none  focus:bg-gray-200 transition ease-in-out duration-150'
           }
         >
           <svg
