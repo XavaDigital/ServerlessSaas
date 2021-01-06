@@ -2,7 +2,8 @@
 import * as admin from 'firebase-admin';
 admin.initializeApp();
 
-// Export Firestore database and add custom settings
+// Export Storage and Firestore database and add custom settings
+export const storage = admin.storage();
 export const db = admin.firestore();
 db.settings({ timestampsInSnapshots: true });
 
