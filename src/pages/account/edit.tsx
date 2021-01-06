@@ -10,6 +10,7 @@ import { useRequireAuth } from 'hooks/useRequireAuth';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 import Layout from 'components/dashboard/Layout';
 import AccountMenu from 'components/dashboard/AccountMenu';
+import ConfirmModal from 'components/dashboard/ConfirmModal';
 
 const breadCrumbs = {
   back: {
@@ -34,6 +35,7 @@ const EditAccount: React.FC = () => {
   const [error, setError] = useState(null);
   const [progress, setProgress] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   if (!auth.user) return null;
 
@@ -56,24 +58,23 @@ const EditAccount: React.FC = () => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const handleUpload = (image) => {
-    const uploadTask = storage.ref(`avatars/${image.name}`).put(image);
+    const uploadTask = storage
+      .ref(`users/${auth.user.uid}/${image.name}`)
+      .put(image);
     uploadTask.on(
       'state_changed',
       (snapshot) => {
-        // Progress
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
         setProgress(progress);
       },
       (error) => {
-        // Error
         console.log(error);
       },
       () => {
-        // Complete
         storage
-          .ref(`avatars`)
+          .ref(`users/${auth.user.uid}`)
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
@@ -109,9 +110,31 @@ const EditAccount: React.FC = () => {
       });
   };
 
+  const deleteAccount = () => {
+    setIsLoading(true);
+    setError(null);
+    auth
+      .deleteUser()
+      .then(function () {
+        addToast({
+          title: 'Account deleted',
+          description: 'You have successfully deleted your account',
+          type: 'success',
+        });
+        push('/');
+      })
+      .catch(function (error) {
+        setError(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setShowConfirmModal(false);
+      });
+  };
+
   return (
     <Layout>
-      <div className="container max-w-6xl px-4 py-10 pb-12 mx-auto sm:px-6 lg:px-8">
+      <div className="px-4 py-10 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <header className="pb-4 sm:py-6">
           {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
           <div className="mt-2 md:flex md:items-center md:justify-between">
@@ -252,31 +275,51 @@ const EditAccount: React.FC = () => {
                 </div>
               </div>
               <div className="pt-5 mt-8 border-t border-gray-200">
-                <div className="flex justify-end">
-                  <span className="inline-flex rounded-md shadow-sm">
-                    <Link href="/account">
+                <div className="flex justify-between">
+                  <button
+                    type="button"
+                    className="px-4 py-2 text-sm font-medium leading-5 text-gray-700 text-red-500 transition duration-150 ease-in-out border border-red-500 rounded-md hover:text-red-600 focus:outline-none focus:border-red-300 focus:shadow-outline-blue active:bg-red-50 active:text-red-800"
+                    onClick={() => setShowConfirmModal(true)}
+                  >
+                    Delete account
+                  </button>
+                  <div className="flex justify-end">
+                    <span className="inline-flex rounded-md shadow-sm">
+                      <Link href="/account">
+                        <button
+                          type="button"
+                          className="px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800"
+                        >
+                          Cancel
+                        </button>
+                      </Link>
+                    </span>
+                    <span className="inline-flex ml-3 rounded-md shadow-sm">
                       <button
-                        type="button"
-                        className="px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800"
+                        type="submit"
+                        className="inline-flex justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-royal-blue-600 hover:bg-royal-blue-500 focus:outline-none focus:border-royal-blue-700 focus:shadow-outline-royal-blue active:bg-royal-blue-700"
                       >
-                        Cancel
+                        {isLoading ? 'Loading...' : 'Save'}
                       </button>
-                    </Link>
-                  </span>
-                  <span className="inline-flex ml-3 rounded-md shadow-sm">
-                    <button
-                      type="submit"
-                      className="inline-flex justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-royal-blue-600 hover:bg-royal-blue-500 focus:outline-none focus:border-royal-blue-700 focus:shadow-outline-royal-blue active:bg-royal-blue-700"
-                    >
-                      {isLoading ? 'Loading...' : 'Save'}
-                    </button>
-                  </span>
+                    </span>
+                  </div>
                 </div>
               </div>
             </form>
           </main>
         </div>
       </div>
+      {showConfirmModal && (
+        <ConfirmModal
+          closeModal={() => setShowConfirmModal(false)}
+          title={'Are you sure?'}
+          text={
+            'Your account and any other related data will be permanently deleted. You can not undo this action.'
+          }
+          confirmText={isLoading ? 'Deleting...' : 'Delete account'}
+          confirmAction={() => deleteAccount()}
+        />
+      )}
     </Layout>
   );
 };

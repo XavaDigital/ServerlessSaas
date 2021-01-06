@@ -6,7 +6,6 @@ import {
   ReactNode,
 } from 'react';
 import { auth, db } from 'config/firebase';
-import { User } from 'interfaces/user';
 
 const authContext = createContext({ user: {} });
 const { Provider } = authContext;
@@ -42,6 +41,15 @@ const useAuthProvider = () => {
     try {
       await db.collection('users').doc(id).update(data);
       setUser({ ...user, ...data });
+    } catch (error) {
+      return { error };
+    }
+  };
+
+  const deleteUser = async () => {
+    try {
+      await auth.currentUser.delete();
+      setTimeout(() => setUser(false), 1000);
     } catch (error) {
       return { error };
     }
@@ -111,6 +119,7 @@ const useAuthProvider = () => {
   /// We need to get the user data from the Firestore db
   const handleAuthStateChanged = (user: firebase.User) => {
     if (user?.uid) {
+      setUser(user);
       getUserAdditionalData(user);
     }
   };
@@ -139,5 +148,6 @@ const useAuthProvider = () => {
     signOut,
     sendPasswordResetEmail,
     updateUser,
+    deleteUser,
   };
 };
