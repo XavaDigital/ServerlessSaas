@@ -25,6 +25,8 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+To be able login to the admin panel, follow [the instructions](#Admin-dashboard) of the Admin dashboard section.
+
 ## Netlify CMS
 
 Netlify CMS is an open-source git-based content management library. Content is stored in your Git repository alongside your code for easier versioning, multi-channel publishing, and the option to handle content updates directly in Git. It's like a UI for editing your markdown files that we use to show the landing page and the blog posts.
@@ -33,7 +35,7 @@ Netlify CMS is an open-source git-based content management library. Content is s
 - Open `cms/config.js` in this project and update `backend.repo` with your new repository name.
 - Push the code of this project to this new repo.
 
-You can now start the project with `yarn dev` or `npm run dev` and navigate to `http://localhost:3000/admin`. You can now login with Github and manage the content of the landing page of blog posts with a nice UI. When you make a change you can hit the "Publish" button, this will result in making a commit to your repository with the changes made to the corresponding markdown file.
+You can now start the project with `yarn dev` or `npm run dev`, navigate to `http://localhost:3000/admin`, and select the CMS button that brings you to `/admin/cms`. You can now login with Github and manage the content of the landing page of blog posts with a nice UI. When you make a change you can hit the "Publish" button, this will result in making a commit to your repository with the changes made to the corresponding markdown file.
 
 Note: Before you deploy your application, don't forget to update the `SEO` component with your meta tags.
 
@@ -260,6 +262,22 @@ Note: Users can only be part of 1 team. They can't join multiple teams or be bot
 When you want to scope newly created documents to a certain team, it's recommended to create sub-collections inside the team document. For example, a team member creates a "project", you could have the following structure: `/teams/{teamId}/projects`. This way, you can simply fetch all projects of a certain team with `db.collection("teams").doc("team-123").collection("projects").get()`. It's recommended to always save the userId on the project document as well, so you can list all project created by a single users like `db.collection("teams").doc("team-123").collection("projects").where("userId", "==", "user-123").get()`.
 
 You do not have to use sub-collections. A different way would be to save the team ID on the project document, so you can query for all projects with a given teamID. Just keep in mind that this will result in a lot more reads, especially when your application starts to grow. Since Firestore has a pay-for-what-you-use pricing model, it's recommended to think about how you structure your data so you have a little reads/writes as possible. If you do this well, you can start completely free or at least keep your bills very low. Check out this short video on [How to NOT get a 30K Firebase Bill](https://www.youtube.com/watch?v=Lb-Pnytoi-8).
+
+---
+
+## Admin dashboard
+
+When your app is in production and people start to use it, it's nice an admin panel where you can view and edit data of your project. The [Firebase console](https://console.firebase.google.com/) is a great start, but to give you a custom overview of the most important data in your app you might want to build an admin dashboard.
+
+This boilerplate comes with a simple admin dashboard that you can use to build upon. A page with a list of all your users in your database is included. This admin can be extended with any data that you would like to add.
+
+To be able to use the Admin dashboard follow these steps:
+
+- Make sure you have created an account in your app (start the development server, go to `/signup`, and create an account).
+- Login to your [Firebase console](https://console.firebase.google.com/) and navigate to "Cloud Firestore".
+- Select the user document that is associated with your personal account and update the `isAdmin` property to `true`.
+- Go back to your app, log out and login again, and then navigate to `/admin`.
+- You should now be able to select the admin button navigate to the admin dashboard at `/admin/dashboard`.
 
 ---
 
