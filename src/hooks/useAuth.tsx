@@ -1,9 +1,9 @@
 import {
-  useState,
-  useEffect,
-  useContext,
-  createContext,
   ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
 } from 'react';
 import { auth, db } from 'config/firebase';
 
@@ -66,6 +66,8 @@ const useAuthProvider = () => {
             email,
             name,
             teamId: teamId || '',
+            isAdmin: false,
+            createdAt: Date.now(),
           });
         });
     } catch (error) {
