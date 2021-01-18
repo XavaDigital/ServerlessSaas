@@ -260,8 +260,6 @@ const SidebarLayout: NextPage<Props> = ({ children }) => {
 
                 <a
                   href="https://dashboard.stripe.com/"
-                  target="_blank"
-                  rel="noreferrer"
                   className="flex items-center px-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group"
                 >
                   <svg
@@ -283,37 +281,39 @@ const SidebarLayout: NextPage<Props> = ({ children }) => {
                 </a>
               </nav>
             </div>
-            <div className="flex flex-shrink-0 p-4 border-t border-gray-200">
-              <div className="flex-shrink-0 block w-full group">
-                <div className="flex items-center">
-                  <div>
-                    {user?.avatarUrl ? (
-                      <img
-                        className="inline-block object-cover rounded-full h-9 w-9"
-                        src={user.avatarUrl}
-                        alt={user.name}
-                      />
-                    ) : (
-                      <svg
-                        className="inline-block text-gray-700 rounded-full h-9 w-9"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                      </svg>
-                    )}
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                      {user.name}
-                    </p>
-                    <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                      Admin
-                    </p>
+            <Link href="/account">
+              <div className="flex flex-shrink-0 p-4 border-t border-gray-200 cursor-pointer hover:border-gray-300">
+                <div className="flex-shrink-0 block w-full group">
+                  <div className="flex items-center">
+                    <div>
+                      {user?.avatarUrl ? (
+                        <img
+                          className="inline-block object-cover rounded-full h-9 w-9"
+                          src={user.avatarUrl}
+                          alt={user.name}
+                        />
+                      ) : (
+                        <svg
+                          className="inline-block text-gray-700 rounded-full h-9 w-9"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                      )}
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                        {user.name}
+                      </p>
+                      <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                        Admin
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

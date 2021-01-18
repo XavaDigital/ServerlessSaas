@@ -18,10 +18,10 @@ export const DashboardHeader: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [navbarOpen, setNavbarOpen] = useState(false);
 
-  if (!auth.user) return null;
-
   useOnClickOutside(dropdownNode, () => setDropdownOpen(false));
   useOnClickOutside(navbarNode, () => setNavbarOpen(false));
+
+  if (!auth.user) return null;
 
   const signOut = () => {
     auth.signOut().then(() =>
@@ -117,7 +117,7 @@ export const DashboardHeader: React.FC = () => {
                       <div className="py-1 bg-white rounded shadow-xs">
                         <Link href="/account">
                           <a
-                            href="#"
+                            href=""
                             className="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                           >
                             Account
@@ -139,6 +139,16 @@ export const DashboardHeader: React.FC = () => {
                             Billing
                           </a>
                         </Link>
+                        {auth.user?.isAdmin && (
+                          <Link href="/admin">
+                            <a
+                              href=""
+                              className="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                            >
+                              Admin
+                            </a>
+                          </Link>
+                        )}
                         <a
                           href="/"
                           className="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100"
