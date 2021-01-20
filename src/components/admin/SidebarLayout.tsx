@@ -132,28 +132,6 @@ const SidebarLayout: NextPage<Props> = ({ children }) => {
                       Users
                     </a>
                   </Link>
-
-                  <a
-                    href="/"
-                    className="flex items-center px-2 py-2 text-base font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group"
-                  >
-                    <svg
-                      className="w-6 h-6 mr-4 text-gray-400 group-hover:text-gray-500"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                      />
-                    </svg>
-                    Reports
-                  </a>
                 </nav>
               </div>
               <div className="flex flex-shrink-0 p-4 border-t border-gray-200">
@@ -257,28 +235,6 @@ const SidebarLayout: NextPage<Props> = ({ children }) => {
                     Users
                   </a>
                 </Link>
-
-                <a
-                  href="https://dashboard.stripe.com/"
-                  className="flex items-center px-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group"
-                >
-                  <svg
-                    className="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                    />
-                  </svg>
-                  Reports
-                </a>
               </nav>
             </div>
             <Link href="/account">
@@ -340,7 +296,7 @@ const SidebarLayout: NextPage<Props> = ({ children }) => {
             </svg>
           </button>
         </div>
-        <main className="relative z-0 flex-1 p-4 overflow-y-auto focus:outline-none sm:p-6 md:p-8">
+        <main className="relative z-0 flex-1 px-4 py-12 overflow-y-auto sm:px-6 md:px-8 sm:py-14">
           {children}
         </main>
       </div>

@@ -7,15 +7,13 @@ import { useRequireAdmin } from 'hooks/useRequireAdmin';
 const AdminDashboardPage: React.FC = () => {
   const { user } = useRequireAdmin();
 
-  if (!user) return <Spinner width="30" className="m-auto mt-6 animate-spin" />;
+  if (!user || !user.isAdmin)
+    return <Spinner width="30" className="m-auto mt-20 animate-spin" />;
 
   return (
     <SidebarLayout>
-      <main className="px-4 pb-8 mx-auto mt-8 sm:px-6 lg:px-8">
-        <h1 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">
-          Admin dashboard
-        </h1>
-        <section className="p-6 mb-10 bg-white rounded-lg shadow-lg">
+      <div className="max-w-5xl mx-auto">
+        <section className="p-6 mb-6 bg-white rounded-lg shadow-lg">
           <div className="sm:flex sm:items-center sm:justify-between">
             <div className="sm:flex sm:space-x-5">
               <div className="flex-shrink-0">
@@ -46,13 +44,10 @@ const AdminDashboardPage: React.FC = () => {
         </section>
 
         <section>
-          <h1 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">
-            Quick links
-          </h1>
           <div className="rounded-lg grid-col-1 sm:grid sm:grid-cols-2 sm:gap-2">
             <Link href="/admin/users">
               <a>
-                <div className="relative p-6 mr-2 bg-white rounded-lg shadow-lg group focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                <div className="relative p-6 mb-4 bg-white rounded-lg shadow-lg sm:mr-2 group focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
                   <div>
                     <span className="inline-flex p-3 text-indigo-700 rounded-lg bg-indigo-50 ring-4 ring-white">
                       <svg
@@ -81,7 +76,107 @@ const AdminDashboardPage: React.FC = () => {
                       Users
                     </h3>
                     <p className="mt-2 text-sm text-gray-500">
-                      Show a list of all your users in your system.
+                      Show a list of all your users in your database
+                    </p>
+                  </div>
+                  <span
+                    className="absolute text-gray-300 pointer-events-none top-6 right-6 group-hover:text-gray-400"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </Link>
+
+            <Link href="/dashboard">
+              <a>
+                <div className="relative p-6 mb-4 bg-white rounded-lg shadow-lg group focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                  <div>
+                    <span className="inline-flex p-3 text-purple-700 rounded-lg bg-purple-50 ring-4 ring-white">
+                      <svg
+                        className="w-6 h-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-medium">
+                      <span
+                        className="absolute inset-0"
+                        aria-hidden="true"
+                      ></span>
+                      App Dashboard
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-500">
+                      Go to the dashboard of your application
+                    </p>
+                  </div>
+                  <span
+                    className="absolute text-gray-300 pointer-events-none top-6 right-6 group-hover:text-gray-400"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </Link>
+
+            <Link href="/admin/cms">
+              <a>
+                <div className="relative p-6 mb-4 bg-white rounded-lg shadow-lg sm:mr-2 group focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                  <div>
+                    <span className="inline-flex p-3 text-blue-700 rounded-lg bg-blue-50 ring-4 ring-white">
+                      <svg
+                        className="w-6 h-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-medium">
+                      <span
+                        className="absolute inset-0"
+                        aria-hidden="true"
+                      ></span>
+                      CMS
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-500">
+                      Go to the CMS to manage the content of your landing page
                     </p>
                   </div>
                   <span
@@ -106,7 +201,7 @@ const AdminDashboardPage: React.FC = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <div className="relative p-6 ml-2 bg-white rounded-lg shadow-lg group focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+              <div className="relative p-6 mb-4 bg-white rounded-lg shadow-lg sm:ml-2 group focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
                 <div>
                   <span className="inline-flex p-3 text-green-700 rounded-lg bg-green-50 ring-4 ring-white">
                     <svg
@@ -115,13 +210,12 @@ const AdminDashboardPage: React.FC = () => {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                        strokeWidth={2}
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
                   </span>
@@ -132,10 +226,120 @@ const AdminDashboardPage: React.FC = () => {
                       className="absolute inset-0"
                       aria-hidden="true"
                     ></span>
-                    Reports
+                    Stripe Dashboard
                   </h3>
                   <p className="mt-2 text-sm text-gray-500">
-                    Go to your Stripe Dashboard.
+                    Go to your Stripe Dashboard and see your reports
+                  </p>
+                </div>
+                <span
+                  className="absolute text-gray-300 pointer-events-none top-6 right-6 group-hover:text-gray-400"
+                  aria-hidden="true"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <a
+              href="https://console.firebase.google.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div className="relative p-6 mb-4 bg-white rounded-lg shadow-lg sm:ml-2 group focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                <div>
+                  <span className="inline-flex p-3 text-yellow-700 rounded-lg bg-yellow-50 ring-4 ring-white">
+                    <svg
+                      className="w-6 h-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+                <div className="mt-4">
+                  <h3 className="text-lg font-medium">
+                    <span
+                      className="absolute inset-0"
+                      aria-hidden="true"
+                    ></span>
+                    Firebase console
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-500">
+                    Go to Firebase and manage your DB and Cloud Functions
+                  </p>
+                </div>
+                <span
+                  className="absolute text-gray-300 pointer-events-none top-6 right-6 group-hover:text-gray-400"
+                  aria-hidden="true"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <a
+              href="https://account.postmarkapp.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div className="relative p-6 mb-4 bg-white rounded-lg shadow-lg sm:ml-2 group focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                <div>
+                  <span className="inline-flex p-3 text-red-700 rounded-lg bg-red-50 ring-4 ring-white">
+                    <svg
+                      className="w-6 h-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+                <div className="mt-4">
+                  <h3 className="text-lg font-medium">
+                    <span
+                      className="absolute inset-0"
+                      aria-hidden="true"
+                    ></span>
+                    Postmark dashboard
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-500">
+                    Go to Postmark and manage your transactional emails
                   </p>
                 </div>
                 <span
@@ -155,7 +359,7 @@ const AdminDashboardPage: React.FC = () => {
             </a>
           </div>
         </section>
-      </main>
+      </div>
     </SidebarLayout>
   );
 };

@@ -43,18 +43,18 @@ const AdminUsersPage: React.FC = () => {
 
   return (
     <SidebarLayout>
-      <h1 className="px-8 pt-8 pb-4 text-xl font-bold text-gray-900 sm:text-2xl">
-        Users
-      </h1>
-
-      {isLoading && <Spinner width="30" className="m-auto mt-6 animate-spin" />}
-      {!isLoading && !users.length && (
-        <div className="pt-5">No users found.</div>
-      )}
-      <ul className="grid grid-cols-1 gap-6 px-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-        {!isLoading &&
-          users?.map((user) => <UserCard key={user.id} user={user} />)}
-      </ul>
+      <div className="max-w-5xl mx-auto">
+        {isLoading && (
+          <Spinner width="30" className="m-auto mt-6 animate-spin" />
+        )}
+        {!isLoading && !users.length && (
+          <div className="pt-5">No users found.</div>
+        )}
+        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {!isLoading &&
+            users?.map((user) => <UserCard key={user.id} user={user} />)}
+        </ul>
+      </div>
     </SidebarLayout>
   );
 };
