@@ -1,8 +1,10 @@
 import * as functions from 'firebase-functions';
-import Stripe from 'stripe';
+
 import { catchErrors, getUID } from '../helpers';
-import { stripe } from '../config';
+
+import Stripe from 'stripe';
 import { getCustomerId } from './customers';
+import { stripe } from '../config';
 
 interface Subscription {
   isPro: boolean;
@@ -28,7 +30,7 @@ interface Subscription {
  * @returns subscription
  */
 export const subscriptionStatus = (
-  subscription: Stripe.Subscription
+  subscription: Stripe.Subscription | any
 ): Subscription => {
   return {
     subscriptionActive: subscription.status === 'active',
