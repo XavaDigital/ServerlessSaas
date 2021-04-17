@@ -4,7 +4,7 @@ import { catchErrors, getUID } from '../helpers';
 
 import Stripe from 'stripe';
 import { getCustomerId } from './customers';
-import { stripe } from '../config';
+import { hobbyProductId, proProductId, stripe } from '../config';
 
 interface Subscription {
   isPro: boolean;
@@ -35,10 +35,10 @@ export const subscriptionStatus = (
   return {
     subscriptionActive: subscription.status === 'active',
     isPro:
-      subscription.plan?.product === 'prod_HZuU1aPAqyJI2D' &&
+      subscription.plan?.product === proProductId &&
       subscription.status === 'active',
     isHobby:
-      subscription.plan?.product === 'prod_HXISyTxcEgcoch' &&
+      subscription.plan?.product === hobbyProductId &&
       subscription.status === 'active',
     subscription: {
       cancelAtPeriodEnd: subscription.cancel_at_period_end,
