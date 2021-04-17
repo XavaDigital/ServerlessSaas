@@ -1,10 +1,8 @@
 import * as functions from 'firebase-functions';
-
-import { catchErrors, getUID } from '../helpers';
-
 import Stripe from 'stripe';
-import { getCustomerId } from './customers';
+import { catchErrors, getUID } from '../helpers';
 import { hobbyProductId, proProductId, stripe } from '../config';
+import { getCustomerId } from './customers';
 
 interface Subscription {
   isPro: boolean;
