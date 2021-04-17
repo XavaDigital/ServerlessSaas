@@ -20,7 +20,7 @@ export const proProductId = functions.config().stripe.pro_product_id;
 
 // Initialize Stripe
 import Stripe from 'stripe';
-export const stripe = new Stripe(stripeSecretKey, { apiVersion: '2020-03-02' });
+export const stripe = new Stripe(stripeSecretKey, { apiVersion: '2020-08-27' });
 
 // Postmark
 export const postMarkApiKey = functions.config().postmark.api_key;

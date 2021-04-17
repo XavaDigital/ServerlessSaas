@@ -19,7 +19,7 @@
     "postmark": "^2.7.0",
     "randomstring": "^1.1.5",
     "simple-oauth2": "3.4.0",
-    "stripe": "^8.67.0"
+    "stripe": "v8.144.0"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.1.6",
