@@ -5,7 +5,10 @@ const Posts2: React.FC<{
     <div className="flex flex-wrap mt-4">
       {posts?.map((post, i) => {
         return (
-          <div className="flex flex-wrap py-8 md:flex-no-wrap">
+          <div
+            className="flex flex-wrap py-8 md:flex-no-wrap"
+            key={`post-${i}`}
+          >
             <div className="flex flex-col flex-shrink-0 mb-6 md:w-64 md:mb-0">
               <span className="font-medium tracking-widest text-gray-900 title-font">
                 {post.attributes.category}

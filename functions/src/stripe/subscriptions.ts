@@ -1,7 +1,9 @@
 import * as functions from 'firebase-functions';
-import Stripe from 'stripe';
+
 import { catchErrors, getUID } from '../helpers';
 import { hobbyProductId, proProductId, stripe } from '../config';
+
+import Stripe from 'stripe';
 import { getCustomerId } from './customers';
 
 interface Subscription {

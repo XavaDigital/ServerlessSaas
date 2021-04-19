@@ -24,7 +24,7 @@ const LoginForm: React.FC = () => {
     if (user) {
       push('/dashboard');
     }
-  }, [user]);
+  }, [user, push]);
 
   const onSubmit = (data: LoginData) => {
     setIsLoading(true);

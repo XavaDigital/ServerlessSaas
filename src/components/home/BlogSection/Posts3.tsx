@@ -5,7 +5,7 @@ const Posts3: React.FC<{
     <div className="flex flex-wrap mt-4 -m-4">
       {posts?.map((post, i) => {
         return (
-          <div className="p-4 md:w-1/3" key={i}>
+          <div className="p-4 md:w-1/3" key={`post-${i}`}>
             <div className="flex flex-wrap py-8 md:flex-no-wrap">
               <div className="relative h-full px-8 pt-16 pb-24 overflow-hidden text-center bg-gray-200 rounded-lg">
                 <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-500 title-font">

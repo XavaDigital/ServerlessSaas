@@ -14,6 +14,7 @@ const Steps3: React.FC<Props> = ({ image, steps }) => {
           {steps?.map((_, i) => {
             return (
               <a
+                key={`step-${i}`}
                 className={`inline-flex items-center justify-center w-1/2 py-3 font-medium leading-none tracking-wider border-b-2  rounded-t sm:px-6 sm:w-auto sm:justify-start title-font ${
                   i > 0
                     ? 'border-gray-200 hover:text-gray-900'

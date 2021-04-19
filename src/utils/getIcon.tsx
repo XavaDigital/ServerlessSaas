@@ -1,5 +1,5 @@
 // returns a different icon based on the given index for demo purposes
-export const getIcon = (i: number, size: number = 5) => {
+export const getIcon = (i: number, size = 5) => {
   switch (i) {
     case 0:
       return (

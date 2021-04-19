@@ -15,7 +15,7 @@ const ToastComponent: React.FC<Props> = ({ toast }) => {
     if (!shouldShow) {
       setShouldShow(true);
     }
-  }, []);
+  }, [shouldShow]);
 
   useEffect(() => {
     const timer = setTimeout(() => {

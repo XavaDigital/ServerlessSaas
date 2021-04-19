@@ -37,11 +37,9 @@ const EditAccount: React.FC = () => {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-  if (!auth.user) return null;
-
   const { register, errors, handleSubmit } = useForm({
     defaultValues: {
-      name: auth.user.name,
+      name: auth.user?.name,
     },
   });
 
@@ -57,9 +55,11 @@ const EditAccount: React.FC = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
+  if (!auth.user) return null;
+
   const handleUpload = (image) => {
     const uploadTask = storage
-      .ref(`users/${auth.user.uid}/${image.name}`)
+      .ref(`users/${auth.user.uid}/${image?.name}`)
       .put(image);
     uploadTask.on(
       'state_changed',
@@ -75,7 +75,7 @@ const EditAccount: React.FC = () => {
       () => {
         storage
           .ref(`users/${auth.user.uid}`)
-          .child(image.name)
+          .child(image?.name)
           .getDownloadURL()
           .then((url) => {
             setAvatarUrl(url);
@@ -184,9 +184,9 @@ const EditAccount: React.FC = () => {
                               required: 'Please enter a username',
                             })}
                           />
-                          {errors.name && (
+                          {errors?.name && (
                             <div className="mt-2 text-xs text-red-600">
-                              {errors.name.message}
+                              {errors?.name.message}
                             </div>
                           )}
                         </div>
@@ -222,7 +222,7 @@ const EditAccount: React.FC = () => {
                                 <img
                                   className="object-cover w-12 h-12 rounded-md"
                                   src={avatarUrl || auth.user.avatarUrl}
-                                  alt={auth.user.name}
+                                  alt={auth.user?.name}
                                 />
                               </span>
                             ) : (
@@ -278,7 +278,7 @@ const EditAccount: React.FC = () => {
                 <div className="flex justify-between">
                   <button
                     type="button"
-                    className="px-4 py-2 text-sm font-medium leading-5 text-gray-700 text-red-500 transition duration-150 ease-in-out border border-red-500 rounded-md hover:text-red-600 focus:outline-none focus:border-red-300 focus:shadow-outline-blue active:bg-red-50 active:text-red-800"
+                    className="px-4 py-2 text-sm font-medium leading-5 text-red-500 transition duration-150 ease-in-out border border-red-500 rounded-md hover:text-red-600 focus:outline-none focus:border-red-300 focus:shadow-outline-blue active:bg-red-50 active:text-red-800"
                     onClick={() => setShowConfirmModal(true)}
                   >
                     Delete account

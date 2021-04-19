@@ -11,7 +11,10 @@ const Steps2: React.FC<Props> = ({ steps }) => {
       <div className="container flex flex-wrap px-5 py-24 mx-auto">
         {steps?.map((step, i) => {
           return (
-            <div className="relative flex pt-10 pb-20 mx-auto sm:items-center md:w-2/3">
+            <div
+              className="relative flex pt-10 pb-20 mx-auto sm:items-center md:w-2/3"
+              key={`step-${i}`}
+            >
               <div className="absolute inset-0 flex items-center justify-center w-6 h-full">
                 <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
               </div>

@@ -2,7 +2,6 @@ import Link from 'next/link';
 import SignUpForm from '../components/forms/SignUpForm';
 import Layout from 'components/home/Layout';
 import { GetServerSideProps } from 'next';
-import { db } from 'config/firebase';
 import { getTeamName } from 'services/team';
 
 const SignUpPage: React.FC<{

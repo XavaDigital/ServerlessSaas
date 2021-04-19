@@ -14,27 +14,27 @@ const BlogDetailPage: React.FC<{ content: any }> = ({ content }) => {
         <meta property="og:image" content={image} />
       </Head>
       <div className="min-h-screen bg-gray-50">
-        <div className="bg-gray-900 pb-32">
-          <header className="py-16 md:py-24 container mx-auto">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h1 className="text-4xl leading-9 font-bold text-white text-center">
+        <div className="pb-32 bg-gray-900">
+          <header className="container py-16 mx-auto md:py-24">
+            <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
+              <h1 className="text-4xl font-bold leading-9 text-center text-white">
                 {title}
               </h1>
             </div>
           </header>
         </div>
 
-        <main className="-mt-32 mx-auto md:px-6 lg:px-32 pb-16">
-          <div className="max-w-4xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+        <main className="pb-16 mx-auto -mt-32 md:px-6 lg:px-32">
+          <div className="max-w-4xl px-4 pb-12 mx-auto sm:px-6 lg:px-8">
             <div>
               <nav className="sm:hidden">
                 <Link href="/blog">
                   <a
                     href="#"
-                    className="flex items-center text-sm mb-2 leading-5 font-medium text-gray-200 hover:text-white transition duration-150 ease-in-out"
+                    className="flex items-center mb-2 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out hover:text-white"
                   >
                     <svg
-                      className="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-200"
+                      className="flex-shrink-0 w-5 h-5 mr-1 -ml-1 text-gray-200"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -48,17 +48,17 @@ const BlogDetailPage: React.FC<{ content: any }> = ({ content }) => {
                   </a>
                 </Link>
               </nav>
-              <nav className="hidden sm:flex items-center text-sm leading-5 font-medium mb-2">
+              <nav className="items-center hidden mb-2 text-sm font-medium leading-5 sm:flex">
                 <Link href="/">
                   <a
                     href="#"
-                    className="text-gray-200 hover:text-white transition duration-150 ease-in-out"
+                    className="text-gray-200 transition duration-150 ease-in-out hover:text-white"
                   >
                     Home
                   </a>
                 </Link>
                 <svg
-                  className="flex-shrink-0 mx-2 h-5 w-5 text-gray-200"
+                  className="flex-shrink-0 w-5 h-5 mx-2 text-gray-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -71,16 +71,16 @@ const BlogDetailPage: React.FC<{ content: any }> = ({ content }) => {
                 <Link href="/blog">
                   <a
                     href="#"
-                    className="text-gray-200 hover:text-white transition duration-150 ease-in-out"
+                    className="text-gray-200 transition duration-150 ease-in-out hover:text-white"
                   >
                     Blogs
                   </a>
                 </Link>
               </nav>
             </div>
-            <div className="bg-white rounded-lg shadow-xl py-8 md:py-12 px-8 text-lg">
+            <div className="px-8 py-8 text-lg bg-white rounded-lg shadow-xl md:py-12">
               <article
-                className="prose lg:prose-lg mx-auto"
+                className="mx-auto prose lg:prose-lg"
                 dangerouslySetInnerHTML={{ __html: content.html }}
               ></article>
             </div>
@@ -93,7 +93,7 @@ const BlogDetailPage: React.FC<{ content: any }> = ({ content }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const content = await import(`../../content/posts/${params.slug}.md`);
+  const content = await import(`../../content/posts/${params?.slug}.md`);
 
   return { props: { content: content.default } };
 };
@@ -102,6 +102,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const postSlugs = ((context) => {
     const keys = context.keys();
     const data = keys.map((key) => {
+      //eslint-disable-next-line
       const slug = key.replace(/^.*[\\\/]/, '').slice(0, -3);
 
       return slug;

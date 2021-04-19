@@ -12,7 +12,7 @@ const Features1: React.FC<Props> = ({ features }) => {
         return (
           <div
             className="flex flex-col items-center p-4 mb-6 text-center md:w-1/3 md:mb-0"
-            key={i}
+            key={`feature-${i}`}
           >
             <div className="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mb-5 text-indigo-500 bg-indigo-100 rounded-full">
               {getIcon(i, 8)}

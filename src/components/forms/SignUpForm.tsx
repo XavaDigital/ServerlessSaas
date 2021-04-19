@@ -52,7 +52,7 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
     if (user) {
       push('/dashboard');
     }
-  }, [user]);
+  }, [user, push]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

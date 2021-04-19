@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
 
-import { useAuth } from 'hooks/useAuth';
 import { getPlan } from 'utils/getPlan';
+import { useAuth } from 'hooks/useAuth';
 
 const PlanPill: React.FC = () => {
   const [plan, setPlan] = useState(null);
 
   const { user } = useAuth();
-  if (!user) return null;
 
   useEffect(() => {
     if (user?.teamId && !plan) {
       getPlan(user).then((plan) => setPlan(plan));
     }
-  }, [user?.teamId]);
+  }, [user?.teamId, plan, user]);
+
+  if (!user) return null;
 
   const colors = () => {
     if (!plan || plan === 'Free') return 'bg-indigo-100 text-indigo-800';

@@ -1,10 +1,14 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   purge: ['./src/**/*.{js,tsx}'],
   theme: {
     extend: {
       colors: {
+        indigo: colors.indigo,
+        green: colors.green,
+        yellow: colors.yellow,
         'royal-blue': {
           100: '#F0F1FC',
           200: '#D9DCF9',
@@ -26,9 +30,5 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [require('@tailwindcss/typography')],
-  future: {
-    purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true,
-  },
+  plugins: [],
 };

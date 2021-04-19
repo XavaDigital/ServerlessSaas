@@ -10,7 +10,10 @@ const Features3: React.FC<Props> = ({ features }) => {
     <div className="flex flex-wrap -m-4">
       {features?.map((feature: Feature, i: number) => {
         return (
-          <div className="flex flex-col items-center pb-10 mx-auto mb-10 border-b border-gray-200 lg:w-3/5 sm:flex-row">
+          <div
+            className="flex flex-col items-center pb-10 mx-auto mb-10 border-b border-gray-200 lg:w-3/5 sm:flex-row"
+            key={`feature-${i}`}
+          >
             <div className="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 text-indigo-500 bg-indigo-100 rounded-full sm:w-32 sm:h-32 sm:mr-10">
               {getIcon(i, 10)}
             </div>

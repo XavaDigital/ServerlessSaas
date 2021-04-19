@@ -10,7 +10,7 @@ const Features2: React.FC<Props> = ({ features }) => {
     <div className="flex flex-wrap -m-4">
       {features?.map((feature: Feature, i: number) => {
         return (
-          <div className="p-4 md:w-1/3" key={i}>
+          <div className="p-4 md:w-1/3" key={`feature-${i}`}>
             <div className="flex flex-col h-full p-8 bg-gray-100 rounded-lg">
               <div className="flex items-center mb-3">
                 <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 mr-3 text-white bg-indigo-500 rounded-full">

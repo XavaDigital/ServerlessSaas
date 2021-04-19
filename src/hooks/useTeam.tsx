@@ -1,12 +1,13 @@
+import * as teamService from 'services/team';
+
 import {
-  useState,
-  useEffect,
-  useContext,
-  createContext,
   ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
 } from 'react';
 import { auth, db } from 'config/firebase';
-import * as teamService from 'services/team';
 
 const authContext = createContext({ team: {} });
 const { Provider } = authContext;
@@ -48,6 +49,7 @@ const useTeamProvider = () => {
 
     // Unsubscribe on cleanup
     return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
