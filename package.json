@@ -1,6 +1,6 @@
 {
   "name": "serverless-saas",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -23,7 +23,7 @@
     }
   },
   "dependencies": {
-    "@stripe/stripe-js": "1.9.0",
+    "@stripe/stripe-js": "1.13.2",
     "autoprefixer": "10.0.2",
     "firebase": "8.4.1",
     "netlify-cms-app": "2.14.46",
