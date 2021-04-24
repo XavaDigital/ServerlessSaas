@@ -7,6 +7,8 @@ import {
 } from 'react';
 import { auth, db } from 'config/firebase';
 
+import firebase from 'firebase';
+
 const authContext = createContext({ user: {} });
 const { Provider } = authContext;
 
