@@ -5,8 +5,9 @@ export default {
     repo: 'jakeprins/serverless-saas',
     branch: 'master',
     squash_merges: true,
-    base_url: 'https://us-central1-serverless-saas.cloudfunctions.net/',
-    auth_endpoint: '/oauthAuthorize',
+    // Uncomment these lines and replace the base URL when deploying to Vercel
+    // base_url: 'https://us-central1-serverless-saas.cloudfunctions.net/',
+    // auth_endpoint: '/oauthAuthorize',
   },
   media_folder: 'public/img',
   public_folder: 'img',
