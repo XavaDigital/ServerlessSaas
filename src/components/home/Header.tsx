@@ -15,19 +15,19 @@ const Header = (): JSX.Element => {
         </Link>
         <nav className="flex flex-wrap items-center justify-center text-base md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400">
           <a
-            href="#features"
+            href="/#features"
             className="mr-5 text-base text-gray-600 hover:text-gray-800"
           >
             Features
           </a>
           <a
-            href="#pricing"
+            href="/#pricing"
             className="mr-5 text-base text-gray-600 hover:text-gray-800"
           >
             Pricing
           </a>
           <a
-            href="#team"
+            href="/#team"
             className="mr-5 text-base text-gray-600 hover:text-gray-800"
           >
             Team

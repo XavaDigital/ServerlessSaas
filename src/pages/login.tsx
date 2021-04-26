@@ -1,6 +1,6 @@
+import Layout from 'components/home/Layout';
 import Link from 'next/link';
 import LoginForm from '../components/forms/LoginForm';
-import Layout from 'components/home/Layout';
 
 const LoginPage: React.FC = () => {
   return (
@@ -14,9 +14,7 @@ const LoginPage: React.FC = () => {
             <p className="mt-2 text-center text-gray-600 text-md">
               {"Don't have an account? "}
               <Link href="/signup">
-                <a href="" className="text-royal-blue-500">
-                  Sign up
-                </a>
+                <a className="text-royal-blue-500">Sign up</a>
               </Link>
             </p>
           </div>

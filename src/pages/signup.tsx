@@ -1,7 +1,7 @@
+import { GetServerSideProps } from 'next';
+import Layout from 'components/home/Layout';
 import Link from 'next/link';
 import SignUpForm from '../components/forms/SignUpForm';
-import Layout from 'components/home/Layout';
-import { GetServerSideProps } from 'next';
 import { getTeamName } from 'services/team';
 
 const SignUpPage: React.FC<{
@@ -23,9 +23,7 @@ const SignUpPage: React.FC<{
               <p className="mt-2 text-center text-gray-600 text-md">
                 Already have an account?{' '}
                 <Link href="/login">
-                  <a href="" className="text-royal-blue-500">
-                    Log in
-                  </a>
+                  <a className="text-royal-blue-500">Log in</a>
                 </Link>
               </p>
             )}
