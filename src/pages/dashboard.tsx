@@ -3,20 +3,20 @@ import Layout from 'components/dashboard/Layout';
 import { greetUser } from 'utils/greetUser';
 import { useRequireAuth } from 'hooks/useRequireAuth';
 
-const DashboardPage: React.FC = () => {
-  const { user } = useRequireAuth();
-  if (!user) return null;
+const breadCrumbs = {
+  back: {
+    path: '/dashboard',
+    text: 'Back',
+  },
+  first: {
+    path: '/dashboard',
+    text: 'Dashboard',
+  },
+};
 
-  const breadCrumbs = {
-    back: {
-      path: '/dashboard',
-      text: 'Back',
-    },
-    first: {
-      path: '/dashboard',
-      text: 'Dashboard',
-    },
-  };
+const DashboardPage = () => {
+  const { user } = useRequireAuth();
+  if (!user) return <Layout>Loading</Layout>;
 
   return (
     <Layout>
