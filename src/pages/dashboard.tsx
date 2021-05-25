@@ -16,7 +16,6 @@ const breadCrumbs = {
 
 const DashboardPage = () => {
   const { user } = useRequireAuth();
-  if (!user) return <Layout>Loading</Layout>;
 
   return (
     <Layout>
@@ -26,7 +25,7 @@ const DashboardPage = () => {
           <div className="mt-2 md:flex md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
               <h2 className="text-2xl font-bold leading-7 text-gray-800 sm:text-3xl sm:leading-9 sm:truncate">
-                {greetUser(user.name)}
+                {greetUser(user?.name || '')}
               </h2>
             </div>
           </div>
