@@ -31,7 +31,11 @@ const breadCrumbs = {
 };
 
 const Team: React.FC = () => {
-  const { register, errors, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const { addToast } = useToast();
   const { user } = useRequireAuth();
   const { team } = useTeam();
@@ -256,10 +260,11 @@ const Team: React.FC = () => {
                               type="email"
                               name="email"
                               placeholder="Email"
-                              ref={register({
+                              {...register('email', {
                                 required: 'Please enter an email',
                                 pattern: {
-                                  value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                  value:
+                                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                   message: 'Not a valid email',
                                 },
                               })}

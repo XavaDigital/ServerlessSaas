@@ -6,7 +6,11 @@ import { useAuth } from 'hooks/useAuth';
 import Button from 'components/elements/Button';
 
 const ResetPasswordForm: React.FC = () => {
-  const { register, errors, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const auth = useAuth();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +30,7 @@ const ResetPasswordForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {error?.message && (
-        <div className="mb-4 text-red-500 text-center border-dashed border border-red-600 p-2 rounded">
+        <div className="p-2 mb-4 text-center text-red-500 border border-red-600 border-dashed rounded">
           <span>{error.message}</span>
         </div>
       )}
@@ -40,13 +44,14 @@ const ResetPasswordForm: React.FC = () => {
         <div className="mt-1 rounded-md">
           <input
             id="email"
-            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm"
+            className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
             type="email"
             name="email"
-            ref={register({
+            {...register('email', {
               required: 'Please enter an email',
               pattern: {
-                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                value:
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: 'Not a valid email',
               },
             })}

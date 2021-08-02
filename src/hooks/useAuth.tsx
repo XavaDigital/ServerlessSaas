@@ -79,10 +79,8 @@ const useAuthProvider = () => {
 
   const signIn = async ({ email, password }) => {
     try {
-      const {
-        user,
-        additionalUserInfo,
-      } = await auth.signInWithEmailAndPassword(email, password);
+      const { user, additionalUserInfo } =
+        await auth.signInWithEmailAndPassword(email, password);
       const currentUser = { ...user, additionalUserInfo };
       setUser(currentUser);
       getUserAdditionalData(currentUser);
