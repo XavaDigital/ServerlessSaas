@@ -1,9 +1,8 @@
-import dynamic from 'next/dynamic';
-
-import config from 'cms/config';
 import HomePreview from 'cms/previews/HomePreview';
 import PostPreview from 'cms/previews/PostPreview';
 import Spinner from 'components/icons/Spinner';
+import config from 'cms/config';
+import dynamic from 'next/dynamic';
 
 const CMS = dynamic(
   (): any =>

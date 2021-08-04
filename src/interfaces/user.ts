@@ -1,9 +1,16 @@
+import firebase from 'firebase';
 export interface User {
   uid: string;
   name: string;
   email: string;
   teamId: string;
-  isTeamOwner: boolean;
-  isPro: boolean;
-  isHobby: boolean;
+  isAdmin?: boolean;
+  isTeamOwner?: boolean;
+  isPro?: boolean;
+  isHobby?: boolean;
+  createdAt?: number;
+  avatarUrl?: string;
+  emailVerified?: boolean;
 }
+
+export type ExtendedUser = User & firebase.auth.AdditionalUserInfo;

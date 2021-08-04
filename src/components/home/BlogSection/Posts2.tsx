@@ -1,6 +1,10 @@
-const Posts2: React.FC<{
-  posts: { attributes: any }[];
-}> = ({ posts }) => {
+import { Post } from 'interfaces/post';
+
+interface Props {
+  posts: { attributes: Post }[];
+}
+
+const Posts2: React.FC<Props> = ({ posts }) => {
   return (
     <div className="flex flex-wrap mt-4">
       {posts?.map((post, i) => {

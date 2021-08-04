@@ -1,13 +1,12 @@
-import Link from 'next/link';
-
-import { useAuth } from 'hooks/useAuth';
-import { useForm } from 'react-hook-form';
-import Layout from 'components/dashboard/Layout';
 import AccountMenu from 'components/dashboard/AccountMenu';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import Layout from 'components/dashboard/Layout';
+import Link from 'next/link';
 import { createTeam } from 'services/team';
+import { useAuth } from 'hooks/useAuth';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const breadCrumbs = {
   back: {
@@ -45,7 +44,7 @@ const Account: React.FC = () => {
     setIsLoading(true);
     setError(null);
 
-    createTeam(data).then((response: { error?: { massage: string } }) => {
+    createTeam(data).then((response: { error?: { message: string } }) => {
       setIsLoading(false);
       response?.error ? setError(response.error) : router.push('/account/team');
     });

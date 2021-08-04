@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import Button from 'components/elements/Button';
+import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-
-import { useAuth } from 'hooks/useAuth';
-import Button from 'components/elements/Button';
+import { useState } from 'react';
 
 const ResetPasswordForm: React.FC = () => {
   const {
@@ -21,7 +20,7 @@ const ResetPasswordForm: React.FC = () => {
     setError(null);
     auth
       .sendPasswordResetEmail(data.email)
-      .then((response: { error?: { massage: string } }) => {
+      .then((response: { error?: { message: string } }) => {
         setIsLoading(false);
         response?.error ? setError(response.error) : router.push('/login');
       });

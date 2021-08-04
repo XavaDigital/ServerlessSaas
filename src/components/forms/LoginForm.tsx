@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+import Button from 'components/elements/Button';
+import Link from 'next/link';
+import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-
 import { useToast } from 'hooks/useToast';
-import { useAuth } from 'hooks/useAuth';
-import Button from 'components/elements/Button';
 
 interface LoginData {
   email: string;
@@ -33,7 +33,7 @@ const LoginForm: React.FC = () => {
   const onSubmit = (data: LoginData) => {
     setIsLoading(true);
     setError(null);
-    signIn(data).then((response: { error?: { massage: string } }) => {
+    signIn(data).then((response: { error?: { message: string } }) => {
       setIsLoading(false);
       if (response?.error) {
         setError(response.error);

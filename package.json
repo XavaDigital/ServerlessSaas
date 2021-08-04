@@ -19,7 +19,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",
-      "pre-push": "tsc && eslint ./src/ --ext ts,js,tsx,jsx --fix"
+      "pre-push": "npm run type-check && npm run lint:fix"
     }
   },
   "dependencies": {
