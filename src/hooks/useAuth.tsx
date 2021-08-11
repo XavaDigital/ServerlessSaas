@@ -7,9 +7,28 @@ import {
 } from 'react';
 import { auth, db } from 'config/firebase';
 
+import { User } from 'interfaces/user';
 import firebase from 'firebase';
 
-const authContext = createContext({ user: {} });
+type Response = Promise<void | { error?: { message: string } }>;
+
+interface AuthContext {
+  user: User;
+  signUp: (
+    credentials: { name: string; email: string; password: string },
+    teamId: string
+  ) => Response;
+  signIn: (credentials: {
+    email: string;
+    password: string;
+  }) => Promise<firebase.User | { error?: { message: string } }>;
+  signOut: () => Response;
+  sendPasswordResetEmail: (email: string) => Response;
+  updateUser: (user: { id: string; data: any }) => Response;
+  deleteUser: () => Response;
+}
+
+const authContext = createContext({ user: {} } as AuthContext);
 const { Provider } = authContext;
 
 // AuthProvider is a Context Provider that wraps our app and makes an auth object
@@ -20,7 +39,7 @@ export function AuthProvider(props: { children: ReactNode }): JSX.Element {
 }
 
 // useAuth is a hook that enables any component to subscribe to auth state
-export const useAuth: any = () => {
+export const useAuth = () => {
   return useContext(authContext);
 };
 
@@ -28,7 +47,7 @@ export const useAuth: any = () => {
 const useAuthProvider = () => {
   const [user, setUser] = useState(null);
 
-  const createUser = async (currentUser: any) => {
+  const createUser = async (currentUser: User) => {
     try {
       return db
         .collection('users')
@@ -57,7 +76,7 @@ const useAuthProvider = () => {
     }
   };
 
-  const signUp = async ({ name, email, password }, teamId) => {
+  const signUp = async ({ name, email, password }, teamId: string) => {
     try {
       return await auth
         .createUserWithEmailAndPassword(email, password)
@@ -79,10 +98,8 @@ const useAuthProvider = () => {
 
   const signIn = async ({ email, password }) => {
     try {
-      const {
-        user,
-        additionalUserInfo,
-      } = await auth.signInWithEmailAndPassword(email, password);
+      const { user, additionalUserInfo } =
+        await auth.signInWithEmailAndPassword(email, password);
       const currentUser = { ...user, additionalUserInfo };
       setUser(currentUser);
       getUserAdditionalData(currentUser);
@@ -101,7 +118,7 @@ const useAuthProvider = () => {
     }
   };
 
-  const sendPasswordResetEmail = async (email) => {
+  const sendPasswordResetEmail = async (email: string) => {
     const response = await auth.sendPasswordResetEmail(email);
     return response;
   };

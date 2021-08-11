@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { ReactNode } from 'react';
 
 interface Props {
   show: boolean;
@@ -33,7 +33,10 @@ const Transition: React.FC<Props> = ({
     <CSSTransition
       unmountOnExit
       in={show}
-      addEndListener={(node: Element, done: any) => {
+      addEndListener={(
+        node: Element,
+        done: EventListenerOrEventListenerObject
+      ) => {
         node.addEventListener('transitionend', done, false);
       }}
       onEnter={(node: Element) => {

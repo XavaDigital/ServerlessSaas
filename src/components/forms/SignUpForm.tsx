@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+import Button from 'components/elements/Button';
+import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-
 import { useToast } from 'hooks/useToast';
-import { useAuth } from 'hooks/useAuth';
-import Button from 'components/elements/Button';
 
 export interface SignUpData {
   name: string;
@@ -12,11 +12,17 @@ export interface SignUpData {
   password: string;
 }
 
-const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
-  teamId,
-  email,
-}) => {
-  const { register, errors, handleSubmit } = useForm({
+interface Props {
+  teamId?: string;
+  email?: string;
+}
+
+const SignUpForm = ({ teamId, email }: Props) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       name: '',
       email,
@@ -32,7 +38,7 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
   const onSubmit = (data: SignUpData): void => {
     setIsLoading(true);
     setError(null);
-    signUp(data, teamId).then((response: { error?: { massage: string } }) => {
+    signUp(data, teamId).then((response: { error?: { message: string } }) => {
       setIsLoading(false);
       if (response?.error) {
         setError(response.error);
@@ -73,7 +79,7 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
           className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
           type="text"
           name="name"
-          ref={register({
+          {...register('name', {
             required: 'Please enter an name',
             minLength: {
               value: 3,
@@ -100,10 +106,11 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
             }`}
             type="email"
             name="email"
-            ref={register({
+            {...register('email', {
               required: 'Please enter an email',
               pattern: {
-                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                value:
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: 'Not a valid email',
               },
             })}
@@ -128,7 +135,7 @@ const SignUpForm: React.FC<{ teamId?: string; email?: string }> = ({
             className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
             type="password"
             name="password"
-            ref={register({
+            {...register('password', {
               required: 'Please enter a password',
               minLength: {
                 value: 6,

@@ -1,7 +1,10 @@
-import { ComponentType } from 'react';
 import BlogCard from 'components/home/BlogCard';
+interface Props {
+  entry: any;
+  widgetFor: any;
+}
 
-const PostPreview: ComponentType<any> = ({ entry, widgetFor }) => {
+const PostPreview = ({ entry, widgetFor }: Props) => {
   const post = {
     title: entry.getIn(['data', 'title']),
     description: entry.getIn(['data', 'description']),

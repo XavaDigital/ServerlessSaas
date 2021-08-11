@@ -1,19 +1,18 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import firebase from 'firebase/app';
-import { useForm } from 'react-hook-form';
-
-import { functions } from 'config/firebase';
-import { useTeam } from 'hooks/useTeam';
-import { useToast } from 'hooks/useToast';
-import { useRequireAuth } from 'hooks/useRequireAuth';
-import { updateTeam } from 'services/team';
-import Layout from 'components/dashboard/Layout';
 import AccountMenu from 'components/dashboard/AccountMenu';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 import Button from 'components/elements/Button';
 import ConfirmModal from 'components/dashboard/ConfirmModal';
+import Layout from 'components/dashboard/Layout';
+import Link from 'next/link';
 import Spinner from 'components/icons/Spinner';
+import firebase from 'firebase/app';
+import { functions } from 'config/firebase';
+import { updateTeam } from 'services/team';
+import { useForm } from 'react-hook-form';
+import { useRequireAuth } from 'hooks/useRequireAuth';
+import { useState } from 'react';
+import { useTeam } from 'hooks/useTeam';
+import { useToast } from 'hooks/useToast';
 
 const breadCrumbs = {
   back: {
@@ -31,19 +30,25 @@ const breadCrumbs = {
 };
 
 const Team: React.FC = () => {
-  const { register, errors, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const { addToast } = useToast();
   const { user } = useRequireAuth();
   const { team } = useTeam();
   const [formOpen, setFormOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<string | boolean>(false);
   const [hasResendInvite, setHasResendInvite] = useState(null);
   const [error, setError] = useState(null);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState<string | boolean>(
+    false
+  );
 
   if (!user) return null;
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: { name: string; email: string }) => {
     setIsLoading(true);
     setError(null);
 
@@ -53,7 +58,7 @@ const Team: React.FC = () => {
       role: 'member',
       ...data,
     };
-    updateTeam(team.id as string, {
+    updateTeam(team.id, {
       users: firebase.firestore.FieldValue.arrayUnion({ ...payload }),
     }).then(() => {
       const sendTeamInviteEmail = functions.httpsCallable(
@@ -78,7 +83,7 @@ const Team: React.FC = () => {
     });
   };
 
-  const resendInvite = (email) => {
+  const resendInvite = (email: string) => {
     setIsLoading(email);
     const sendTeamInviteEmail = functions.httpsCallable('sendTeamInviteEmail');
     sendTeamInviteEmail({
@@ -98,7 +103,7 @@ const Team: React.FC = () => {
     });
   };
 
-  const deleteMember = (email) => {
+  const deleteMember = (email: string | boolean) => {
     setIsLoading(true);
     const updatedTeamMembers = team.users.filter(
       (user) => user.email !== email
@@ -256,10 +261,11 @@ const Team: React.FC = () => {
                               type="email"
                               name="email"
                               placeholder="Email"
-                              ref={register({
+                              {...register('email', {
                                 required: 'Please enter an email',
                                 pattern: {
-                                  value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                  value:
+                                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                   message: 'Not a valid email',
                                 },
                               })}

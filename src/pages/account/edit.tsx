@@ -1,16 +1,15 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import { useDropzone } from 'react-dropzone';
-
-import { storage } from 'config/firebase';
-import { useToast } from 'hooks/useToast';
-import { useRequireAuth } from 'hooks/useRequireAuth';
-import BreadCrumbs from 'components/dashboard/BreadCrumbs';
-import Layout from 'components/dashboard/Layout';
 import AccountMenu from 'components/dashboard/AccountMenu';
+import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 import ConfirmModal from 'components/dashboard/ConfirmModal';
+import Layout from 'components/dashboard/Layout';
+import Link from 'next/link';
+import { storage } from 'config/firebase';
+import { useDropzone } from 'react-dropzone';
+import { useForm } from 'react-hook-form';
+import { useRequireAuth } from 'hooks/useRequireAuth';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { useToast } from 'hooks/useToast';
 
 const breadCrumbs = {
   back: {
@@ -37,7 +36,11 @@ const EditAccount: React.FC = () => {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-  const { register, errors, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       name: auth.user?.name,
     },
@@ -95,7 +98,7 @@ const EditAccount: React.FC = () => {
 
     auth
       .updateUser({ id: auth.user.uid, data })
-      .then((response: { error?: { massage: string } }) => {
+      .then((response: { error?: { message: string } }) => {
         setIsLoading(false);
         if (response?.error) {
           setError(response.error);
@@ -180,7 +183,7 @@ const EditAccount: React.FC = () => {
                             id="name"
                             name="name"
                             className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-                            ref={register({
+                            {...register('name', {
                               required: 'Please enter a username',
                             })}
                           />

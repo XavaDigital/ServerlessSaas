@@ -35,7 +35,11 @@ const EditTeamPage: React.FC = () => {
   const { addToast } = useToast();
   const { push } = useRouter();
   const { team } = useTeam();
-  const { register, errors, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       name: team?.name,
     },
@@ -106,8 +110,8 @@ const EditTeamPage: React.FC = () => {
                             id="name"
                             name="name"
                             className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-                            ref={register({
-                              required: 'Please enter a name',
+                            {...register('name', {
+                              required: 'Please enter a team name',
                             })}
                           />
                           {errors.name && (

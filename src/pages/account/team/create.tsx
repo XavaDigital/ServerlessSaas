@@ -1,13 +1,12 @@
-import Link from 'next/link';
-
-import { useAuth } from 'hooks/useAuth';
-import { useForm } from 'react-hook-form';
-import Layout from 'components/dashboard/Layout';
 import AccountMenu from 'components/dashboard/AccountMenu';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import Layout from 'components/dashboard/Layout';
+import Link from 'next/link';
 import { createTeam } from 'services/team';
+import { useAuth } from 'hooks/useAuth';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const breadCrumbs = {
   back: {
@@ -32,7 +31,11 @@ const Account: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { register, errors, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const router = useRouter();
   const auth = useAuth();
   if (!auth.user) return null;
@@ -41,7 +44,7 @@ const Account: React.FC = () => {
     setIsLoading(true);
     setError(null);
 
-    createTeam(data).then((response: { error?: { massage: string } }) => {
+    createTeam(data).then((response: { error?: { message: string } }) => {
       setIsLoading(false);
       response?.error ? setError(response.error) : router.push('/account/team');
     });
@@ -49,7 +52,7 @@ const Account: React.FC = () => {
 
   return (
     <Layout>
-      <div className="max-w-6xl px-4 py-10 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div className="px-4 py-10 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <header className="pb-4 pl-3 mb-6 border-b-2 border-gray-300 sm:py-6">
           {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
           <div className="mt-2 md:flex md:items-center md:justify-between">
@@ -96,8 +99,8 @@ const Account: React.FC = () => {
                             id="name"
                             name="name"
                             className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-                            ref={register({
-                              required: 'Please enter a username',
+                            {...register('name', {
+                              required: 'Please enter a team name',
                             })}
                           />
                           {errors.name && (

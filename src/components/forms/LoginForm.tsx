@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+import Button from 'components/elements/Button';
+import Link from 'next/link';
+import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-
 import { useToast } from 'hooks/useToast';
-import { useAuth } from 'hooks/useAuth';
-import Button from 'components/elements/Button';
 
 interface LoginData {
   email: string;
@@ -13,7 +13,11 @@ interface LoginData {
 }
 
 const LoginForm: React.FC = () => {
-  const { register, errors, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const { push } = useRouter();
   const { addToast } = useToast();
   const { user, signIn } = useAuth();
@@ -29,7 +33,7 @@ const LoginForm: React.FC = () => {
   const onSubmit = (data: LoginData) => {
     setIsLoading(true);
     setError(null);
-    signIn(data).then((response: { error?: { massage: string } }) => {
+    signIn(data).then((response: { error?: { message: string } }) => {
       setIsLoading(false);
       if (response?.error) {
         setError(response.error);
@@ -64,10 +68,11 @@ const LoginForm: React.FC = () => {
             className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
             type="email"
             name="email"
-            ref={register({
+            {...register('email', {
               required: 'Please enter an email',
               pattern: {
-                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                value:
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: 'Not a valid email',
               },
             })}
@@ -92,7 +97,7 @@ const LoginForm: React.FC = () => {
             className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
             type="password"
             name="password"
-            ref={register({
+            {...register('password', {
               required: 'Please enter a password',
               minLength: {
                 value: 6,

@@ -9,9 +9,10 @@ import {
 } from 'react';
 import { auth, db } from 'config/firebase';
 
+import { Team } from 'interfaces/team';
 import firebase from 'firebase';
 
-const authContext = createContext({ team: {} });
+const authContext = createContext({ team: {} as Team });
 const { Provider } = authContext;
 
 // TeamProvider is a Context Provider that wraps our app and makes an team object
@@ -22,7 +23,7 @@ export function TeamProvider(props: { children: ReactNode }): JSX.Element {
 }
 
 // useTeam is a hook that enables any component to subscribe to team state
-export const useTeam: any = () => {
+export const useTeam = () => {
   return useContext(authContext);
 };
 
