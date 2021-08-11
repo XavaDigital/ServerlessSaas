@@ -1,10 +1,17 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+
+import Footer from 'components/home/Footer';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import Footer from 'components/home/Footer';
+interface Props {
+  content: {
+    attributes: { title: string; image: string; slug: string };
+    html: string;
+  };
+}
 
-const BlogDetailPage: React.FC<{ content: any }> = ({ content }) => {
+const BlogDetailPage: React.FC<Props> = ({ content }) => {
   const { title, image } = content.attributes;
 
   return (

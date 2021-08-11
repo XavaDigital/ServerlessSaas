@@ -2,7 +2,7 @@ import { useAuth } from 'hooks/useAuth';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-export const useRequireAuth = (redirectUrl = '/login'): any => {
+export const useRequireAuth = (redirectUrl = '/login') => {
   const auth = useAuth();
   const router = useRouter();
 

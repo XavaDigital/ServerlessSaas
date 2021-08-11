@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+import Button from 'components/elements/Button';
+import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-
 import { useToast } from 'hooks/useToast';
-import { useAuth } from 'hooks/useAuth';
-import Button from 'components/elements/Button';
 
 export interface SignUpData {
   name: string;
@@ -38,7 +38,7 @@ const SignUpForm = ({ teamId, email }: Props) => {
   const onSubmit = (data: SignUpData): void => {
     setIsLoading(true);
     setError(null);
-    signUp(data, teamId).then((response: { error?: { massage: string } }) => {
+    signUp(data, teamId).then((response: { error?: { message: string } }) => {
       setIsLoading(false);
       if (response?.error) {
         setError(response.error);

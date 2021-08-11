@@ -1,9 +1,14 @@
 import { GetStaticProps, NextPage } from 'next';
 
-import Layout from 'components/home/Layout';
 import BlogCard from 'components/home/BlogCard';
+import Layout from 'components/home/Layout';
+import { Post } from 'interfaces/post';
 
-const BlogPage: NextPage<{ posts: any[] }> = ({ posts }) => {
+interface Props {
+  posts: { attributes: Post }[];
+}
+
+const BlogPage: NextPage<Props> = ({ posts }) => {
   return (
     <Layout>
       <div className="min-h-screen px-4 pt-16 pb-20 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
@@ -19,7 +24,7 @@ const BlogPage: NextPage<{ posts: any[] }> = ({ posts }) => {
           </div>
           <div className="container mx-auto">
             <div className="grid max-w-lg gap-5 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none">
-              {posts.map((post, i) => {
+              {posts.map((post: { attributes: Post }, i: number) => {
                 return <BlogCard post={post} key={i} version={1} />;
               })}
             </div>
@@ -33,7 +38,7 @@ const BlogPage: NextPage<{ posts: any[] }> = ({ posts }) => {
 export const getStaticProps: GetStaticProps = async () => {
   const posts = ((context) => {
     const keys = context.keys();
-    const values = keys.map(context) as any;
+    const values = keys.map(context);
 
     const data = keys.map((_, index) => {
       const post = values[index];

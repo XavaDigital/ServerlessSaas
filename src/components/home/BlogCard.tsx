@@ -1,18 +1,11 @@
-interface Post {
-  attributes: {
-    title: string;
-    image: string;
-    category: string;
-    description: string;
-    date?: Date;
-    slug?: string;
-  };
+import { Post } from 'interfaces/post';
+
+interface Props {
+  post: { attributes: Post };
+  version: number;
 }
 
-const BlogCard: React.FC<{ post: Post; version: number }> = ({
-  post,
-  version,
-}) => {
+const BlogCard: React.FC<Props> = ({ post, version }) => {
   const { attributes } = post;
 
   if (version === 2) {

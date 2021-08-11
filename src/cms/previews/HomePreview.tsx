@@ -1,12 +1,16 @@
-import { ComponentType } from 'react';
-import HeroSection from 'components/home/HeroSection';
+import BlogSection from 'components/home/BlogSection';
 import FeatureSection from 'components/home/FeatureSection';
+import HeroSection from 'components/home/HeroSection';
+import PricingSection from 'components/home/PricingSection';
 import StepsSection from 'components/home/StepsSection';
 import TeamSection from 'components/home/TeamSection';
-import PricingSection from 'components/home/PricingSection';
-import BlogSection from 'components/home/BlogSection';
 
-const HomePreview: ComponentType<any> = ({ entry, widgetsFor }) => {
+interface Props {
+  entry: any;
+  widgetsFor: any;
+}
+
+const HomePreview = ({ entry, widgetsFor }: Props) => {
   const features = [];
   widgetsFor('features').map((feature) => {
     features.push({
