@@ -33,10 +33,7 @@ const Transition: React.FC<Props> = ({
     <CSSTransition
       unmountOnExit
       in={show}
-      addEndListener={(
-        node: Element,
-        done: EventListenerOrEventListenerObject
-      ) => {
+      addEndListener={(node: any, done: any) => {
         node.addEventListener('transitionend', done, false);
       }}
       onEnter={(node: Element) => {

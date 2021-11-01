@@ -39,7 +39,7 @@ export default {
             {
               label: 'Hero Description',
               name: 'hero_description',
-              widget: 'markdown',
+              widget: 'string',
             },
             {
               label: 'Hero Image',
@@ -164,7 +164,7 @@ export default {
             {
               label: 'Team Description',
               name: 'team_description',
-              widget: 'markdown',
+              widget: 'string',
             },
             {
               label: 'Team',
