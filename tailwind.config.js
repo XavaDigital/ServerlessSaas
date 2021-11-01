@@ -6,9 +6,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        indigo: colors.indigo,
-        green: colors.green,
-        yellow: colors.yellow,
         'royal-blue': {
           100: '#F0F1FC',
           200: '#D9DCF9',
@@ -30,5 +27,5 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };
