@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps = async () => {
     });
 
     return data;
-  })(require.context('../../content/posts', true, /\.md$/));
+  })(require.context('../../content/posts', true, /\.\/.*\.md$/));
 
   return { props: { posts } };
 };

@@ -84,7 +84,7 @@ const BlogCard: React.FC<Props> = ({ post, version }) => {
   }
 
   return (
-    <div className="flex flex-col h-full overflow-hidden border-2 border-gray-200 rounded-lg">
+    <div className="flex flex-col h-full overflow-hidden border border-gray-200 rounded-lg">
       <img
         className="object-cover object-center w-full lg:h-48 md:h-36"
         src={attributes.image}

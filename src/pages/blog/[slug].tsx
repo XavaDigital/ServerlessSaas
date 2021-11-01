@@ -87,7 +87,7 @@ const BlogDetailPage: React.FC<Props> = ({ content }) => {
             </div>
             <div className="px-8 py-8 text-lg bg-white rounded-lg shadow-xl md:py-12">
               <article
-                className="mx-auto prose lg:prose-lg"
+                className="mx-auto overflow-hidden prose lg:prose-lg"
                 dangerouslySetInnerHTML={{ __html: content.html }}
               ></article>
             </div>
