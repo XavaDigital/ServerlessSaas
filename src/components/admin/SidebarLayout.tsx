@@ -2,7 +2,7 @@ import { ReactNode, useRef, useState } from 'react';
 
 import Link from 'next/link';
 import { NextPage } from 'next';
-import Transition from 'components/shared/Transition';
+import { Transition } from '@headlessui/react';
 import { useAuth } from 'hooks/useAuth';
 import { useOnClickOutside } from 'hooks/useClickOutside';
 import { useRouter } from 'next/router';

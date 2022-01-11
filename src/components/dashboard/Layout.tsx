@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { NextPage } from 'next';
 
-import Header from 'components/dashboard/Header';
+import Navbar from 'components/dashboard/Navbar';
 
 interface Props {
   children: ReactNode;
@@ -10,7 +10,7 @@ interface Props {
 const Layout: NextPage<Props> = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-100">
-      <Header />
+      <Navbar />
       {children}
     </div>
   );

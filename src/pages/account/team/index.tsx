@@ -1,6 +1,6 @@
 import AccountMenu from 'components/dashboard/AccountMenu';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
-import Button from 'components/elements/Button';
+import Button from 'components/shared/Button';
 import ConfirmModal from 'components/dashboard/ConfirmModal';
 import Layout from 'components/dashboard/Layout';
 import Link from 'next/link';

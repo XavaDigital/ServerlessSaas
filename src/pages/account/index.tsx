@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { useRequireAuth } from 'hooks/useRequireAuth';
 import Layout from 'components/dashboard/Layout';
-import Button from 'components/elements/Button';
+import Button from 'components/shared/Button';
 import AccountMenu from 'components/dashboard/AccountMenu';
 import BreadCrumbs from 'components/dashboard/BreadCrumbs';
 import { getPlan } from 'utils/getPlan';

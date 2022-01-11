@@ -2,13 +2,13 @@ import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Transition from 'components/shared/Transition';
+import { Transition } from '@headlessui/react';
 import { useAuth } from 'hooks/useAuth';
 import { useToast } from 'hooks/useToast';
 import { useOnClickOutside } from 'hooks/useClickOutside';
 import PlanPill from './PlanPill';
 
-export const DashboardHeader: React.FC = () => {
+const Navbar: React.FC = () => {
   const router = useRouter();
   const { addToast } = useToast();
   const auth = useAuth();
@@ -271,4 +271,4 @@ export const DashboardHeader: React.FC = () => {
   );
 };
 
-export default DashboardHeader;
+export default Navbar;

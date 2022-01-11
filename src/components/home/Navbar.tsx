@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const Header = (): JSX.Element => {
+const Navbar = (): JSX.Element => {
   return (
     <header className="m-auto text-gray-700 body-font max-w-7xl">
       <div className="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
@@ -55,4 +55,4 @@ const Header = (): JSX.Element => {
   );
 };
 
-export default Header;
+export default Navbar;

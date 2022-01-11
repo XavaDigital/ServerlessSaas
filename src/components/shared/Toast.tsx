@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Transition from 'components/shared/Transition';
-import { useToast } from 'hooks/useToast';
+
 import { Toast } from 'interfaces/toast';
+import { Transition } from '@headlessui/react';
+import { useToast } from 'hooks/useToast';
 
 interface Props {
   toast: Toast;

@@ -1,4 +1,4 @@
-import Button from 'components/elements/Button';
+import Button from 'components/shared/Button';
 import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
