@@ -2,7 +2,10 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  purge: ['./src/**/*.{js,tsx}'],
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx}',
+    './src/components/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
       colors: {
@@ -26,6 +29,5 @@ module.exports = {
       },
     },
   },
-  variants: {},
   plugins: [require('@tailwindcss/typography')],
 };

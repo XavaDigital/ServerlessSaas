@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { NextPage } from 'next';
 
-import Header from 'components/home/Header';
+import Navbar from 'components/home/Navbar';
 import Footer from 'components/home/Footer';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 const Layout: NextPage<Props> = ({ children }) => {
   return (
     <div className="min-h-screen">
-      <Header />
+      <Navbar />
       {children}
       <Footer />
     </div>

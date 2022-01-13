@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import Button from 'components/elements/Button';
+import Button from 'components/shared/Button';
 import Link from 'next/link';
 import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
