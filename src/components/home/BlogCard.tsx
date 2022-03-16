@@ -87,7 +87,11 @@ const BlogCard: React.FC<Props> = ({ post, version }) => {
     <div className="flex flex-col h-full overflow-hidden border border-gray-200 rounded-lg">
       <img
         className="object-cover object-center w-full lg:h-48 md:h-36"
-        src={attributes.image}
+        src={
+          attributes.image?.startsWith('/')
+            ? attributes.image
+            : `/${attributes.image}`
+        }
         alt="blog"
         loading="lazy"
       />

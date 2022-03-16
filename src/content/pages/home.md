@@ -5,7 +5,7 @@ hero_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
   do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
   minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
   commodo consequat.
-hero_image: img/serverless-saas.jpg
+hero_image: /img/serverless-saas.jpg
 feature_version: 1
 feature_title: Our amazing features
 feature_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -55,7 +55,7 @@ steps:
       retro.
 
     name: FINISH
-steps_image: img/nesa-by-makers-IgUR1iX0mqM-unsplash.jpg
+steps_image: /img/nesa-by-makers-IgUR1iX0mqM-unsplash.jpg
 pricing_title: Simple Pricing
 pricing_description: Start free. Upgrade whenever you want.
 plans:
@@ -92,7 +92,7 @@ team:
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
-    image: img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
+    image: /img/ayo-ogunseinde-sibvworyqs0-unsplash.jpg
   - name: Alper Kamuu
     photo: /img/foto-sushi-6anudmpilw4-unsplash.jpg
     position: UX Designer
@@ -100,7 +100,7 @@ team:
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
-    image: img/foto-sushi-6anudmpilw4-unsplash.jpg
+    image: /img/foto-sushi-6anudmpilw4-unsplash.jpg
   - name: Atticus Finch
     photo: /img/kal-visuals-b1hg7qi-zcc-unsplash.jpg
     position: UI Developer
@@ -108,7 +108,7 @@ team:
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
-    image: img/harps-joseph-tavpde7fxgy-unsplash.jpg
+    image: /img/harps-joseph-tavpde7fxgy-unsplash.jpg
   - name: Henry Letham
     photo: /img/harps-joseph-tavpde7fxgy-unsplash.jpg
     position: Designer
@@ -116,7 +116,7 @@ team:
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
       mauris erat, porttitor eleifend elit sed, maximus imperdiet risus. Cras
       elit felis, feugiat sit amet rhoncus sed, rhoncus eu ipsum.
-    image: img/kal-visuals-b1hg7qi-zcc-unsplash.jpg
+    image: /img/kal-visuals-b1hg7qi-zcc-unsplash.jpg
 blog_version: 1
 blog_title: From our blog
 blog_description: Read more about how we develop software

@@ -58,7 +58,7 @@ const HomePreview = ({ entry, widgetsFor }: Props) => {
         version={entry.getIn(['data', 'hero_version'])}
         title={entry.getIn(['data', 'hero_title'])}
         description={entry.getIn(['data', 'hero_description'])}
-        image={entry.getIn(['data', 'hero_image'])}
+        image={`/${entry.getIn(['data', 'hero_image'])}`}
       />
       <FeatureSection
         version={entry.getIn(['data', 'feature_version'])}
@@ -68,7 +68,7 @@ const HomePreview = ({ entry, widgetsFor }: Props) => {
       />
       <StepsSection
         version={entry.getIn(['data', 'steps_version'])}
-        image={entry.getIn(['data', 'steps_image'])}
+        image={`/${entry.getIn(['data', 'steps_image'])}`}
         steps={steps}
       />
       <PricingSection
