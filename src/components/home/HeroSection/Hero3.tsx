@@ -6,7 +6,7 @@ interface Props {
 
 const Hero3: React.FC<Props> = ({ title, description, image }): JSX.Element => {
   return (
-    <section className="text-gray-700 body-font">
+    <section className="text-gray-700 body-font" id="hero">
       <div className="container flex flex-col items-center justify-center px-5 py-24 mx-auto">
         <img
           className="object-cover object-center w-5/6 mb-10 rounded lg:w-2/6 md:w-3/6"

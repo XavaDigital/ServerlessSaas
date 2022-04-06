@@ -7,7 +7,7 @@ interface Props {
 
 const Steps2: React.FC<Props> = ({ steps }) => {
   return (
-    <section className="text-gray-700 body-font">
+    <section className="text-gray-700 body-font" id="steps">
       <div className="container flex flex-wrap px-5 py-24 mx-auto">
         {steps?.map((step, i) => {
           return (

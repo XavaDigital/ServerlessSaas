@@ -34,7 +34,7 @@ const BlogSection: React.FC<{
   const BlogPostList = components[version] || components[1];
 
   return (
-    <section className="text-gray-700 body-font">
+    <section className="text-gray-700 body-font" id="blog">
       <div className="container px-5 py-24 mx-auto">
         <div className="w-full mb-20 text-center">
           <h1 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl title-font">

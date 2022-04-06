@@ -8,7 +8,7 @@ interface Props {
 
 const Steps3: React.FC<Props> = ({ image, steps }) => {
   return (
-    <section className="text-gray-700 body-font">
+    <section className="text-gray-700 body-font" id="steps">
       <div className="container flex flex-col flex-wrap px-5 py-24 mx-auto">
         <div className="flex flex-wrap mx-auto mb-20">
           {steps?.map((_, i) => {
