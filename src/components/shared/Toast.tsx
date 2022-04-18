@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { Toast } from 'interfaces/toast';
 import { Transition } from '@headlessui/react';
 import { useToast } from 'hooks/useToast';
+import { Toast } from 'interfaces/toast';
 
 interface Props {
   toast: Toast;
@@ -112,20 +112,19 @@ const ToastComponent: React.FC<Props> = ({ toast }) => {
         leave="transition ease-in duration-100"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
+        className="w-full max-w-sm bg-white rounded-lg shadow-lg pointer-events-auto"
       >
-        <div className="w-full max-w-sm bg-white rounded-lg shadow-lg pointer-events-auto">
-          <div className="overflow-hidden rounded-lg shadow-xs">
-            <div className="p-4">
-              <div className="flex items-start">
-                <div className="flex-shrink-0">{icon()}</div>
-                <div className="ml-3 w-0 flex-1 pt-0.5">
-                  <p className="text-sm font-medium leading-5 text-gray-900">
-                    {toast.title}
-                  </p>
-                  <p className="mt-1 text-sm leading-5 text-gray-500">
-                    {toast.description}
-                  </p>
-                </div>
+        <div className="overflow-hidden rounded-lg shadow-xs">
+          <div className="p-4">
+            <div className="flex items-start">
+              <div className="flex-shrink-0">{icon()}</div>
+              <div className="ml-3 w-0 flex-1 pt-0.5">
+                <p className="text-sm font-medium leading-5 text-gray-900">
+                  {toast.title}
+                </p>
+                <p className="mt-1 text-sm leading-5 text-gray-500">
+                  {toast.description}
+                </p>
               </div>
             </div>
           </div>
